@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!-- <meta http-equiv="refresh" content="60;url='https://gitee.com/iGaoWei/big-data-view'" /> -->
+    <title>中石化胜利油田大数据可视化系统</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/comon0.css" />
+</head>
+<body>
+<div class="loading">
+    <div class="loadbox">
+        <img src="images/loading.gif" /> 页面加载中...
+    </div>
+</div>
+<div class="head">
+    <h1><a href="https://gitee.com/iGaoWei/big-data-view">中石化胜利油田大数据可视化系统</a></h1>
+    <div class="time" id="showTime">
+        2019/12/05 16:16:54
+    </div>
+    <script>
+        var t = null;
+        t = setTimeout(time,1000);//開始运行
+        function time()
+        {
+            clearTimeout(t);//清除定时器
+            dt = new Date();
+            var y=dt.getFullYear();
+            var mt=dt.getMonth()+1;
+            var day=dt.getDate();
+            var h=dt.getHours();//获取时
+            var m=dt.getMinutes();//获取分
+            var s=dt.getSeconds();//获取秒
+            var t = null;
+            document.getElementById("showTime").innerHTML = y+"/"+Appendzero(mt)+"/"+Appendzero(day)+" "+Appendzero(h)+":"+Appendzero(m)+":"+Appendzero(s)+"";
+            function Appendzero(obj){
+                if(obj<10) return "0" +""+ obj;
+                else return obj;
+            }
+            t = setTimeout(time,1000); //设定定时器，循环运行
+        }
+
+    </script>
+</div>
+<div class="mainbox">
+    <ul class="clearfix">
+        <li>
+            <div class="boxall" style="height: calc(58% - .15rem)">
+                <div class="alltitle">
+                    标题名称
+                </div>
+                <div class=" boxnav " id="echarts4">
+                </div>
+            </div>
+            <div class="boxall" style="height: calc(42% - .15rem)">
+                <div class="alltitle">
+                    能源消耗总价
+                </div>
+                <div class="boxnav" id="echarts3"></div>
+            </div> </li>
+        <li>
+            <div class="boxall" style="height: calc(20% - .15rem)">
+                <ul class="row h100 clearfix">
+                    <li class="col-6">
+                        <div class="sqzs h100">
+                            <p>能耗总览</p>
+                            <h1><span>30500</span>万</h1>
+                        </div> </li>
+                    <li class="col-6">
+                        <ul class="row h100 clearfix">
+                            <li class="col-4">
+                                <div class="tit01">
+                                    集输系统
+                                </div>
+                                <div class="piebox" id="pe01"></div> </li>
+                            <li class="col-4">
+                                <div class="tit01">
+                                    联合站
+                                </div>
+                                <div class="piebox" id="pe02"></div> </li>
+                            <li class="col-4">
+                                <div class="tit01">
+                                    注水站
+                                </div>
+                                <div class="piebox" id="pe03"></div> </li>
+                        </ul> </li>
+                </ul>
+            </div>
+            <div class="boxall" style="height: calc(38% - .15rem)">
+                <div class="alltitle">
+                    能耗月度变化图
+                </div>
+                <div class="boxnav" id="echarts1"></div>
+            </div>
+            <div class="boxall" style="height: calc(42% - .15rem)">
+                <div class="alltitle">
+                    原油分水及脱水率趋势图
+                </div>
+                <div class="boxnav" id="echarts2"></div>
+            </div> </li>
+        <li>
+            <div class="boxall" style="height: calc(33.333% - .15rem)">
+                <div class="alltitle">
+                    采出水水质趋势图
+                </div>
+                <div class="boxnav" id="echarts5"></div>
+            </div>
+            <div class="boxall" style="height: calc(33.333% - .15rem)">
+                <div class="alltitle">
+                    研究油区总体介绍
+                </div>
+                <div class="boxnav" id="">
+                    <table border="0" cellspacing="0" id="data-table">
+                        <tbody>
+                        <tr>
+                            <th>区域</th>
+                            <th>数量</th>
+                            <th>开井率</th>
+                            <th>采油量</th>
+                            <th>采液量</th>
+                        </tr>
+                        <tr>
+                            <th>油井</th>
+                            <td>1993</td>
+                            <td> 201%</td>
+                            <td>10</td>
+                            <td> 199</td>
+                        </tr>
+                        <tr>
+                            <th>集输站</th>
+                            <td>8098</td>
+                            <td>19.80%</td>
+                            <td>22</td>
+                            <td>368</td>
+                        </tr>
+                        <tr>
+                            <th>联合站</th>
+                            <td>7506</td>
+                            <td>6.70%</td>
+                            <td>22</td>
+                            <td>339</td>
+                        </tr>
+                        <tr>
+                            <th>注水站</th>
+                            <td>3261</td>
+                            <td>32.30%</td>
+                            <td>10</td>
+                            <td>325.7</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="boxall" style="height: calc(33.333% - .15rem)">
+                <div class="alltitle">
+                    标题名称
+                </div>
+                <div class="boxnav" id="echarts6" style="height:calc(100% - .3rem);"></div>
+            </div> </li>
+    </ul>
+</div>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script language="JavaScript" src="js/js.js"></script>
+    <script>
+        // 在页面加载时执行的 JavaScript 代码
+        window.onload = function() {
+            fetch('http://localhost:8081/index/overview_of_translation_regions')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+                console.log(tableBody.innerHTML)
+                tableBody.innerHTML="                        <tr>\n" +
+                    "                            <th>区域</th>\n" +
+                    "                            <th>数量</th>\n" +
+                    "                            <th>开井率</th>\n" +
+                    "                            <th>采油量</th>\n" +
+                    "                            <th>采液量</th>\n" +
+                    "                        </tr>"
+
+                data.forEach(function (item) {
+                var row = '<tr>';
+                row += '<th>' + item.area + '</th>';
+                row += '<td>' + item.quantity + '</td>';
+                row += '<td>' + item.openingRate + '</td>';
+                row += '<td>' + item.oilProduction + '</td>';
+                row += '<td>' + item.waterProduction + '</td>';
+                row += '</tr>';
+                tableBody.innerHTML += row;
+            });
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        };
+    </script>
+</body>
+</html>
