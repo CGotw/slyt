@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Report Page</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>中石化先进指标体系</h2>
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">编号</th>
+                <th onclick="sortTable(1)">类别</th>
+                <th onclick="sortTable(2)">名称</th>
+                <th onclick="sortTable(3)">级别</th>
+                <th onclick="sortTable(4)">值</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Item A</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Item B</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Item C</td>
+                <td>100</td>
+            </tr>
+            <!-- 更多数据行 -->
+        </tbody>
+    </table>
+    <h2>本站指标体系</h2>
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">编号</th>
+                <th onclick="sortTable(1)">类别</th>
+                <th onclick="sortTable(2)">名称</th>
+                <th onclick="sortTable(3)">级别</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Item A</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Item B</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Item C</td>
+                <td>100</td>
+            </tr>
+            <!-- 更多数据行 -->
+        </tbody>
+    </table>
+    <h2>对标结果</h2>
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">编号</th>
+                <th onclick="sortTable(1)">类别</th>
+                <th onclick="sortTable(2)">名称</th>
+                <th onclick="sortTable(3)">级别</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Item A</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Item B</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Item C</td>
+                <td>100</td>
+            </tr>
+            <!-- 更多数据行 -->
+        </tbody>
+    </table>
+    <h2>本站指标体系</h2>
+    <table id="reportTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">编号</th>
+                <th onclick="sortTable(1)">类别</th>
+                <th onclick="sortTable(2)">名称</th>
+                <th onclick="sortTable(3)">级别</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Item A</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Item B</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Item C</td>
+                <td>100</td>
+            </tr>
+            <!-- 更多数据行 -->
+        </tbody>
+    </table>
+
+    <script>
+        function sortTable(columnIndex) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("reportTable");
+            switching = true;
+            // 使用一个循环来持续排序，直到没有任何行需要切换位置
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                // 遍历除了表头之外的所有行
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    // 获取需要比较的两个元素
+                    x = rows[i].getElementsByTagName("TD")[columnIndex];
+                    y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+                    // 检查是否需要根据这两行的列内容切换位置
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // 如果是，标记为需要切换并跳出循环
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    // 如果需要切换，执行切换并标记已经切换了一次
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

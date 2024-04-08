@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    /* 设置导航栏样式 */
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    /* 导航栏中每个链接的样式 */
+    .navbar a {
+      float: left;
+      color: #fff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    /* 鼠标悬停在链接上的样式 */
+    .navbar a:hover {
+      background-color: #ddd;
+      color: #333;
+    }
+
+    /* 隐藏页面内容 */
+    .page-content {
+      display: none;
+      /* justify-content: center; */
+    }
+
+    /* 显示当前页面内容 */
+    .active {
+      display: block;
+    }
+
+    .wrapper1 {
+      /* display: flex; */
+    }
+
+    .inner {
+      display: flex;
+    }
+
+    .upload-text {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .upload-image {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+    }
+
+    .upload-button {
+      padding: 10px 20px;
+      background-color: #999;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .required-star {
+      color: red;
+    }
+
+    .submit-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+    body {
+  background-image: url('images//bg.jpg'); /* 将 'your-background-image-path.jpg' 替换成你的背景图片路径 */
+  background-size: cover; /* 背景图片覆盖整个页面 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
+}
+/* 基本样式设置 */
+body {
+    font-family: Arial, sans-serif; /* 设置统一的字体 */
+    color: #e0e0e0; /* 浅灰色字体提高在深背景上的可读性 */
+    line-height: 1.6; /* 行高增加阅读舒适度 */
+}
+
+/* 导航栏样式优化 */
+.navbar a {
+    color: #f0f0f0; /* 更亮的字体颜色以增加对比度 */
+}
+
+/* 标题样式优化 */
+h1, h2 {
+    color: #ffffff; /* 标题使用纯白色以增强可读性 */
+    margin-bottom: 0.5em; /* 增加标题下方的空间 */
+}
+
+/* 表单标签样式优化 */
+form label {
+    color: #cccccc; /* 浅灰色标签文字 */
+    display: block; /* 使标签显示为块级元素，增加可读性 */
+    margin-bottom: 0.25em; /* 在标签和输入字段之间增加空间 */
+}
+
+/* 输入字段样式优化 */
+input[type="text"], input[type="file"] {
+    padding: 0.5em; /* 增加填充以使输入框更易于点击 */
+    border: 1px solid #777777; /* 增加边框对比度 */
+    background-color: #333333; /* 暗背景的输入框 */
+    color: #ffffff; /* 输入文字颜色 */
+    border-radius: 0.25em; /* 轻微的边框圆角 */
+    margin-bottom: 1em; /* 增加输入框之间的空间 */
+}
+
+/* 上传按钮样式优化 */
+.upload-button {
+    background-color: #5c5c5c; /* 深灰色按钮背景 */
+    color: #ffffff; /* 白色按钮文字 */
+}
+
+/* 鼠标悬停在链接和按钮上的样式 */
+.navbar a:hover, .upload-button:hover {
+    opacity: 0.8; /* 添加透明度以提供视觉反馈 */
+}
+
+/* 提交按钮样式优化 */
+.submit-button {
+    background-color: #4CAF50; /* 鲜绿色背景以突出提交按钮 */
+    color: #ffffff; /* 白色文字 */
+    padding: 10px 20px; /* 增加填充 */
+    border: none; /* 移除边框 */
+    border-radius: 5px; /* 圆角边框 */
+    cursor: pointer; /* 鼠标悬停时显示指针 */
+}
+
+
+    /* .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .form-label {
+      width: 100px;
+      text-align: right;
+      padding-right: 10px;
+    }
+
+    .form-input {
+      flex: 1;
+      padding: 5px;
+    } */
+    input[type="file"]::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+
+    input[type="file"]:before {
+      content: '图片上传';
+      color: white;
+      background-color: #3d89c2;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-left: 90px;
+    }
+
+    input[type="file"] {
+
+      color: transparent;
+
+    }
+  </style>
+  <script>
+    // JS代码实现页面切换
+    window.onload = function () {
+      var menuLinks = document.querySelectorAll('.navbar a');
+      var pageContents = document.querySelectorAll('.page-content');
+
+      // 默认显示第一个页面
+      pageContents[0].classList.add('active');
+
+      // 点击菜单链接时显示对应的页面内容
+      menuLinks.forEach(function (link, index) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+
+          // 移除当前已显示的页面内容
+          document.querySelector('.page-content.active').classList.remove('active');
+
+          // 添加点击链接对应的页面内容
+          pageContents[index].classList.add('active');
+        });
+      });
+    };
+  </script>
+</head>
+
+<body>
+  <div
+    style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #000;">
+    <div style="border: 1px solid red; padding: 5px;">
+      <img src="logo.png" alt="Logo" style="height: 50px;"> <!-- Replace 'logo.png' with the path to your logo image -->
+      <span style="font-size: 24px; vertical-align: middle;">Sinopec</span>
+    </div>
+    <div>
+      <span style="font-size: 18px;">老区优化简化项目软件平台</span> <!-- This text translates to "Welcome to use our platform" -->
+    </div>
+    <div>
+      <a href="/myaccount" style="font-size: 16px;">我的账号</a> |
+      <a href="/logout" style="font-size: 16px;">退出</a>
+    </div>
+  </div>
+  <div class="navbar">
+    <a href="#">数据填报</a>
+    <a href="#">分析报告</a>
+  </div>
+
+  <div id="test1" class="page-content">
+    <div class="wrapper1"></div>
+    <!-- <div style="height: 300px;">
+      <h2>1.基本信息logo</h2>
+      <div class="inner">
+        <div style="width: 50%;height: 200px;background-color: #333;">1</div>
+        <div style="width: 50%;height: 200px;background-color:aqua;">2</div>
+      </div>
+    </div> -->
+    <div style="height: 300px;">
+      <h2>1.基本信息</h2>
+      <div class="inner">
+        <div
+          style="width: 50%;height: 200px;background-color: #ddd; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div class="upload-text">上传</div>
+          <img src="upload-icon.png" alt="上传图片" class="upload-image">
+          <input type="file" class="upload-button">
+        </div>
+        <div
+          style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <form>
+            <label for="name">站点名称</label><span class="required-star">*</span>
+            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+          </form>
+          <div>
+            <label for="name">站点描述</label>
+            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;">
+          </div>
+          <form>
+            <label for="name">备注</label>
+            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;">
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <hr>
+
+    <div>
+      <h2>2.前端站</h2>
+      <div style="display: flex; height: 300px;">
+        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <form>
+            <label for="site-name">回压推荐值<span class="required-star">*</span></label>
+            <input type="text" name="site-name" id="site-name" style="width: 100%; margin-bottom: 10px; height: 2vh;"
+              required>
+          </form>
+        </div>
+        <div
+          style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div
+            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+            <form>
+              <label for="name">前端站名称</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <div
+              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+              <div class="upload-text">前端站数据上传</div>
+              <img src="upload-icon.png" class="upload-image">
+              <input type="file">
+            </div>
+          </div>
+          <div style="width:400px;"><a style="text-align: left;" href="#">添加+</a></div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <hr>
+
+    <div>
+      <h2>3.集输系统</h2>
+      <div class="inner">
+        <div
+          style="width: 50%;height: 300px; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <!-- <div class="upload-text">上传</div>
+          <img src="upload-icon.png" alt="上传图片" class="upload-image">
+          <input type="file" class="upload-button"> -->
+          <div
+            style="height: 200px;width: 450px;background-color: #ddd;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+            <div>123</div>
+            <div style="display: flex;margin-top: 30px;">
+              <div style="background-color: aquamarine; margin-right: 30px;">上传</div>
+              <input type="file" style="margin-right: -100px;">
+            </div>
+          </div>
+        </div>
+        <div style="width: 50%;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div
+            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+            <form>
+              <label for="name">系统名称01</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <div
+              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+              <div class="upload-text">管道拓扑图片上传</div>
+              <img src="upload-icon.png" class="upload-image">
+              <input type="file">
+            </div>
+            <form>
+              <label for="name">起点名称</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">终点名称</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">起点温度</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">终点温度</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">测量时间</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">土壤潮湿程度</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">管线外径</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">管线内径</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">液体质量流量</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+
+          </div>
+          <div style="width:400px;"><a style="text-align: left;" href="#">添加+</a></div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <hr>
+
+
+    <div style="height: 300px;">
+      <h2>4.联合站-三相分离器</h2>
+      <div class="inner">
+        <div
+          style="width: 50%;height: 200px;background-color: #ddd; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div class="upload-text">上传</div>
+          <img src="upload-icon.png" alt="上传图片" class="upload-image">
+          <input type="file" class="upload-button">
+        </div>
+        <div
+          style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <form>
+            <label for="name">装置名称</label><span class="required-star">*</span>
+            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <hr>
+
+
+    <div>
+      <h2>5.联合站-泵和加热炉</h2>
+      <div style="display: flex; height: 300px;">
+        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        </div>
+        <div
+          style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div
+            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+            <form>
+              <label for="name">装置名称</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <form>
+              <label for="name">标准效率</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <div
+              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+              <div class="upload-text">设备数据上传</div>
+              <img src="upload-icon.png" class="upload-image">
+              <input type="file">
+            </div>
+          </div>
+          <div style="width:400px;"><a style="text-align: left;" href="#">添加+</a></div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div>
+      <h2>6.联合站-稳定塔</h2>
+      <div style="display: flex; height: 300px;">
+        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        </div>
+        <div
+          style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div
+            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+            <form>
+              <label for="name">装置名称</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <div
+              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+              <div class="upload-text">设备数据上传</div>
+              <img src="upload-icon.png" class="upload-image">
+              <input type="file">
+            </div>
+          </div>
+          <div style="width:400px;"><a style="text-align: left;" href="#">添加+</a></div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div>
+      <h2>7.联合站-综合评估</h2>
+      <div style="display: flex; height: 300px;">
+        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        </div>
+        <div
+          style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div
+            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+            <form>
+              <label for="name">站点名称</label><span class="required-star">*</span>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <div
+              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+              <div class="upload-text">综合数据上传</div>
+              <img src="upload-icon.png" class="upload-image">
+              <input type="file">
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <h2>8.联合站-综合评估</h2>
+        <div style="display: flex; height: 300px;">
+          <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          </div>
+          <div
+            style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+            <div
+              style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+              <form>
+                <label for="name">站点名称</label><span class="required-star">*</span>
+                <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+              </form>
+              <div
+                style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+                <div class="upload-text">综合数据上传</div>
+                <img src="upload-icon.png" class="upload-image">
+                <input type="file">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 右下角提交按钮 -->
+
+    </div>
+
+
+    <div style="float: right;"><button
+        style="margin-right: 100px;margin-bottom: 100px; background-color: red;color: #fff;border: 0;border-radius: 10px;">提交111</button>
+    </div>
+
+
+    <div id="test2" class="page-content">
+      <h1>分析报告</h1>
+    </div>
+</body>
+
+</html>
