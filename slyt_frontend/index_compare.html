@@ -3,37 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple Report Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
         table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table, th, td {
-    border: 1px solid black;
-}
-th, td {
-    padding: 8px;
-    text-align: left;
-    color: #f0f0f0; /* 浅色字体提高可读性 */
-}
-th {
-    background-color: #f2f2f2;
-    color: #000; /* 对于表头使用深色字体以保持对比度 */
-}
-body {
-    padding: 0px;
-    margin: 0px;
-    font-family: "微软雅黑";
-    background: #000d4a url('images/bg.jpg') center;
-    background-size: cover;
-    color: #fff;
-    font-size: 12px;
-}
-
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            color: #f0f0f0; /* 浅色字体提高可读性 */
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #000; /* 对于表头使用深色字体以保持对比度 */
+        }
+        body {
+            padding: 0px;
+            margin: 0px;
+            font-family: "微软雅黑";
+            background: #000d4a url('images/bg.jpg') center;
+            background-size: cover;
+            color: #fff;
+            font-size: 12px;
+        }
+        #myPieChart {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .chartjs-render-monitor {
+            color: white; /* Improving legibility of the text on the chart */
+        }
     </style>
 </head>
 <body>
-    <h2>中石化先进指标体系</h2>
+    <h1>分析报告</h1>
+    <br>
+    <br>
+
+    <h2>指标体系对比报告</h2>
+    <p>1.达到中石化先进值的条数</p>
+    <table id="reportTable1">
+        <thead>
+            <tr>
+                <th onclick="sortTable('reportTable1', 0)">编号</th>
+                <th onclick="sortTable('reportTable1', 1)">类别</th>
+                <th onclick="sortTable('reportTable1', 2)">名称</th>
+                <th onclick="sortTable('reportTable1', 3)">级别</th>
+                <th onclick="sortTable('reportTable1', 4)">值</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>投资控制指标</td>
+                <td>油田百万吨产能地面投资 </td>
+                <td>一级指标 </td>
+                <td>1 </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>投资控制指标</td>
+                <td>油田地面工程投资占比</td>
+                <td>一级指标 </td>
+                <td>1 </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>投资控制指标</td>
+                <td>单井地面工程投资</td>
+                <td>一级指标 </td>
+                <td>1 </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>达标率指标</td>
+                <td>原油自用率</td>
+                <td>一级指标 </td>
+                <td>1 </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>达标率指标</td>
+                <td>集输密闭率</td>
+                <td>一级指标 </td>
+                <td>1 </td>
+            </tr>
+        </tbody>
+    </table>
+    <p>2.达到中石化平均值的条数</p>
     <table id="reportTable">
         <thead>
             <tr>
@@ -80,688 +148,9 @@ body {
                 <td>一级指标 </td>
                 <td>1 </td>
             </tr>
-            <tr>
-                <td>6</td>
-                <td>达标率指标</td>
-                <td>原油含水率 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>达标率指标</td>
-                <td>原油稳定率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>达标率指标</td>
-                <td>伴生气处理率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>达标率指标</td>
-                <td>伴生气集气率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>达标率指标</td>
-                <td>采出水处理站水质达标率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>达标率指标</td>
-                <td>蒸汽锅炉出口蒸汽干度 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>达标率指标</td>
-                <td>配注系统黏损率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>13</td>
-                <td>负荷率指标</td>
-                <td>脱水站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>14</td>
-                <td>负荷率指标</td>
-                <td>采出水处理站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>15</td>
-                <td>负荷率指标</td>
-                <td>注水站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>16</td>
-                <td>负荷率指标</td>
-                <td>注汽站实际负荷率 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>17</td>
-                <td>能耗成本指标</td>
-                <td>机采系统效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>18</td>
-                <td>能耗成本指标</td>
-                <td>新井常温集油工艺覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>19</td>
-                <td>能耗成本指标</td>
-                <td>常温集油工艺覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>20</td>
-                <td>能耗成本指标</td>
-                <td>吨油处理能耗</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>21</td>
-                <td>能耗成本指标</td>
-                <td>吨水处理能耗 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>22</td>
-                <td>能耗成本指标</td>
-                <td>单位原油处理药剂量（万吨原油药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>23</td>
-                <td>能耗成本指标</td>
-                <td>单位水处理药剂量（万吨水药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>24</td>
-                <td>能耗成本指标</td>
-                <td>脱水工艺</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>25</td>
-                <td>能耗成本指标</td>
-                <td>脱水温升</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>26</td>
-                <td>能耗成本指标</td>
-                <td>脱水时间 </td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>27</td>
-                <td>能耗成本指标</td>
-                <td>加热炉效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>28</td>
-                <td>能耗成本指标</td>
-                <td>泵效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>29</td>
-                <td>能耗成本指标</td>
-                <td>注水系统效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>30</td>
-                <td>能耗成本指标</td>
-                <td>注水用电标耗</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>31</td>
-                <td>能耗成本指标</td>
-                <td>吨汽能耗 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>32</td>
-                <td>能耗成本指标</td>
-                <td>注汽管网热损失</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>33</td>
-                <td>能耗成本指标</td>
-                <td>稠油采出水锅炉回用率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>34</td>
-                <td>能耗成本指标</td>
-                <td>注汽锅炉热效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>35</td>
-                <td>能耗成本指标</td>
-                <td>单位化学驱油田原油生产药剂量（万吨原油药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>36</td>
-                <td>能耗成本指标</td>
-                <td>单位油田油气生产新水量 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>37</td>
-                <td>人均生产能力指标</td>
-                <td>新井软件量油覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>38</td>
-                <td>人均生产能力指标</td>
-                <td>油井软件量油覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>39</td>
-                <td>人均生产能力指标</td>
-                <td>井场数字化覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>40</td>
-                <td>人均生产能力指标</td>
-                <td>站场数字化覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>41</td>
-                <td>人均生产能力指标</td>
-                <td>人均年采油量 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>42</td>
-                <td>人均生产能力指标</td>
-                <td>百万吨产能用工</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>43</td>
-                <td>人均生产能力指标</td>
-                <td>人均管井数</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>44</td>
-                <td>建设管理指标</td>
-                <td>标准化设计定型文件使用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>45</td>
-                <td>建设管理指标</td>
-                <td>标准化设计覆盖率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>46</td>
-                <td>建设管理指标</td>
-                <td>三维设计覆盖率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>47</td>
-                <td>建设管理指标</td>
-                <td>模块化应用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>48</td>
-                <td>建设管理指标</td>
-                <td>工厂化预制率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>49</td>
-                <td>建设管理指标</td>
-                <td>一体化集成装置应用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>50</td>
-                <td>建设管理指标</td>
-                <td>数字化交付率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
         </tbody>
     </table>
-    <h2>本站指标体系</h2>
-    <table id="reportTable">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">编号</th>
-                <th onclick="sortTable(1)">类别</th>
-                <th onclick="sortTable(2)">名称</th>
-                <th onclick="sortTable(3)">级别</th>
-                <th onclick="sortTable(4)">值</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>投资控制指标</td>
-                <td>油田百万吨产能地面投资 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>投资控制指标</td>
-                <td>油田地面工程投资占比</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>投资控制指标</td>
-                <td>单井地面工程投资</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>达标率指标</td>
-                <td>原油自用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>达标率指标</td>
-                <td>集输密闭率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>达标率指标</td>
-                <td>原油含水率 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>达标率指标</td>
-                <td>原油稳定率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>达标率指标</td>
-                <td>伴生气处理率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>达标率指标</td>
-                <td>伴生气集气率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>达标率指标</td>
-                <td>采出水处理站水质达标率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>达标率指标</td>
-                <td>蒸汽锅炉出口蒸汽干度 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>达标率指标</td>
-                <td>配注系统黏损率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>13</td>
-                <td>负荷率指标</td>
-                <td>脱水站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>14</td>
-                <td>负荷率指标</td>
-                <td>采出水处理站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>15</td>
-                <td>负荷率指标</td>
-                <td>注水站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>16</td>
-                <td>负荷率指标</td>
-                <td>注汽站实际负荷率 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>17</td>
-                <td>能耗成本指标</td>
-                <td>机采系统效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>18</td>
-                <td>能耗成本指标</td>
-                <td>新井常温集油工艺覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>19</td>
-                <td>能耗成本指标</td>
-                <td>常温集油工艺覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>20</td>
-                <td>能耗成本指标</td>
-                <td>吨油处理能耗</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>21</td>
-                <td>能耗成本指标</td>
-                <td>吨水处理能耗 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>22</td>
-                <td>能耗成本指标</td>
-                <td>单位原油处理药剂量（万吨原油药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>23</td>
-                <td>能耗成本指标</td>
-                <td>单位水处理药剂量（万吨水药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>24</td>
-                <td>能耗成本指标</td>
-                <td>脱水工艺</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>25</td>
-                <td>能耗成本指标</td>
-                <td>脱水温升</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>26</td>
-                <td>能耗成本指标</td>
-                <td>脱水时间 </td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>27</td>
-                <td>能耗成本指标</td>
-                <td>加热炉效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>28</td>
-                <td>能耗成本指标</td>
-                <td>泵效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>29</td>
-                <td>能耗成本指标</td>
-                <td>注水系统效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>30</td>
-                <td>能耗成本指标</td>
-                <td>注水用电标耗</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>31</td>
-                <td>能耗成本指标</td>
-                <td>吨汽能耗 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>32</td>
-                <td>能耗成本指标</td>
-                <td>注汽管网热损失</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>33</td>
-                <td>能耗成本指标</td>
-                <td>稠油采出水锅炉回用率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>34</td>
-                <td>能耗成本指标</td>
-                <td>注汽锅炉热效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>35</td>
-                <td>能耗成本指标</td>
-                <td>单位化学驱油田原油生产药剂量（万吨原油药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>36</td>
-                <td>能耗成本指标</td>
-                <td>单位油田油气生产新水量 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>37</td>
-                <td>人均生产能力指标</td>
-                <td>新井软件量油覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>38</td>
-                <td>人均生产能力指标</td>
-                <td>油井软件量油覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>39</td>
-                <td>人均生产能力指标</td>
-                <td>井场数字化覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>40</td>
-                <td>人均生产能力指标</td>
-                <td>站场数字化覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>41</td>
-                <td>人均生产能力指标</td>
-                <td>人均年采油量 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>42</td>
-                <td>人均生产能力指标</td>
-                <td>百万吨产能用工</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>43</td>
-                <td>人均生产能力指标</td>
-                <td>人均管井数</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>44</td>
-                <td>建设管理指标</td>
-                <td>标准化设计定型文件使用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>45</td>
-                <td>建设管理指标</td>
-                <td>标准化设计覆盖率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>46</td>
-                <td>建设管理指标</td>
-                <td>三维设计覆盖率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>47</td>
-                <td>建设管理指标</td>
-                <td>模块化应用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>48</td>
-                <td>建设管理指标</td>
-                <td>工厂化预制率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>49</td>
-                <td>建设管理指标</td>
-                <td>一体化集成装置应用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>50</td>
-                <td>建设管理指标</td>
-                <td>数字化交付率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-        </tbody>
-    </table>
-    <h2>对标结果</h2>
+    <p>3.未达到中石化平均值的条数</p>
     <table id="reportTable">
         <thead>
             <tr>
@@ -808,399 +197,138 @@ body {
                 <td>一级指标 </td>
                 <td>1 </td>
             </tr>
-            <tr>
-                <td>6</td>
-                <td>达标率指标</td>
-                <td>原油含水率 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>达标率指标</td>
-                <td>原油稳定率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>达标率指标</td>
-                <td>伴生气处理率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>达标率指标</td>
-                <td>伴生气集气率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>达标率指标</td>
-                <td>采出水处理站水质达标率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>达标率指标</td>
-                <td>蒸汽锅炉出口蒸汽干度 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>达标率指标</td>
-                <td>配注系统黏损率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>13</td>
-                <td>负荷率指标</td>
-                <td>脱水站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>14</td>
-                <td>负荷率指标</td>
-                <td>采出水处理站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>15</td>
-                <td>负荷率指标</td>
-                <td>注水站负荷率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>16</td>
-                <td>负荷率指标</td>
-                <td>注汽站实际负荷率 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>17</td>
-                <td>能耗成本指标</td>
-                <td>机采系统效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>18</td>
-                <td>能耗成本指标</td>
-                <td>新井常温集油工艺覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>19</td>
-                <td>能耗成本指标</td>
-                <td>常温集油工艺覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>20</td>
-                <td>能耗成本指标</td>
-                <td>吨油处理能耗</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>21</td>
-                <td>能耗成本指标</td>
-                <td>吨水处理能耗 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>22</td>
-                <td>能耗成本指标</td>
-                <td>单位原油处理药剂量（万吨原油药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>23</td>
-                <td>能耗成本指标</td>
-                <td>单位水处理药剂量（万吨水药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>24</td>
-                <td>能耗成本指标</td>
-                <td>脱水工艺</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>25</td>
-                <td>能耗成本指标</td>
-                <td>脱水温升</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>26</td>
-                <td>能耗成本指标</td>
-                <td>脱水时间 </td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>27</td>
-                <td>能耗成本指标</td>
-                <td>加热炉效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>28</td>
-                <td>能耗成本指标</td>
-                <td>泵效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>29</td>
-                <td>能耗成本指标</td>
-                <td>注水系统效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>30</td>
-                <td>能耗成本指标</td>
-                <td>注水用电标耗</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>31</td>
-                <td>能耗成本指标</td>
-                <td>吨汽能耗 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>32</td>
-                <td>能耗成本指标</td>
-                <td>注汽管网热损失</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>33</td>
-                <td>能耗成本指标</td>
-                <td>稠油采出水锅炉回用率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>34</td>
-                <td>能耗成本指标</td>
-                <td>注汽锅炉热效率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>35</td>
-                <td>能耗成本指标</td>
-                <td>单位化学驱油田原油生产药剂量（万吨原油药剂耗量）</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>36</td>
-                <td>能耗成本指标</td>
-                <td>单位油田油气生产新水量 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>37</td>
-                <td>人均生产能力指标</td>
-                <td>新井软件量油覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>38</td>
-                <td>人均生产能力指标</td>
-                <td>油井软件量油覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>39</td>
-                <td>人均生产能力指标</td>
-                <td>井场数字化覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>40</td>
-                <td>人均生产能力指标</td>
-                <td>站场数字化覆盖率</td>
-                <td>二级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>41</td>
-                <td>人均生产能力指标</td>
-                <td>人均年采油量 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>42</td>
-                <td>人均生产能力指标</td>
-                <td>百万吨产能用工</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>43</td>
-                <td>人均生产能力指标</td>
-                <td>人均管井数</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>44</td>
-                <td>建设管理指标</td>
-                <td>标准化设计定型文件使用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>45</td>
-                <td>建设管理指标</td>
-                <td>标准化设计覆盖率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>46</td>
-                <td>建设管理指标</td>
-                <td>三维设计覆盖率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>47</td>
-                <td>建设管理指标</td>
-                <td>模块化应用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>48</td>
-                <td>建设管理指标</td>
-                <td>工厂化预制率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>49</td>
-                <td>建设管理指标</td>
-                <td>一体化集成装置应用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>50</td>
-                <td>建设管理指标</td>
-                <td>数字化交付率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
         </tbody>
     </table>
-    <h2>类别名称</h2>
-    <table id="reportTable">
-        <thead>
-            <table>
-                <thead>
-                    <tr>
-                        <th onclick="sortTable(0)">编号</th>
-                        <th onclick="sortTable(1)">类别</th>
-                        <th onclick="sortTable(2)">名称</th>
-                        <th onclick="sortTable(3)">级别</th>
-                        <th onclick="sortTable(4)">对标结果</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>投资控制指标</td>
-                        <td>追风筝的人</td>
-                        <td>A</td>
-                        <td>优秀</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>能耗成本指标</td>
-                        <td>史记</td>
-                        <td>A+</td>
-                        <td>卓越</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>人均生产能力指标</td>
-                        <td>宇宙简史</td>
-                        <td>A</td>
-                        <td>优秀</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>建设管理指标</td>
-                        <td>宇宙简史</td>
-                        <td>A</td>
-                        <td>优秀</td>
-                    </tr>
-                    <!-- 添加更多行数据 -->
-                </tbody>
-            </table>
-        
+
+    <p>4.饼图展示：各类别分布</p>
+    <canvas id="myPieChart"></canvas>
+    
+    <p>5.根据先进性分析，生产指标综合评分为80分</p>
 
     <script>
-        function sortTable(columnIndex) {
-            var table, rows, switching, i, x, y, shouldSwitch;
-            table = document.getElementById("reportTable");
-            switching = true;
-            // 使用一个循环来持续排序，直到没有任何行需要切换位置
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                // 遍历除了表头之外的所有行
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    // 获取需要比较的两个元素
-                    x = rows[i].getElementsByTagName("TD")[columnIndex];
-                    y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
-                    // 检查是否需要根据这两行的列内容切换位置
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        // 如果是，标记为需要切换并跳出循环
-                        shouldSwitch = true;
-                        break;
+        function sortTable(tableId, columnIndex) {
+            var table = document.getElementById(tableId);
+            var rows = Array.from(table.rows).slice(1);
+            var sorted = rows.sort(function(a, b) {
+                var ax = a.cells[columnIndex].innerText.toLowerCase();
+                var bx = b.cells[columnIndex].innerText.toLowerCase();
+                return ax.localeCompare(bx);
+            });
+            sorted.forEach(function(row) {
+                table.appendChild(row);
+            });
+            // window.onload = function() {
+            // // 创建一个新的 XMLHttpRequest 对象
+            // var xhr = new XMLHttpRequest();
+
+            // // 设置请求方法和URL
+            // xhr.open("GET", "https://api.example.com/data", true);
+
+            // // 设置回调函数，处理响应
+            // xhr.onreadystatechange = function() {
+            //     if (xhr.readyState === XMLHttpRequest.DONE) {
+            //         if (xhr.status === 200) {
+            //             // 请求成功，解析返回的 JSON 数据
+            //             var data = JSON.parse(xhr.responseText);
+            //             // 填充到第一个表格
+            //             fillTable(data, "reportTable1");
+            //         } else {
+            //             // 请求失败，显示错误信息
+            //             console.error("发生错误：" + xhr.status);
+            //         }
+            //     }
+            // };
+
+            // // 发送请求
+            // xhr.send();
+        }
+
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['先进性指标', '达标率指标', '未达标率指标'],
+                datasets: [{
+                    label: '指标分布',
+                    data: [20, 30, 50],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1,
+                    hoverBorderColor: 'rgba(255, 255, 255, 1)', // White border on hover
+                    hoverBorderWidth: 3 // Thicker border on hover
+                }]
+            },
+            options: {
+                responsive: true,
+                interaction: {
+                    mode: 'nearest', // Interact with elements nearest to the mouse
+                    intersect: true, // Interaction when intersecting with the element
+                    axis: 'x'        // Horizontal axis interaction
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#fff' // White color for better visibility on dark backgrounds
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        mode: 'index',
+                        intersect: false,
+                        bodyFont: { size: 14 },
+                        backgroundColor: '#000', // Black background for tooltips
+                        titleFont: { size: 16, weight: 'bold' },
+                        titleMarginBottom: 10,
+                        callbacks: {
+                            labelTextColor: function() {
+                                return 'white'; //  text color for tooltips
+                            }
+                        }
+                    }
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true,
+                    onHover: function(e, chartElement) {
+                        e.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                    }
+                },
+                animation: {
+                    duration: 400, // General animation time
+                    hover: {
+                        animationDuration: 300 // Duration of animations when hovering an item
                     }
                 }
-                if (shouldSwitch) {
-                    // 如果需要切换，执行切换并标记已经切换了一次
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                }
             }
-        }
+        });
+        // 将数据填充到指定的表格中
+function fillTable(data, tableId) {
+    var table = document.getElementById(tableId);
+    var tbody = table.querySelector("tbody");
+    tbody.innerHTML = ""; // 清空表格内容
+
+    // 循环遍历数据，并创建表格行填充数据
+    data.forEach(function(rowData) {
+        var row = document.createElement("tr");
+        Object.values(rowData).forEach(function(value) {
+            var cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+        tbody.appendChild(row);
+    });
+}
     </script>
 </body>
 </html>

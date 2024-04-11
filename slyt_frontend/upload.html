@@ -227,22 +227,24 @@ input[type="text"], input[type="file"] {
     <div style="height: 300px;">
       <h2>1.基本信息</h2>
       <div class="inner">
-        <div
-          style="width: 50%;height: 200px;background-color: #ddd; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-          <div class="upload-text">上传</div>
-          <img src="upload-icon.png" alt="上传图片" class="upload-image">
-          <input type="file" class="upload-button">
+        <div style="width: 50%; height: 200px; background-color: #ddd; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div>
+          <label for="siteNameUpload" style="cursor: pointer; display: flex; justify-content: center; align-items: center;">
+            <img src="upload-icon.png" alt="上传图片" style="margin-bottom: 10px;">
+          </label>
+          <input type="file" id="siteNameUpload" style="display: none;">
         </div>
+               
         <div
           style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
           <form>
-            <label for="name">站点名称</label><span class="required-star">*</span>
+            <label for="name">站点名称<span class="required-star">*</span></label>
             <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
           </form>
-          <div>
+          <form>
             <label for="name">站点描述</label>
             <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;">
-          </div>
+          </form>
           <form>
             <label for="name">备注</label>
             <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;">
@@ -274,7 +276,7 @@ input[type="text"], input[type="file"] {
             </form>
             <div
               style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-              <div class="upload-text">前端站数据上传</div>
+              <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div>
               <img src="upload-icon.png" class="upload-image">
               <input type="file">
             </div>
