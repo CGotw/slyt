@@ -52,7 +52,7 @@
     <br>
 
     <h2>指标体系对比报告</h2>
-    <p>1.达到中石化先进值的条数</p>
+    <p id="index1">1.达到中石化先进值的条数</p>
     <table id="reportTable1">
         <thead>
             <tr>
@@ -101,8 +101,8 @@
             </tr>
         </tbody>
     </table>
-    <p>2.达到中石化平均值的条数</p>
-    <table id="reportTable">
+    <p id="index2">2.达到中石化平均值的条数</p>
+    <table id="reportTable2">
         <thead>
             <tr>
                 <th onclick="sortTable(0)">编号</th>
@@ -150,15 +150,15 @@
             </tr>
         </tbody>
     </table>
-    <p>3.未达到中石化平均值的条数</p>
-    <table id="reportTable">
+    <p id="index3">3.未达到中石化平均值的条数</p>
+    <table id="reportTable3">
         <thead>
             <tr>
                 <th onclick="sortTable(0)">编号</th>
                 <th onclick="sortTable(1)">类别</th>
                 <th onclick="sortTable(2)">名称</th>
                 <th onclick="sortTable(3)">级别</th>
-                <th onclick="sortTable(4)">对标情况</th>
+                <th onclick="sortTable(4)">值</th>
             </tr>
         </thead>
         <tbody>
@@ -203,7 +203,7 @@
     <p>4.饼图展示：各类别分布</p>
     <canvas id="myPieChart"></canvas>
     
-    <p>5.根据先进性分析，生产指标综合评分为80分</p>
+    <p id="indexall">5.根据先进性分析，生产指标综合评分为80分</p>
 
     <script>
         function sortTable(tableId, columnIndex) {
@@ -217,30 +217,6 @@
             sorted.forEach(function(row) {
                 table.appendChild(row);
             });
-            // window.onload = function() {
-            // // 创建一个新的 XMLHttpRequest 对象
-            // var xhr = new XMLHttpRequest();
-
-            // // 设置请求方法和URL
-            // xhr.open("GET", "https://api.example.com/data", true);
-
-            // // 设置回调函数，处理响应
-            // xhr.onreadystatechange = function() {
-            //     if (xhr.readyState === XMLHttpRequest.DONE) {
-            //         if (xhr.status === 200) {
-            //             // 请求成功，解析返回的 JSON 数据
-            //             var data = JSON.parse(xhr.responseText);
-            //             // 填充到第一个表格
-            //             fillTable(data, "reportTable1");
-            //         } else {
-            //             // 请求失败，显示错误信息
-            //             console.error("发生错误：" + xhr.status);
-            //         }
-            //     }
-            // };
-
-            // // 发送请求
-            // xhr.send();
         }
 
         var ctx = document.getElementById('myPieChart').getContext('2d');
@@ -312,23 +288,71 @@
                 }
             }
         });
-        // 将数据填充到指定的表格中
-function fillTable(data, tableId) {
-    var table = document.getElementById(tableId);
-    var tbody = table.querySelector("tbody");
-    tbody.innerHTML = ""; // 清空表格内容
 
-    // 循环遍历数据，并创建表格行填充数据
-    data.forEach(function(rowData) {
-        var row = document.createElement("tr");
-        Object.values(rowData).forEach(function(value) {
-            var cell = document.createElement("td");
-            cell.textContent = value;
-            row.appendChild(cell);
-        });
-        tbody.appendChild(row);
-    });
-}
+        // 将数据填充到指定的表格中
+        window.onload = function() {
+            // 创建一个新的 XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+
+        // 设置请求方法和URL
+        xhr.open("GET", "http://127.0.0.1:8081/index_compare", true);
+
+        // 设置回调函数，处理响应
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // 请求成功，解析返回的 JSON 数据
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data.advanced)
+                    // 填充到第一个表格
+                    fillTable(data.advanced, "reportTable1");
+                    fillTable(data.mean, "reportTable2");
+                    fillTable(data.unqualified, "reportTable3");
+                    var paragraph = document.getElementById("index1");
+                    // 修改 <p> 元素的内容
+                    paragraph.innerText = "达到中石化先进指标数："+data.advanced.length;
+                    var paragraph = document.getElementById("index2");
+                    // 修改 <p> 元素的内容
+                    paragraph.innerText = "达到中石化平均指标数："+data.mean.length;
+                    var paragraph = document.getElementById("index3");
+                    // 修改 <p> 元素的内容
+                    paragraph.innerText = "未达到中石化平均指标数："+data.unqualified.length;
+                    var total=data.advanced.length+data.mean.length+data.unqualified.length
+                    myPieChart.data.datasets[0].data = [data.advanced.length/total*100, data.mean.length/total*100, data.unqualified.length/total*100];
+// 更新图表
+                    myPieChart.update();
+                    var paragraph = document.getElementById("indexall");
+                    // 修改 <p> 元素的内容
+                    paragraph.innerText = "综上分析，对标中石化生产指标，本系统得分："+data.score+"分";
+                } else {
+                    // 请求失败，显示错误信息
+                    console.error("发生错误：" + xhr.status);
+                }
+            }
+        };
+
+        // 发送请求
+        xhr.send();
+        };
+
+        // 将数据填充到指定的表格中
+        function fillTable(data, tableId) {
+        var table = document.getElementById(tableId);
+        var tbody = table.getElementsByTagName("tbody")[0];
+        tbody.innerHTML = ""; // 清空表格内容
+        for (var i = 0; i < data.length; i++) {
+            var row = "<tr>";
+            row += "<td>" + i+ "</td>";
+            row += "<td>" + data[i].类别 + "</td>";
+            row += "<td>" + data[i].指标名称 + "</td>";
+            row += "<td>" + "一级" + "</td>";
+            row += "<td>" + data[i].油区系统一级指标实际值 + "</td>";
+            row += "</tr>";
+            tbody.innerHTML += row;
+        }
+        }
+
+
     </script>
 </body>
 </html>
