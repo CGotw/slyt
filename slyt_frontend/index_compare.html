@@ -132,7 +132,7 @@
     <div id="charts">
         <div class="chart-container">
             <canvas id="myLineChart"></canvas>
-            <p>这是年度指标趋势的折线图。</p>
+            <p>这是年度指标趋势的柱状图。</p>
         </div>
         <div class="chart-container">
             <canvas id="myPieChart"></canvas>
@@ -303,17 +303,18 @@
                 table.appendChild(row);
             });
         }
-        var ctxLine = document.getElementById('myLineChart').getContext('2d');
-        var myLineChart = new Chart(ctxLine, {
-            type: 'line',
+    
+        var ctxBar = document.getElementById('myLineChart').getContext('2d');
+        var myBarChart = new Chart(ctxBar, {
+            type: 'bar',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月'],
                 datasets: [{
                     label: '指标趋势',
-                    data: [65, 59, 80, 81, 56, 55],
-                    fill: false,
+                    data: [65, 59, 80, 81, 56, 55, 60, 62, 58, 64],
+                    backgroundColor: 'rgb(75, 192, 192)',
                     borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
+                    borderWidth: 1
                 }]
             },
             options: {
@@ -357,19 +358,29 @@
                     },
                     annotation: {
                         annotations: {
-                            line70: {
+                            line60: {
                                 type: 'line',
-                                yMin: 70,
-                                yMax: 70,
-                                borderColor: 'rgb(255, 99, 132)',
+                                mode: 'horizontal',
+                                scaleID: 'y',
+                                value: 60,
+                                borderColor: 'red',
                                 borderWidth: 2,
+                                label: {
+                                    enabled: true,
+                                    // content: '目标线 60'
+                                }
                             },
                             line80: {
                                 type: 'line',
-                                yMin: 80,
-                                yMax: 80,
-                                borderColor: 'rgb(54, 162, 235)',
+                                mode: 'horizontal',
+                                scaleID: 'y',
+                                value: 80,
+                                borderColor: 'blue',
                                 borderWidth: 2,
+                                label: {
+                                    enabled: true,
+                                    // content: '目标线 80'
+                                }
                             }
                         }
                     }
@@ -388,6 +399,7 @@
                         }
                     },
                     y: {
+                        max: 100, // Y轴最大值保持为100
                         ticks: {
                             color: '#ffffff',
                             font: {
@@ -402,7 +414,6 @@
                 }
             }
         });
-
 
         var ctx = document.getElementById('myPieChart').getContext('2d');
         var myPieChart = new Chart(ctx, {

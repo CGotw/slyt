@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +6,28 @@
     <title>中石化胜利油田大数据可视化系统</title>
     <script type="text/javascript" src="js/jquery.js"></script>
     <link rel="stylesheet" href="css/comon0.css" />
+    <style>
+        .head {
+            text-align: center; /* 使整个头部内容居中 */
+        }
+        .head > div {
+            display: inline-block; /* 使div成为内联块，以便它们能水平排列 */
+            vertical-align: middle; /* 垂直对齐 */
+        }
+        .custom-button {
+            background-color: #000d4a; /* 蓝色背景 */
+            color: #399bff; /* 白色文本 */
+            border: none; /* 无边框 */
+            padding: 8px 16px; /* 内边距 */
+            font-size: 10px; /* 调整字体大小 */
+            margin: 0 5px; /* 两边的外边距 */
+            border-radius: 5px; /* 圆角 */
+            cursor: pointer; /* 指针形状 */
+        }
+        .custom-button:hover {
+            background-color: #0056b3; /* 鼠标悬停时的深蓝色 */
+        }
+    </style>
 </head>
 <body>
 <div class="loading">
@@ -15,6 +37,11 @@
 </div>
 <div class="head">
     <h1><a href="https://gitee.com/iGaoWei/big-data-view">中石化胜利油田大数据可视化系统</a></h1>
+    <button class="custom-button" onclick="window.location.href='mind.html'">指标图</button>
+        <button class="custom-button" onclick="window.location.href='upload.html'">上传</button>
+        <button class="custom-button" onclick="window.location.href='index_compare.html'">分析报告</button>
+        <!-- <button class="custom-button" onclick="window.location.href='upload.html'">上传</button> -->
+    </div>
     <div class="time" id="showTime">
         2019/12/05 16:16:54
     </div>
