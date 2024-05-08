@@ -11,20 +11,39 @@
         :root {
             --chart-margin: 100px; /* 可以修改这个值来控制图表之间的间距 */
         }
+        #p-summary2{
+            text-indent: 2em;
+            line-height: 2; /* 设置单倍行距 */
+          }
+          #copyright {
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        }
+        h1{
+            font-size: 35px;
+        }
+        h2{
+            font-size: 25px;
+        }
         h1, h2 {
             text-align: center;
         }
+
         #index1 {
             text-align: center; /* 使文字居中 */
-            font-size: 20px; /* 设置字体大小为20px */
+            font-size: 15px; /* 设置字体大小为20px */
+                font-weight: bold; /* 加粗 */
         }
         #index2 {
             text-align: center; /* 使文字居中 */
-            font-size: 20px; /* 设置字体大小为20px */
+            font-size: 15px; /* 设置字体大小为20px */
+                font-weight: bold; /* 加粗 */
         }
         #index3 {
             text-align: center; /* 使文字居中 */
-            font-size: 20px; /* 设置字体大小为20px */
+            font-size: 15px; /* 设置字体大小为20px */
+                font-weight: bold; /* 加粗 */
         }
         body {
             padding: 0;
@@ -34,6 +53,7 @@
             background-size: cover;
             color: #fff;
             font-size: 12px;
+
         }
         #charts {
             display: flex;
@@ -64,29 +84,87 @@
             margin: 10px var(--chart-margin);
         }
         table {
-            width: 100%;
+            width: auto;
             border-collapse: collapse;
             margin-top: 20px;
+             margin-left: auto; /* 设置左外边距为auto */
+    margin-right: auto;
         }
         th, td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
             color: #f0f0f0;
+                text-align: center; /* 将内容水平居中 */
+    vertical-align: middle; /* 将内容垂直居中 */
         }
         th {
-            background-color: #f2f2f2;
-            color: #000;
+            background-color: #00008B;
+            color: #ffffff;
+        }
+        h3{
+            font-size: 17px;
+            margin-left: 250px;
+            margin-right: 250px;
         }
         p {
-            text-align: center;
-            font-size: 20px;
+            /*text-align: center;*/
+            font-size: 15px;
+            margin-left: 250px;
+            margin-right: 250px;
         }
         #printButton {
             position: fixed;
             bottom: 20px;  /* 距离底部20像素 */
             right: 20px;   /* 距离右边20像素 */
             padding: 10px 20px; /* 按钮内部的填充 */
+            font-size: 16px; /* 文字大小 */
+            background-color: #4CAF50; /* 背景颜色 */
+            color: white; /* 文字颜色 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border: none; /* 无边框 */
+            border-radius: 5px; /* 圆角边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* 添加阴影效果 */
+            z-index: 1000; /* 确保按钮在最上层 */
+        }
+
+        #backHomeButton:hover {
+            background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
+        }
+
+                #backHomeButton {
+            position: fixed;
+            up: 20px;  /* 距离底部20像素 */
+            left: 20px;   /* 距离右边20像素 */
+            padding: 5px 16px; /* 按钮内部的填充 */
             font-size: 16px; /* 文字大小 */
             background-color: #4CAF50; /* 背景颜色 */
             color: white; /* 文字颜色 */
@@ -127,16 +205,27 @@
     </style>
 </head>
 <body>
+</br>
+    <button id="backHomeButton" onclick="redirectToPage();">首页</button>
+     </br>
+     </br>
+     </br>
     <h1>分析报告</h1>
-    <h2>指标体系对比报告</h2>
+    </br>
+      </br>
+    <h2>一、生成系统指标体系对比报告</h2>
+      </br>
+
+    <p id="summary">对标中石化先进指标数据库，本生产系统共x项达到中石化先进水平，共x项达到中石化平均水平，x项未达到中石化平均水平，现金指标占比为x。</p>
+
     <div id="charts">
         <div class="chart-container">
-            <canvas id="myLineChart"></canvas>
-            <p>这是年度指标趋势的柱状图。</p>
+            <canvas id="myLineChart" width="800" height="400"></canvas>
+            <p>指标得分柱状图</p>
         </div>
         <div class="chart-container">
             <canvas id="myPieChart"></canvas>
-            <p>这是指标分布的饼图。</p>
+            <p>指标占比分布图</p>
         </div>
     </div>
     <p id="index1">达到中石化先进值的条数</p>
@@ -286,9 +375,153 @@
             </tr>
         </tbody>
     </table>
-    
-    <button id="printButton" onclick="window.print();">打印报告</button>
 
+    <button id="printButton" onclick="window.print();">打印报告</button>
+    </br>
+    </br>
+ </br> </br> </br>
+    <h2>二、生产系统优化简化策略分析报告</h2>
+    </br>
+    <p id="p-summary2">sdfd</p>
+    <h3>1. 串-油井串接分析</h3>
+    <p id="p-well">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="well">
+  <tr>
+    <th>序号</th>
+    <th>油井名称</th>
+    <th>是否采用功图在线计量装置</th>
+    <th>油井是否在区域中心站、分水站、分水点、增压点周边（≤1km）</th>
+    <th>串接后预计回压，MPa</th>
+    <th>该油井附近是否有其他油井（≤0.3km）</th>
+    <th>油井到原油集输支线距离，km</th>
+    <th>油井到隶属站距离，km</th>
+    <th>优化建议</th>
+  </tr>
+</table>
+
+    </br>
+    <h3>2. 撤-计量站撤销分析</h3>
+    <p id="p-metering_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="metering_station">
+  <tr>
+    <th>序号</th>
+    <th>计量站名称</th>
+    <th>管辖油井是否使用功图计量装置</th>
+    <th>计量站仅具有计量功能</th>
+    <th>改造后进站或集输支干线前温度（℃）</th>
+    <th>原油凝固点（℃）</th>
+    <th>优化建议</th>
+  </tr>
+
+</table>
+
+    </br>
+    <h3>3. 并-注水站合并分析</h3>
+    <p id="p-water_injection_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="water_injection_station">
+  <tr>
+    <th>序号</th>
+    <th>站点1名称</th>
+    <th>站点2名称</th>
+    <th>类别</th>
+    <th>两站站间距，km</th>
+    <th>设计能力</th>
+    <th>实际注水量</th>
+      <th>两站压力等级基本相同（MPa）</th>
+      <th>优化建议</th>
+  </tr>
+
+</table>
+
+     </br>
+    <h3>4. 并-集油支干线合并分析</h3>
+    <p id="p-line">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="line">
+  <tr>
+    <th>序号</th>
+    <th>集输支干线名称</th>
+    <th>设计流量（方/天）</th>
+    <th>实际流量（方/天）</th>
+    <th>集油管线是否存在腐蚀穿孔等安全风险隐患</th>
+    <th>周边是否有同流向集油管线</th>
+    <th>富余能力（方/天）</th>
+      <th>被撤管线流量（方/天）</th>
+      <th>优化建议</th>
+  </tr>
+
+</table>
+
+         </br>
+    <h3>5. 并-输油管线合并分析</h3>
+    <p id="p-out_line">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="out_line">
+  <tr>
+    <th>序号</th>
+    <th>输油管线名称</th>
+    <th>设计流量（方/天）</th>
+    <th>实际流量（方/天）</th>
+    <th>外输管线是否存在腐蚀穿孔等安全风险隐患</th>
+    <th>周边是否有同流向外输油管线</th>
+    <th>同流向外输油管线原油物性是否差别不大</th>
+      <th>同流向外输油管线富余能力是否满足被撤并管线油量</th>
+      <th>优化建议</th>
+  </tr>
+
+</table>
+    </br>
+    <h3>6. 分-就地分水分析</h3>
+    <p id="p-divide_water">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="divide_water">
+  <tr>
+    <th>序号</th>
+    <th>站点</th>
+    <th>采出液含水率，%</th>
+    <th>采出水往返距离，km</th>
+    <th>是否有注水需求</th>
+    <th>存在问题</th>
+      <th>优化建议</th>
+  </tr>
+
+</table>
+
+        </br>
+    <h3>7. 简-接转站降级或取消分析</h3>
+    <p id="p-transfer_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="transfer_station">
+  <tr>
+    <th>序号</th>
+    <th>转接站</th>
+    <th>取消后油井回压，MPa</th>
+    <th>接转站取消后插入点的压力，MPa</th>
+    <th>管线设计压力，MPa</th>
+    <th>实际外输压力，MPa</th>
+      <th>周边有无注水或掺水需求</th>
+      <th>优化建议</th>
+  </tr>
+
+</table>
+
+            </br>
+    <h3>8. 简-联合站降级分析</h3>
+    <p id="p-union_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+    <table id="union_station">
+  <tr>
+    <th>序号</th>
+    <th>联合站1</th>
+    <th>联合站2</th>
+    <th>两座联合站场间距，km</th>
+    <th>两联合站采出液物性是否相近，处理流程是否相同</th>
+    <th>两座联合站原油脱水负荷率均＜60%</th>
+    <th>区域中心站能力是否满足降级站来液处理规模</th>
+      <th>优化建议</th>
+  </tr>
+
+</table>
+    </br></br></br></br></br></br>
+    </br>
+
+    <p id="copyright">© 中石化石油工程建设有限公司版权所有</p>
+    </br></br>
 
     <script>
         function sortTable(tableId, columnIndex) {
@@ -312,14 +545,15 @@
                 datasets: [{
                     label: '指标趋势',
                     data: [65, 59, 80, 81, 56, 55, 60, 62, 58, 64],
-                    backgroundColor: 'rgb(75, 192, 192)',
-                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: '#FFA500',
+                    borderColor: '#FFA500',
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                // barThickness: 20,
                 plugins: {
                     legend: {
                         position: 'top',
@@ -362,7 +596,7 @@
                                 type: 'line',
                                 mode: 'horizontal',
                                 scaleID: 'y',
-                                value: 60,
+                                value: 50,
                                 borderColor: 'red',
                                 borderWidth: 2,
                                 label: {
@@ -374,7 +608,7 @@
                                 type: 'line',
                                 mode: 'horizontal',
                                 scaleID: 'y',
-                                value: 80,
+                                value: 100,
                                 borderColor: 'blue',
                                 borderWidth: 2,
                                 label: {
@@ -470,10 +704,201 @@
         });
 
 
+
     // 将数据填充到指定的表格中
     window.onload = function() {
-            // 创建一个新的 XMLHttpRequest 对象
+
+        fetch('http://localhost:8081/index_optimize_well')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"well")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-well");
+                paragraph.innerText = "本生产系统共"+data.data.length+"口油井待优化简化，经分析，其中,"+data.count1+"口油井建议油井串接，"+data.count2+"口油井建议串联后直接进站（点）或集输支干线。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        fetch('http://localhost:8081/index_optimize_metering_station')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"metering_station")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-metering_station");
+                paragraph.innerText = "本生产系统共"+data.data.length+"座计量站待优化简化，经分析，其中,"+data.count1+"座计量站考虑可以撤销。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        fetch('http://localhost:8081/index_optimize_water_injection_station')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"water_injection_station")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-water_injection_station");
+                paragraph.innerText = "本生产系统共"+data.count_all_1*2+"座注水站和"+data.count_all_2+"座单体泵站待优化合并，经分析，其中,"+data.count1+"座注水站考虑可以合并，"+data.count2+"座单体泵站考虑可以合并。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+        // 干线
+        fetch('http://localhost:8081/index_optimize_line')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"line")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-line");
+                paragraph.innerText = "本生产系统共"+data.data.length+"条集输支干线，"+"经分析，其中,"+data.count1+"条集输支干线合并考虑可以合并。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+            // 输油管线
+                fetch('http://localhost:8081/index_optimize_out_line')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"out_line")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-out_line");
+                paragraph.innerText = "本生产系统共"+data.data.length+"条集输支干线，"+"经分析，其中,"+data.count1+"条集输支干线合并考虑可以合并。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+            // 分水区
+            fetch('http://localhost:8081/index_optimize_divide_water')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"divide_water")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-divide_water");
+                paragraph.innerText = "本生产系统共"+data.data.length+"座分水站，"+"经分析，其中,"+data.count1+"座分水站考虑新建分水站。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+            // 转接站
+                    fetch('http://localhost:8081/index_optimize_transfer_station')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"transfer_station")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-transfer_station");
+                paragraph.innerText = "本生产系统共"+data.data.length+"座转接站，"+"经分析，其中,"+data.count1+"座转接站考虑取消，"+data.count2+"座转接站降级为分水点。";
+                console.log(data)
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+            // 联合站
+            fetch('http://localhost:8081/index_optimize_union_station')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                fillTable1(data.data,"union_station")
+                // 修改 <p> 元素的内容
+                var paragraph = document.getElementById("p-union_station");
+                paragraph.innerText = "本生产系统共"+data.data.length*2+"座联合站，"+"经分析，其中,"+data.count1+"座联合站可降级为分水站。";
+                console.log(data)
+                            var p1Content = document.getElementById("p-well").innerHTML;
+            var p2Content = document.getElementById("p-metering_station").innerHTML;
+            var p3Content = document.getElementById("p-water_injection_station").innerHTML;
+            var p4Content = document.getElementById("p-line").innerHTML;
+            var p5Content = document.getElementById("p-out_line").innerHTML;
+            var p6Content = document.getElementById("p-divide_water").innerHTML;
+            var p7Content = document.getElementById("p-transfer_station").innerHTML;
+            var p8Content = document.getElementById("p-union_station").innerHTML;
+
+    // 创建一个新的段落
+    var mergedParagraph = document.getElementById("p-summary2");
+
+    // 将各个段落的内容合并到新的段落中
+    mergedParagraph.innerHTML = "    "+p1Content + p2Content + p3Content+p4Content + p5Content + p6Content+p7Content + p8Content ;            
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+
+    //
+    // // 将新的段落插入到文档中
+    // document.body.appendChild(mergedParagraph);
+        function fillTable1(data,table_name) {
+    var table = document.getElementById(table_name);
+    for (var i = 0; i < data.length; i++) {
+      var row = table.insertRow(-1); // 在表格末尾添加新行
+      for (var key in data[i]) {
+        if (data[i].hasOwnProperty(key)) {
+          var cell = row.insertCell(); // 在行中插入单元格
+          cell.innerHTML = data[i][key]; // 填充单元格内容
+        }
+      }
+    }
+  }
+
+        // 创建一个新的 XMLHttpRequest 对象
         var xhr = new XMLHttpRequest();
+
 
         // 设置请求方法和URL
         xhr.open("GET", "http://127.0.0.1:8081/index_compare", true);
@@ -490,7 +915,23 @@
                     fillTable(data.mean, "reportTable2");
                     fillTable(data.unqualified, "reportTable3");
                     var paragraph = document.getElementById("index1");
+
+                    // 修改饼图
+                    myPieChart.data.datasets[0].data =data.rates;
+                    myPieChart.update();
+
+                    // 修改柱状图
+                    myBarChart.data.labels = data.score_percent.labels;
+                    myBarChart.data.datasets[0].data = data.score_percent.values;
+                    myBarChart.update();
+
+                    // 修改summary p标签内容
+                    var paragraph = document.getElementById("summary");
+                    paragraph.innerHTML = "对标中石化先进指标数据库，本生产系统共"+data.advanced.length+"项达到中石化先进水平，共"+data.mean.length+"项达到中石化平均水平，"+data.unqualified.length+"项未达到中石化平均水平，先进指标占比为"+data.rates[0]*100+"%,系统综合评估得分为"+data.score+"分。";
+
+
                     // 修改 <p> 元素的内容
+                    var paragraph = document.getElementById("index1");
                     paragraph.innerText = "达到中石化先进指标数："+data.advanced.length;
                     var paragraph = document.getElementById("index2");
                     // 修改 <p> 元素的内容
@@ -532,6 +973,12 @@
             tbody.innerHTML += row;
         }
         }
+
+        // 跳转页面
+        function redirectToPage() {
+    // 将页面的URL设置为新的URL
+    window.location.href = "index.html";
+}
     </script>
 </body>
 </html>
