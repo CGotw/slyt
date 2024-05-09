@@ -1,5 +1,10 @@
 import uvicorn
 from fastapi import FastAPI
+from starlette.responses import HTMLResponse
+import os
+
+from starlette.staticfiles import StaticFiles
+
 from apis.index import index_router
 from apis.index_compare import index_compare_router
 import pandas as pd
@@ -14,8 +19,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
 
 
 
