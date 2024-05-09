@@ -91,6 +91,12 @@
     input[type="file"] {
       color: transparent;
     }
+    hr {
+        border: none;            /* 移除默认边框 */
+        height: 2px;             /* 设置高度 */
+        background-color: #ff4500; /* 设置颜色 */
+        margin: 60px 0;          /* 设置上下边距 */
+    }
     
   </style>
 </head>
@@ -135,37 +141,55 @@
         </div>
           <input type="file" id="siteNameUpload" style="display: none;">
         </div>
-               
         <div
-          style="width: 50%;height: 200px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
-          <form>
-            <label for="name">站点名称<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">站点描述</label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;">
-          </form>
-          <form>
-            <label for="name">站点备注</label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;">
-          </form>
+          style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
+          <div
+            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
+            <form>
+              <label for="name">前端站名称<span class="required-star">*</span></label>
+              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
+            </form>
+            <!-- <div
+              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
+              <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div>
+              <img src="upload-icon.png" class="upload-image">
+              <input type="file">
+            </div> -->
+            <div style="width: 100%; height: 200px; background-color: #ddd; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+              <!-- <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div> -->
+              <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 10px;">
+                  <!-- 下载模板按钮 -->
+                  <button style="cursor: pointer;">
+                      <a href="template-file.xlsx" download="TemplateFile">下载模板</a>
+                  </button>
+                  <!-- 文件上传部分 -->
+                  <label for="siteNameUpload" style="cursor: pointer; display: flex; justify-content: center; align-items: center;">
+                      <img src="upload-icon.png" alt="上传图片">
+                      <div style="color: blue; text-align: center; margin-bottom: 10px;">上传</div>  
+                  </label>
+              </div>
+              <input type="file" id="siteNameUpload" style="display: none;">
+          </div>        
         </div>
+        <div style="width:400px;">
+          <a style="text-align: left; color: red;" href="#">添加+</a>
+      </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+       
 
       </div>
     </div>
-
     <hr>
 
     <div>
       <h2>2.前端站</h2>
       <div style="display: flex; height: 300px;">
         <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-          <form>
-            <label for="site-name">回压推荐值<span class="required-star">*</span></label>
-            <input type="text" name="site-name" id="site-name" style="width: 100%; margin-bottom: 10px; height: 2vh;"
-              required>
-          </form>
+          
         </div>
         <div
           style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
@@ -204,307 +228,19 @@
         </div>
       </div>
     </div>
-
-    <div class="spacer"></div>
-
-    <hr>
-
-    <div>
-      <h2>3.集输系统</h2>
-      <div class="inner" style="display: flex; justify-content: center; align-items: flex-start;">
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center; padding: 10px;">
-          <div class="form-container">
-            <h2>多介质流量计算器</h2>
-            <div class="form-group">
-              <label for="flow1_1">流体1水质量流量:</label>
-              <input type="text" id="flow1" name="flow1"> <span>kg/d</span>
-            </div>
-            <div class="form-group">
-              <label for="flow1_2">流体1油质量流量:</label>
-              <input type="text" id="flow2" name="flow2"> <span>kg/d</span>
-            </div>
-            <div class="form-group">
-              <label for="flow2_1">流体2水质量流量:</label>
-              <input type="text" id="flow2_1" name="flow2_1"> <span>kg/d</span>
-            </div>
-            <div class="form-group">
-              <label for="flow2_2">流体2油质量流量:</label>
-              <input type="text" id="flow2_2" name="flow2_2"> <span>kg/d</span>
-            </div>
-            <div class="form-group">
-              <label for="temp1">流体1温度:</label>
-              <input type="text" id="temp1" name="temp1"> <span>°C</span>
-            </div>
-            <div class="form-group">
-              <label for="temp2">流体2温度:</label>
-              <input type="text" id="temp2" name="temp2"> <span>°C</span>
-            </div>
-            <div class="form-group">
-              <button type="submit">计算</button>
-            </div>
-            <div class="form-group">
-              <label for="result">混合后温度:</label>
-              <input type="text" id="result" name="result"> <span>°C</span>
-            </div>
-          </div>
-        </div>
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center; padding: 10px;">
-          <div
-          style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
-          <form>
-            <label for="name">系统名称01<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <div
-            style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-            <div class="upload-text" style="color: blue;">管道拓扑图片上传</div>
-            <!-- <img src="upload-icon.png" class="upload-image"> -->
-            <input type="file">
-          </div>
-          <form>
-            <label for="name">起点名称<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">终点名称<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">起点温度<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">终点温度<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">测量时间<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">土壤潮湿程度<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">管线外径<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">管线内径<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-          <form>
-            <label for="name">液体质量流量<span class="required-star">*</span></label>
-            <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-          </form>
-        </div>
-        <div style="width:400px;">
-          <a style="text-align: left; color: red;" href="#">添加+</a>
-      </div>
-        </div>
-      </div>
-    </div>
+<hr>
     
-
-
-    <hr>
-
-
-    <div>
-      <h2>4.联合站-三相分离器</h2>
-      <div style="display: flex; height: 300px;">
-        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-          <form>
-            <label for="site-name">装置名称<span class="required-star">*</span></label>
-            <input type="text" name="site-name" id="site-name" style="width: 100%; margin-bottom: 10px; height: 2vh;"
-              required>
-          </form>
-        </div>
-        <div
-          style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
-          <div
-            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
-            <!-- <div
-              style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-              <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div>
-              <img src="upload-icon.png" class="upload-image">
-              <input type="file">
-            </div> -->
-            <div style="width: 100%; height: 200px; background-color: #ddd; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-              <!-- <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div> -->
-              <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 10px;">
-                  <!-- 下载模板按钮 -->
-                  <button style="cursor: pointer;">
-                      <a href="template-file.xlsx" download="TemplateFile">下载模板</a>
-                  </button>
-                  <!-- 文件上传部分 -->
-                  <label for="siteNameUpload" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-                    <div style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-                      <div class="upload-text" style="color: blue;">三相分离器数据上传</div>
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                        <img src="upload-icon.png" style="margin-bottom: 10px;">
-                    </div>
-                </label>                
-              </div>
-              <input type="file" id="siteNameUpload" style="display: none;">
-          </div>        
-        </div>
-          </div>
-          <div style="width:400px;">
-            <a style="text-align: left; color: red;" href="#">添加+</a>
-        </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="spacer"></div>
-
-    <hr>
-
-
-    <div>
-      <h2>5.联合站-泵和加热炉</h2>
-      <div style="display: flex; height: 300px;">
-        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        </div>
-        <div
-          style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
-          <div
-            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
-            <form>
-              <label for="name">装置名称<span class="required-star">*</span></label>
-              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-            </form>
-            <form>
-              <label for="name">标准效率<span class="required-star">*</span></label>
-              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-            </form>
-            <div style="width: 100%; height: 100px; background-color: #ddd; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-              <!-- <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div> -->
-              <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 10px;">
-                  <!-- 下载模板按钮 -->
-                  <button style="cursor: pointer;">
-                      <a href="template-file.xlsx" download="TemplateFile">下载模板</a>
-                  </button>
-                  <!-- 文件上传部分 -->
-                  <label for="siteNameUpload" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-                    <div style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-                      <div class="upload-text" style="color: blue;">设备数据上传</div>
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                        <img src="upload-icon.png" style="margin-bottom: 10px;">
-                    </div>
-                </label>                
-              </div>
-              <input type="file" id="siteNameUpload" style="display: none;">
-          </div>        
-        </div>
-          </div>
-          <div style="width:400px;">
-            <a style="text-align: left; color: red;" href="#">添加+</a>
-        </div>
-        </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-
-    <div>
-      <h2>6.联合站-稳定塔</h2>
-      <div style="display: flex; height: 300px;">
-        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        </div>
-        <div
-          style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
-          <div
-            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
-            <form>
-              <label for="name">装置名称<span class="required-star">*</span></label>
-              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-            </form>
-            <div style="width: 100%; height: 100px; background-color: #ddd; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-              <!-- <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div> -->
-              <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 10px;">
-                  <!-- 下载模板按钮 -->
-                  <button style="cursor: pointer;">
-                      <a href="template-file.xlsx" download="TemplateFile">下载模板</a>
-                  </button>
-                  <!-- 文件上传部分 -->
-                  <label for="siteNameUpload" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-                    <div style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-                      <div class="upload-text" style="color: blue;">设备数据上传</div>
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                        <img src="upload-icon.png" style="margin-bottom: 10px;">
-                    </div>
-                </label>                
-              </div>
-              <input type="file" id="siteNameUpload" style="display: none;">
-          </div>        
-        </div>
-          </div>
-          <div style="width:400px;">
-            <a style="text-align: left; color: red;" href="#">添加+</a>
-        </div>
-        </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-
-    <div>
-      <h2>7.联合站-综合评估</h2>
-      <div style="display: flex; height: 300px;">
-        <div style="width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        </div>
-        <div
-          style="width: 50%;height: 300px;display: flex;flex-direction: column;justify-content: center; align-items: center;">
-          <div
-            style="width:400px;border: 1px solid;border-color: aqua;padding-left: 15px;padding-top: 10px;padding-right: 15px;">
-            <form>
-              <label for="name">站点名称<span class="required-star">*</span></label>
-              <input type="text" name="name" id="name" style="width: 100%;margin-bottom: 10px;height: 2vh;" required>
-            </form>
-            <div style="width: 100%; height: 100px; background-color: #ddd; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-              <!-- <div style="color: blue; text-align: center; margin-bottom: 10px;">站点图片上传</div> -->
-              <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 10px;">
-                  <!-- 下载模板按钮 -->
-                  <button style="cursor: pointer;">
-                      <a href="template-file.xlsx" download="TemplateFile">下载模板</a>
-                  </button>
-                  <!-- 文件上传部分 -->
-                  <label for="siteNameUpload" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-                    <div style="background-color:aliceblue; display: flex;flex-direction: column;justify-content: center; align-items: center;">
-                      <div class="upload-text" style="color: blue;">设备数据上传</div>
-                    <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-                        <img src="upload-icon.png" style="margin-bottom: 10px;">
-                    </div>
-                </label>                
-              </div>
-              <input type="file" id="siteNameUpload" style="display: none;">
-          </div>        
-        </div>
-          </div>
-          <div style="width:400px;">
-            <a style="text-align: left; color: red;" href="#">添加+</a>
-        </div>
-        </div>
-          </div>
-        </div>
-      </div>
-    </div>
-      <hr>
-      <div>
-      
+  
+        
 
   
 
 
       <div style="float: right;">
         <button
-          style="margin-right: 100px;margin-bottom: 100px; background-color: red; color: #fff; border: 0; border-radius: 10px; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease;"
+          style="margin-right: 100px;margin-bottom: 100px; background-color: green; color: #fff; border: 0; border-radius: 10px; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s ease;"
           onmouseover="this.style.backgroundColor='#b30000'"
-          onmouseout="this.style.backgroundColor='red'"
+          onmouseout="this.style.backgroundColor='green'"
           onmousedown="this.style.backgroundColor='#990000'"
           onmouseup="this.style.backgroundColor='#b30000'"
           onclick="submitForm();">提交</button>

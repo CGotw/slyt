@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Simple Report Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
+
+
 
     <style>
         :root {
@@ -178,7 +179,21 @@
         #printButton:hover {
             background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
         }
-
+        .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+}
+.button:hover {
+    background-color: #45a049;
+}
         /* @page {
             size: A4;
             margin: 0;
@@ -206,11 +221,18 @@
 </head>
 <body>
 </br>
-    <button id="backHomeButton" onclick="redirectToPage();">首页</button>
+    <a href="index.html" class="button">首页</a>
+    <a href="#section1" class="button">对比报告</a>
+    <a href="#section2" class="button">分析报告</a>
+    <button class="button" onclick="window.print();">打印报告</button>
+
+
+
+
      </br>
      </br>
      </br>
-    <h1>分析报告</h1>
+    <h2 id="section1">分析报告</h2>
     </br>
       </br>
     <h2>一、生成系统指标体系对比报告</h2>
@@ -376,11 +398,10 @@
         </tbody>
     </table>
 
-    <button id="printButton" onclick="window.print();">打印报告</button>
     </br>
     </br>
  </br> </br> </br>
-    <h2>二、生产系统优化简化策略分析报告</h2>
+    <h2 id="section2">二、生产系统优化简化策略分析报告</h2>
     </br>
     <p id="p-summary2">sdfd</p>
     <h3>1. 串-油井串接分析</h3>
@@ -538,170 +559,183 @@
         }
     
         var ctxBar = document.getElementById('myLineChart').getContext('2d');
+        var data = [65, 59, 80, 81, 56, 55, 60, 62, 58, 64];
+
+        // Function to determine the background color based on data value
+        function getColor(value) {
+            if (value < 60) return 'red';
+            else if (value >= 60 && value <= 80) return 'yellow';
+            else return 'blue';
+        }
         var myBarChart = new Chart(ctxBar, {
             type: 'bar',
             data: {
                 labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月'],
                 datasets: [{
                     label: '指标趋势',
-                    data: [65, 59, 80, 81, 56, 55, 60, 62, 58, 64],
-                    backgroundColor: '#FFA500',
-                    borderColor: '#FFA500',
+                    data: data,
+                    backgroundColor: data.map(getColor), // Apply color logic for each data point
+                    borderColor: data.map(getColor), // Apply the same logic for borders if required
                     borderWidth: 1
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                // barThickness: 20,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            font: {
-                                size: 14,
-                                family: 'Arial',
-                                weight: 'bold'
-                            },
-                            color: '#ffffff'
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 14,
+                        family: 'Arial',
+                        weight: 'bold'
+                    },
+                    color: '#ffffff'
+                }
+            },
+            title: {
+                display: true,
+                text: '年度指标趋势',
+                font: {
+                    size: 16,
+                    family: 'Arial',
+                    weight: 'bold'
+                },
+                color: '#ffffff'
+            },
+            tooltip: {
+                bodyFont: {
+                    size: 14,
+                    family: 'Arial'
+                },
+                titleFont: {
+                    size: 16,
+                    family: 'Arial',
+                    weight: 'bold'
+                },
+                backgroundColor: '#333333',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff'
+            },
+            annotation: {
+                annotations: {
+                    line60: {
+                        type: 'line',
+                        yMin: 60,
+                        yMax: 60,
+                        borderColor: 'red',
+                        borderWidth: 2,
+                        borderDash: [6, 6],
+                        label: {
+                            content: '目标线 60',
+                            enabled: true,
+                            position: 'end'
                         }
                     },
-                    title: {
-                        display: true,
-                        text: '年度指标趋势',
-                        font: {
-                            size: 16,
-                            family: 'Arial',
-                            weight: 'bold'
-                        },
-                        color: '#ffffff'
-                    },
-                    tooltip: {
-                        bodyFont: {
-                            size: 14,
-                            family: 'Arial'
-                        },
-                        titleFont: {
-                            size: 16,
-                            family: 'Arial',
-                            weight: 'bold'
-                        },
-                        backgroundColor: '#333333',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff'
-                    },
-                    annotation: {
-                        annotations: {
-                            line60: {
-                                type: 'line',
-                                mode: 'horizontal',
-                                scaleID: 'y',
-                                value: 50,
-                                borderColor: 'red',
-                                borderWidth: 2,
-                                label: {
-                                    enabled: true,
-                                    // content: '目标线 60'
-                                }
-                            },
-                            line80: {
-                                type: 'line',
-                                mode: 'horizontal',
-                                scaleID: 'y',
-                                value: 100,
-                                borderColor: 'blue',
-                                borderWidth: 2,
-                                label: {
-                                    enabled: true,
-                                    // content: '目标线 80'
-                                }
-                            }
+                    line80: {
+                        type: 'line',
+                        yMin: 80,
+                        yMax: 80,
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        borderDash: [6, 6],
+                        label: {
+                            content: '目标线 80',
+                            enabled: true,
+                            position: 'end'
                         }
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    color: '#ffffff',
+                    font: {
+                        size: 12,
+                        family: 'Arial'
                     }
                 },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: '#ffffff',
-                            font: {
-                                size: 12,
-                                family: 'Arial'
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(255,255,255,0.2)'
-                        }
-                    },
-                    y: {
-                        max: 100, // Y轴最大值保持为100
-                        ticks: {
-                            color: '#ffffff',
-                            font: {
-                                size: 12,
-                                family: 'Arial'
-                            }
-                        },
-                        grid: {
-                            color: 'rgba(255,255,255,0.2)'
-                        }
-                    }
+                grid: {
+                    color: 'rgba(255,255,255,0.2)'
                 }
-            }
-        });
-
-        var ctx = document.getElementById('myPieChart').getContext('2d');
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['先进性指标', '达标率指标', '未达标率指标'],
-                datasets: [{
-                    label: '指标分布',
-                    data: [20, 30, 50],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)'
-                    ],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 1
-                }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            font: {
-                                size: 14,
-                                family: 'Arial',
-                                weight: 'bold'
-                            },
-                            color: '#ffffff'
-                        }
-                    },
-                    tooltip: {
-                        bodyFont: {
-                            size: 14,
-                            family: 'Arial'
-                        },
-                        titleFont: {
-                            size: 16,
-                            family: 'Arial',
-                            weight: 'bold'
-                        },
-                        backgroundColor: '#333333',
-                        titleColor: '#ffffff',
-                        bodyColor: '#ffffff'
+            y: {
+                max: 100, // Y轴最大值保持为100
+                ticks: {
+                    color: '#ffffff',
+                    font: {
+                        size: 12,
+                        family: 'Arial'
                     }
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.2)'
                 }
             }
-        });
+        }
+    }
+});
+
+
+
+
+var ctx = document.getElementById('myPieChart').getContext('2d');
+var myPieChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['先进性指标', '达标率指标', '未达标率指标'],
+        datasets: [{
+            label: '指标分布',
+            data: [20, 30, 50],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            datalabels: {
+                color: 'white',  // 设置白色字体
+                formatter: (value, ctx) => {
+                    let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);  // 计算总和
+                    let percentage = (value / sum * 100).toFixed(2) + "%";  // 计算百分比
+                    return value + ' (' + percentage + ')';  // 显示值和百分比
+                },
+                font: {
+                    weight: 'bold'
+                },
+                anchor: 'end',  // 锚点设置为结束点
+                align: 'end'    // 对齐设置为结束点
+            },
+            legend: {
+                position: 'bottom',
+                labels: {
+                    font: {
+                        size: 14,
+                        family: 'Arial',
+                        weight: 'bold'
+                    },
+                    color: '#ffffff'
+                }
+            }
+        }
+    }
+});
+
+
 
 
 
