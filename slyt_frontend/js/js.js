@@ -58,7 +58,7 @@ function echarts_1() {
 "left":"30",
 },
 legend: {
-  data: ['天然气', '碳乳剂', '用电量','总量','天然气增长率','碳乳剂增长率','用电量增长率','总量增长率'],
+  data: ['天然气', '药剂', '用电量','总量','天然气变化','药剂变化','用电量变化','总量变化'],
   right: 'center', width:'100%',
   textStyle: {
       color: "#fff"
@@ -82,7 +82,11 @@ legend: {
  "yAxis": [
    {
      "type": "value",
-     "name": "单位万",
+     "name": "单位/万元",
+     "nameTextStyle": {
+        "color": "#FFFFFF", // 设置字体颜色为白色
+        "fontWeight": "bold" // 加粗字体使其更显眼
+    },
      axisTick: {show: false},
      splitLine: {
       show: false,
@@ -104,6 +108,10 @@ legend: {
    {
      "type": "value",
      "name": "增速",
+     "nameTextStyle": {
+        "color": "#FFFFFF", // 设置字体颜色为白色
+        "fontWeight": "bold" // 加粗字体使其更显眼
+    },
      "show": true,
      "axisLabel": {
        "show": true,
@@ -139,7 +147,7 @@ legend: {
    },
 
    {
-    "name": "碳乳剂",
+    "name": "药剂",
     "type": "bar",
     "data":[14.8,14.1, 15, 16.30],
     "barWidth": "15%",
@@ -196,7 +204,7 @@ legend: {
     "barGap": "0.2"
   },
    {
-     "name": "天然气增长率",
+     "name": "天然气变化",
      "type": "line",
      "yAxisIndex": 1,
 
@@ -215,7 +223,7 @@ legend: {
      "smooth": true
    } ,
    {
-     "name": "碳乳剂增长率",
+     "name": "药剂变化",
      "type": "line",
      "yAxisIndex": 1,
 
@@ -234,7 +242,7 @@ legend: {
      "smooth": true
    },
    {
-    "name": "用电量增长率",
+    "name": "用电量变化",
     "type": "line",
     "yAxisIndex": 1,
 
@@ -253,7 +261,7 @@ legend: {
     "smooth": true
   },
   {
-    "name": "总量增长率",
+    "name": "总量变化",
     "type": "line",
     "yAxisIndex": 1,
 
@@ -318,29 +326,30 @@ fetch('http://127.0.0.1:8081/all_data')
     }
 
     async function echarts_2() {
-        // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts2'));
-
-        const response = await fetch('http://127.0.0.1:8081/data2/')
+        const response = await fetch('http://127.0.0.1:8081/data2/');
         const data = await response.json();
-        console.log(data)
-
-        let dates = []
-        let sanxiang = []
-        let yiciguan = []
-        let unionStation = []
+        console.log(data);
+    
+        let dates = [];
+        let sanxiang = [];
+        let yiciguan = [];
+        let unionStation = [];
+        let standardWaterContent = [];  
+    
         for (let i = 0; i < data.length; i++) {
-            dates.push(formatDate(data[i]['时间'].slice(0, 8)).slice(0,8))
-            sanxiang.push(data[i]['三相分离器出油含水率'])
-            yiciguan.push(data[i]['一次罐出油含水率'])
-            unionStation.push(data[i]['联合站外输含水率'])
+            dates.push(formatDate(data[i]['时间'].slice(0, 8)).slice(0, 8));
+            sanxiang.push(data[i]['三相分离器出油含水率']);
+            yiciguan.push(data[i]['一次罐出油含水率']);
+            unionStation.push(data[i]['联合站外输含水率']);
+            standardWaterContent.push(data[i]['原油含水率达标值']);  
         }
+    
 
         option = {
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {type: 'shadow'},
-                // formatter:'{c}' ,
             },
             grid: {
                 left: '0',
@@ -350,7 +359,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 containLabel: true
             },
             legend: {
-                data: ['三相分离器出油含水率', '一次罐出油含水率', '联合站外输含水率'],
+                data: ['三相分离器出油含水率', '一次罐出油含水率', '联合站外输含水率', '原油含水率达标值'],
                 right: 'center',
                 top: 0,
                 textStyle: {
@@ -358,9 +367,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 },
                 itemWidth: 12,
                 itemHeight: 10,
-                // itemGap: 35
             },
-
             xAxis: [{
                 type: 'category',
                 boundaryGap: false,
@@ -511,13 +518,28 @@ fetch('http://127.0.0.1:8081/all_data')
                     },
                     itemStyle: {
                         normal: {
-                            color: 'rgb(180,4,44)',
+                            color: 'rgb(0,59,201)',
                             borderColor: 'rgba(255, 128, 128, .1)',
                             borderWidth: 12
                         }
                     },
                     data: unionStation
                 },
+                {
+                    name: '原油含水率达标值',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'circle',
+                    symbolSize: 5,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            color: 'rgba(255, 0, 0, 1)',  // 红色
+                            width: 2
+                        }
+                    },
+                    data: standardWaterContent
+                }
             ]
         };
         // 使用刚指定的配置项和数据显示图表。
@@ -542,7 +564,7 @@ fetch('http://127.0.0.1:8081/all_data')
         for (let i = 0; i < data.length; i++) {
             dates.push(formatDate(data[i]['时间'].slice(0, 10)))
             tianranqi.push(data[i]['天然气消耗总价'])
-            poruqi.push(data[i]['破乳剂消耗总价'])
+            poruqi.push(data[i]['药剂消耗成本'])
             power.push(data[i]['用电消耗总价'])
         }
 
@@ -554,7 +576,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 }
             },
             legend: {
-                data: ['天然气消耗总价', '破乳剂消耗总价', '用电消耗总价'],
+                data: ['天然气消耗成本', '药剂消耗成本', '用电消耗成本'],
                 right: 'center',
                 top: 0,
                 textStyle: {
@@ -590,8 +612,13 @@ fetch('http://127.0.0.1:8081/all_data')
 
             yAxis: {
                 type: 'value',
+                "name": "单位/元",
+                "nameTextStyle": {
+                    "color": "#FFFFFF", // 设置字体颜色为白色
+                    "fontWeight": "bold" // 加粗字体使其更显眼
+                },
                 splitNumber: 4,
-                axisTick: {show: false},
+                axisTick: { show: false },
                 splitLine: {
                     show: true,
                     lineStyle: {
@@ -602,13 +629,14 @@ fetch('http://127.0.0.1:8081/all_data')
                     textStyle: {
                         color: "rgba(255,255,255,.6)",
                         fontSize: 14,
-                    }
+                    },
                 },
-                axisLine: {show: false},
+                axisLine: { show: false },
             },
+            
 
             series: [{
-                name: '天然气消耗总价',
+                name: '天然气消耗成本',
                 type: 'bar',
                 stack: 'a',
                 barWidth: '30', barGap: 0,
@@ -620,7 +648,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 data: tianranqi
             },
                 {
-                    name: '破乳剂消耗总价',
+                    name: '药剂消耗成本',
                     type: 'bar',
                     stack: 'a',
                     barWidth: '30', barGap: 0,
@@ -633,7 +661,7 @@ fetch('http://127.0.0.1:8081/all_data')
                     data: poruqi
                 },
                 {
-                    name: '用电消耗总价',
+                    name: '用电消耗成本',
                     type: 'bar',
                     stack: 'a',
                     barWidth: '30', barGap: 0,
@@ -654,7 +682,6 @@ fetch('http://127.0.0.1:8081/all_data')
             myChart.resize();
         });
     }
-
     async function echarts_5() {
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('echarts5'));
@@ -711,7 +738,11 @@ fetch('http://127.0.0.1:8081/all_data')
             "yAxis": [
                 {
                     "type": "value",
-                    "name": "单位1",
+                    "name": "mg/L",
+                    "nameTextStyle": {
+                        "color": "#FFFFFF", // 设置字体颜色为白色
+                        "fontWeight": "bold" // 加粗字体使其更显眼
+                    },
                     splitLine: {show: false},
                     axisTick: {show: false},
                     "axisLabel": {
@@ -724,7 +755,11 @@ fetch('http://127.0.0.1:8081/all_data')
                 },
                 {
                     "type": "value",
-                    "name": "单位2",
+                    "name": "变化率",
+                    "nameTextStyle": {
+                        "color": "#FFFFFF", // 设置字体颜色为白色
+                        "fontWeight": "bold" // 加粗字体使其更显眼
+                    },
                     "show": true,
                     axisTick: {show: false},
                     "axisLabel": {
@@ -739,23 +774,22 @@ fetch('http://127.0.0.1:8081/all_data')
             "series": [
                 {
                     "name": "含油量率",
-                    "type": "bar",
+                    "type": "line",
                     "data": data1,
-                    "barWidth": "20%",
+                    "yAxisIndex": 1,
 
+                    lineStyle: {
+                        normal: {
+                            width: 2
+                        },
+                    },
                     "itemStyle": {
                         "normal": {
-                            barBorderRadius: 15,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: '#fccb05'
-                            }, {
-                                offset: 1,
-                                color: '#f5804d'
-                            }]),
+                            "color": "#ffff00",
+
                         }
                     },
-                    "barGap": "0"
+                    "smooth": true
                 },
                 {
                     "name": "含油量增加率",
@@ -779,7 +813,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 {
                     "name": "悬浮物量",
                     "type": "bar",
-                    "data": data1,
+                    "data": data3,
                     "barWidth": "20%",
 
                     "itemStyle": {
@@ -814,7 +848,8 @@ fetch('http://127.0.0.1:8081/all_data')
                         }
                     },
                     "smooth": true
-                }
+                },
+               
             ]
         };
         // 使用刚指定的配置项和数据显示图表。
@@ -823,7 +858,224 @@ fetch('http://127.0.0.1:8081/all_data')
             myChart.resize();
         });
     }
+    // async function echarts_5() {
+    //     // 基于准备好的dom，初始化echarts实例
+    //     var myChart = echarts.init(document.getElementById('echarts5'));
 
+    //     const response = await fetch('http://127.0.0.1:8081/data3/')
+    //     const data = await response.json();
+    //     console.log(data)
+
+    //     let dates = []
+    //     let data1 = []
+    //     let data2 = []
+    //     let data3 = []
+    //     let data4 = []
+    //     let data5 = []
+    //     let data6 = []
+    //     for (let i = 0; i < data.length; i++) {
+    //         dates.push(formatDate(data[i]['时间'].slice(0, 8)).slice(0,8))
+    //         data1.push(data[i]['含油量率'])
+    //         data2.push(data[i]['含油量增加率'])
+    //         data3.push(data[i]['悬浮物量'])
+    //         data4.push(data[i]['悬浮物量减少率'])
+    //         data5.push(data[i]['含油量达标值'])
+    //         data6.push(data[i]['悬浮物达标值'])
+    //     }
+
+    //     option = {
+    //         tooltip: {
+    //             trigger: 'axis',
+    //             axisPointer: {type: 'shadow'},
+    //         }, "grid": {
+    //             "top": "15%",
+    //             "right": "10%",
+    //             "bottom": "20",
+    //             "left": "10%",
+    //         },
+    //         legend: {
+    //             data: ['含油量率', '含油量增加率', '悬浮物量', '悬浮物量减少率','含油量达标值','悬浮物达标值'],
+    //             right: 'center',
+    //             top: 0,
+    //             textStyle: {
+    //                 color: "#fff"
+    //             },
+    //             itemWidth: 12,
+    //             itemHeight: 10,
+    //         },
+    //         "xAxis": [
+    //             {
+    //                 "type": "category",
+
+    //                 data: dates,
+    //                 axisLine: {lineStyle: {color: "rgba(255,255,255,.1)"}},
+    //                 axisLabel: {
+    //                     textStyle: {color: "rgba(255,255,255,.7)", fontSize: '14',},
+    //                 },
+
+    //             },
+    //         ],
+    //         "yAxis": [
+    //             {
+    //                 "type": "value",
+    //                 "name": "mg/L",
+    //                 "nameTextStyle": {
+    //                     "color": "#FFFFFF", // 设置字体颜色为白色
+    //                     "fontWeight": "bold" // 加粗字体使其更显眼
+    //                 },
+    //                 splitLine: {show: false},
+    //                 axisTick: {show: false},
+    //                 "axisLabel": {
+    //                     "show": true,
+    //                     color: "rgba(255,255,255,.6)"
+
+    //                 },
+    //                 axisLine: {lineStyle: {color: 'rgba(255,255,255,.1)'}},//左线色
+
+    //             },
+    //             {
+    //                 "type": "value",
+    //                 "name": "变化率",
+    //                 "nameTextStyle": {
+    //                     "color": "#FFFFFF", // 设置字体颜色为白色
+    //                     "fontWeight": "bold" // 加粗字体使其更显眼
+    //                 },
+    //                 "show": true,
+    //                 axisTick: {show: false},
+    //                 "axisLabel": {
+    //                     "show": true,
+    //                     formatter: "{value} %",
+    //                     color: "rgba(255,255,255,.6)"
+    //                 },
+    //                 axisLine: {lineStyle: {color: 'rgba(255,255,255,.1)'}},//右线色
+    //                 splitLine: {show: true, lineStyle: {color: 'rgba(255,255,255,.1)'}},//x轴线
+    //             },
+    //         ],
+    //         "series": [
+    //             {
+    //                 "name": "含油量率",
+    //                 "type": "line",
+    //                 "data": data1,
+    //                 "yAxisIndex": 1,
+
+    //                 lineStyle: {
+    //                     normal: {
+    //                         width: 2
+    //                     },
+    //                 },
+    //                 "itemStyle": {
+    //                     "normal": {
+    //                         "color": "#ffff00",
+
+    //                     }
+    //                 },
+    //                 "smooth": true
+    //             },
+    //             {
+    //                 "name": "含油量增加率",
+    //                 "type": "line",
+    //                 "yAxisIndex": 1,
+
+    //                 "data": data2,
+    //                 lineStyle: {
+    //                     normal: {
+    //                         width: 2
+    //                     },
+    //                 },
+    //                 "itemStyle": {
+    //                     "normal": {
+    //                         "color": "#ff3300",
+
+    //                     }
+    //                 },
+    //                 "smooth": true
+    //             },
+    //             {
+    //                 "name": "悬浮物量",
+    //                 "type": "bar",
+    //                 "data": data3,
+    //                 "barWidth": "20%",
+
+    //                 "itemStyle": {
+    //                     "normal": {
+    //                         barBorderRadius: 15,
+    //                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+    //                             offset: 0,
+    //                             color: '#f54857'
+    //                         }, {
+    //                             offset: 1,
+    //                             color: '#f5804d'
+    //                         }]),
+    //                     }
+    //                 },
+    //                 "barGap": "0"
+    //             },
+    //             {
+    //                 "name": "悬浮物量减少率",
+    //                 "type": "line",
+    //                 "yAxisIndex": 1,
+
+    //                 "data": data4,
+    //                 lineStyle: {
+    //                     normal: {
+    //                         width: 2
+    //                     },
+    //                 },
+    //                 "itemStyle": {
+    //                     "normal": {
+    //                         "color": "#00d740",
+
+    //                     }
+    //                 },
+    //                 "smooth": true
+    //             },
+    //             {
+    //                 "name": "含油量达标值",
+    //                 "type": "line",
+    //                 "data": data5,
+    //                 "yAxisIndex": 1,
+
+    //                 lineStyle: {
+    //                     normal: {
+    //                         width: 2
+    //                     },
+    //                 },
+    //                 "itemStyle": {
+    //                     "normal": {
+    //                         "color": "#00ff00",
+
+    //                     }
+    //                 },
+    //                 "smooth": true
+    //             },
+    //             {
+    //                 "name": "悬浮物达标值",
+    //                 "type": "line",
+    //                 "data": data6,
+    //                 "yAxisIndex": 1,
+
+    //                 lineStyle: {
+    //                     normal: {
+    //                         width: 2
+    //                     },
+    //                 },
+    //                 "itemStyle": {
+    //                     "normal": {
+    //                         "color": "#0000ff",
+
+    //                     }
+    //                 },
+    //                 "smooth": true
+    //             },
+    //         ]
+    //     };
+    //     // 使用刚指定的配置项和数据显示图表。
+    //     myChart.setOption(option);
+    //     window.addEventListener("resize", function () {
+    //         myChart.resize();
+    //     });
+    // }
+    
     function echarts_4() {
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('echarts4'));
@@ -1030,7 +1282,7 @@ option.series[0].data = formatted_avg_efficiency;
         color: ['rgb(131,249,103)', '#FBFE27', '#FE5050', '#1DB7E5'], //'#FBFE27','rgb(11,228,96)','#FE5050'
         data: [{
           "value": 1924,
-          "name": "碳乳剂消耗量"
+          "name": "药剂消耗量"
       }, {
           "value": 1055,
           "name": "天然气消耗量"
@@ -1082,12 +1334,12 @@ fetch('http://127.0.0.1:8081/read_excel/3')
 })
 .then(data => {
   console.log(data)
-  option.series[0].data[0].value=data.natural_gas
-  option.series[0].data[1].value=data.power_consumption
+  option.series[0].data[0].value=data.natural_gas.toFixed(2)
+  option.series[0].data[1].value=data.power_consumption.toFixed(2)
   // option.series[0].data[0].value=data["carbon_emulsion"]
   // option.series[0].data[2].value=data["power_consumption"]
-  option.series[0].data[2].value=data.carbon_emulsion
-  option.title.text=data["total"]
+  option.series[0].data[2].value=data.carbon_emulsion.toFixed(2)
+  option.title.text=data["total"].toFixed(2)
   // option.xAxis[0].data=data.month
   // option.xAxis[0].data=data.month
   // var xAxisData = option["xAxis"];
