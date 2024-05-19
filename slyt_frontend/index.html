@@ -14,19 +14,25 @@
             display: inline-block; /* 使div成为内联块，以便它们能水平排列 */
             vertical-align: middle; /* 垂直对齐 */
         }
-        .custom-button {
-            background-color: #000d4a; /* 蓝色背景 */
-            color: #399bff; /* 白色文本 */
-            border: none; /* 无边框 */
-            padding: 8px 16px; /* 内边距 */
-            font-size: 10px; /* 调整字体大小 */
-            margin: 0 5px; /* 两边的外边距 */
-            border-radius: 5px; /* 圆角 */
-            cursor: pointer; /* 指针形状 */
-        }
-        .custom-button:hover {
-            background-color: #0056b3; /* 鼠标悬停时的深蓝色 */
-        }
+        .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    font-size: 16px; /* 控制文字大小 */
+    font-family: Arial, sans-serif; /* 设置字体为Arial */
+}
+
+.button:hover {
+    background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
+}
+
     </style>
 </head>
 <body>
@@ -37,9 +43,9 @@
 </div>
 <div class="head">
     <h1><a href="https://gitee.com/iGaoWei/big-data-view">中石化胜利油田大数据可视化系统</a></h1>
-    <button class="custom-button" onclick="window.location.href='mind.html'">指标图</button>
-        <button class="custom-button" onclick="window.location.href='upload.html'">上传</button>
-        <button class="custom-button" onclick="window.location.href='index_compare.html'">分析报告</button>
+        <a href="mind.html" class="button">指标图</a>
+        <a href="upload.html" class="button">上传</a>
+        <a href="index_compare.html" class="button">分析报告</a>
         <!-- <button class="custom-button" onclick="window.location.href='upload.html'">上传</button> -->
     </div>
     <div class="time" id="showTime">
@@ -115,13 +121,13 @@
             </div>
             <div class="boxall" style="height: calc(38% - .15rem)">
                 <div class="alltitle">
-                    能耗月度变化图
+                    直接成本月度变化图
                 </div>
                 <div class="boxnav" id="echarts1"></div>
             </div>
             <div class="boxall" style="height: calc(42% - .15rem)">
                 <div class="alltitle">
-                    原油分水及脱水率趋势图
+                    联合站原油脱水率趋势图
                 </div>
                 <div class="boxnav" id="echarts2"></div>
             </div> </li>
@@ -134,7 +140,7 @@
             </div>
             <div class="boxall" style="height: calc(33.333% - .15rem)">
                 <div class="alltitle">
-                    油井概况
+                    油区概况
                 </div>
                 <div class="boxnav" id="">
                     <table border="0" cellspacing="0" id="data-table">
@@ -142,9 +148,10 @@
                         <tr>
                             <th>区域</th>
                             <th>数量</th>
-                            <th>开井率</th>
-                            <th>采油量</th>
-                            <th>采液量</th>
+                            <th>开井率/负荷率</th>
+                            <th>油量</th>
+                            <th>液量</th>
+                            <th>注水量</th>
                         </tr>
                         <tr>
                             <th>油井</th>
@@ -181,7 +188,7 @@
             <div class="boxall" style="height: calc(33.333% - .15rem)">
                 <div style="display: flex;justify-content: space-between;"><div class="alltitle">
                     9月生产消耗量
-                </div><a href="mind.html">思维导图</a></div>
+                </div></div>
                 <div class="boxnav" id="echarts6" style="height:calc(100% - .3rem);"></div>
             </div> </li>
     </ul>
@@ -204,9 +211,10 @@
                 tableBody.innerHTML="                        <tr>\n" +
                     "                            <th>区域</th>\n" +
                     "                            <th>数量</th>\n" +
-                    "                            <th>开井率</th>\n" +
-                    "                            <th>采油量</th>\n" +
-                    "                            <th>采液量</th>\n" +
+                    "                            <th>开井率/负荷率</th>\n" +
+                    "                            <th>油量</th>\n" +
+                    "                            <th>液量</th>\n" +
+                    "                            <th>注水量</th>\n" +
                     "                        </tr>"
 
                 data.forEach(function (item) {
@@ -216,40 +224,7 @@
                 row += '<td>' + item.openingRate + '</td>';
                 row += '<td>' + item.oilProduction + '</td>';
                 row += '<td>' + item.waterProduction + '</td>';
-                row += '</tr>';
-                tableBody.innerHTML += row;
-            });
-
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-
-            fetch('http://localhost:8081/index/overview_of_translation_regions')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                var tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
-                console.log(tableBody.innerHTML)
-                tableBody.innerHTML="                        <tr>\n" +
-                    "                            <th>区域</th>\n" +
-                    "                            <th>数量</th>\n" +
-                    "                            <th>开井率</th>\n" +
-                    "                            <th>采油量</th>\n" +
-                    "                            <th>采液量</th>\n" +
-                    "                        </tr>"
-
-                data.forEach(function (item) {
-                var row = '<tr>';
-                row += '<th>' + item.area + '</th>';
-                row += '<td>' + item.quantity + '</td>';
-                row += '<td>' + item.openingRate + '</td>';
-                row += '<td>' + item.oilProduction + '</td>';
-                row += '<td>' + item.waterProduction + '</td>';
+                row += '<td>' + item.water_1Production + '</td>';
                 row += '</tr>';
                 tableBody.innerHTML += row;
             });
@@ -261,5 +236,6 @@
 
         };
     </script>
+    
 </body>
 </html>
