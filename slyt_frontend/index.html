@@ -81,7 +81,7 @@
             </div>
             <div class="boxall" style="height: calc(42% - .15rem)">
                 <div class="alltitle">
-                    能源消耗总价
+                    直接运行成本
                 </div>
                 <div class="boxnav" id="echarts3"></div>
             </div> </li>
@@ -134,7 +134,7 @@
             </div>
             <div class="boxall" style="height: calc(33.333% - .15rem)">
                 <div class="alltitle">
-                    研究油区总体介绍
+                    油井概况
                 </div>
                 <div class="boxnav" id="">
                     <table border="0" cellspacing="0" id="data-table">
@@ -191,6 +191,40 @@
     <script>
         // 在页面加载时执行的 JavaScript 代码
         window.onload = function() {
+            fetch('http://localhost:8081/index/overview_of_translation_regions')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+                console.log(tableBody.innerHTML)
+                tableBody.innerHTML="                        <tr>\n" +
+                    "                            <th>区域</th>\n" +
+                    "                            <th>数量</th>\n" +
+                    "                            <th>开井率</th>\n" +
+                    "                            <th>采油量</th>\n" +
+                    "                            <th>采液量</th>\n" +
+                    "                        </tr>"
+
+                data.forEach(function (item) {
+                var row = '<tr>';
+                row += '<th>' + item.area + '</th>';
+                row += '<td>' + item.quantity + '</td>';
+                row += '<td>' + item.openingRate + '</td>';
+                row += '<td>' + item.oilProduction + '</td>';
+                row += '<td>' + item.waterProduction + '</td>';
+                row += '</tr>';
+                tableBody.innerHTML += row;
+            });
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
             fetch('http://localhost:8081/index/overview_of_translation_regions')
             .then(response => {
                 if (!response.ok) {

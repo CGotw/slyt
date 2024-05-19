@@ -541,9 +541,9 @@ fetch('http://127.0.0.1:8081/all_data')
         let power = []
         for (let i = 0; i < data.length; i++) {
             dates.push(formatDate(data[i]['时间'].slice(0, 10)))
-            tianranqi.push(data[i]['天然气消耗总价'])
-            poruqi.push(data[i]['破乳剂消耗总价'])
-            power.push(data[i]['用电消耗总价'])
+            tianranqi.push(data[i]['天然气消耗成本'])
+            poruqi.push(data[i]['药剂消耗成本'])
+            power.push(data[i]['用电消耗成本'])
         }
 
         option = {
@@ -554,7 +554,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 }
             },
             legend: {
-                data: ['天然气消耗总价', '破乳剂消耗总价', '用电消耗总价'],
+                data: ['天然气消耗成本', '药剂消耗成本', '用电消耗成本'],
                 right: 'center',
                 top: 0,
                 textStyle: {
@@ -608,7 +608,7 @@ fetch('http://127.0.0.1:8081/all_data')
             },
 
             series: [{
-                name: '天然气消耗总价',
+                name: '天然气消耗成本',
                 type: 'bar',
                 stack: 'a',
                 barWidth: '30', barGap: 0,
@@ -620,7 +620,7 @@ fetch('http://127.0.0.1:8081/all_data')
                 data: tianranqi
             },
                 {
-                    name: '破乳剂消耗总价',
+                    name: '药剂消耗成本',
                     type: 'bar',
                     stack: 'a',
                     barWidth: '30', barGap: 0,
@@ -633,7 +633,7 @@ fetch('http://127.0.0.1:8081/all_data')
                     data: poruqi
                 },
                 {
-                    name: '用电消耗总价',
+                    name: '用电消耗成本',
                     type: 'bar',
                     stack: 'a',
                     barWidth: '30', barGap: 0,
