@@ -10,19 +10,29 @@
     <script type="text/javascript" src="https://unpkg.com/jsmind@0.8.2/es6/jsmind.draggable-node.js"></script>
     <style>
         body {
-            padding: 0px;
-            margin: 0px;
+            padding: 0;
+            margin: 0;
             font-family: "微软雅黑";
             background: #000d4a url('images/bg.jpg') center;
             background-size: cover;
             color: #fff;
             font-size: 12px;
         }
+        #title {
+            text-align: center;
+            font-size: 36px; /* 修改标题的字号 */
+            margin: 20px 0;
+            color: #06c; /* 修改标题的颜色 */
+        }
         #jsmind_container {
             width: 100%;
             height: 800px;
-            border: solid 1px #ccc;
+            border: none; /* 移除边框 */
             background-color: transparent; /* 使思维导图容器背景透明 */
+            position: relative;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: flex-start; /* 顶部对齐 */
         }
         .jsmind-node {
             border: solid 1px #a0a0a0;
@@ -42,463 +52,504 @@
             font-size: 12px;
             z-index: 100;
         }
-
-
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 16px; /* 控制文字大小 */
+            font-family: Arial, sans-serif; /* 设置字体为Arial */
+        }
+        .button:hover {
+            background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
+        }
+        .container {
+            border: none; /* 移除边框 */
+            padding: 0; /* 移除内边距 */
+            margin: 0; /* 移除外边距 */
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <a href="index.html" class="button">首页</a>
+        <a href="upload.html" class="button">分析报告</a>
+    </div>
+    <h1 id="title">中石化胜利油田指标体系图</h1>
     <div id="jsmind_container"></div>
     
     <script type="text/javascript">
-        
-
-
         var mind = {
-    /* 元数据，定义思维导图的名称、作者、版本等信息 */
-    "meta":{
-        "name":"jsMind-demo-tree",
-        "author":"hizzgdev@163.com",
-        "version":"0.2"
-    },
-    /* 数据格式声明 */
-    "format":"node_tree",
-    /* 数据内容 */
-    "data":{"id":"root","topic":"指标体系",'background-color': '#D3D3D3',"extra": "胜利油田指标信息","children":[
-        {"id":"easy","topic":"投资控制指标",'background-color': '#FF7F50',"direction":"left","expanded":false,"children":[
-            {
-                "id": "easy1", 
-                "topic": "油田百万吨产能地面投资" ,
-                'background-color': '#1F8EF1',
-                "extra": "油田百万吨产能地面投资=地面工程投资/产能规模"
-        
-              },
-              {
-                "id": "easy2", 
-                "topic": "油田地面工程投资占比" ,
-                'background-color': '#1F8EF1',
-                "extra": "地面工程投资占比=地面工程投资/项目建设投资×100%"
-              },
-              {
-                "id": "easy3", 
-                "topic": "单井地面工程投资" ,
-                'background-color': '#1F8EF1',
-                "extra": "单井地面工程投资=地面工程投资/基建井数"
-              },
-        ]},
-        {"id":"open","topic":"建设管理指标",'background-color': '#FF7F50',"direction":"left","expanded":false,"children":[
-              {
-                "id": "open1", 
-                "topic": "标准化设计定型文件使用率" ,
-                'background-color': '#1F8EF1',
-                "extra": "标准化设计定型文件使用率=使用标准化设计定型文件的数量/工程项目总设计文件数量×100%"
-              },
-              {
-                "id": "open2", 
-                "topic": "标准化设计覆盖率" ,
-                'background-color': '#1F8EF1',
-                "extra": "标准化设计覆盖率=采用标准化设计的新建站场数量/新建站场总数量×100%"
-              },
-              {
-                "id": "open3", 
-                "topic": "三维设计覆盖率" ,
-                'background-color': '#1F8EF1',
-                "extra": "三维设计覆盖率=采用三维设计项目数/总项目数×100%"
-              },
-              {
-                "id": "open4", 
-                "topic": "模块化应用率" ,
-                'background-color': '#1F8EF1',
-                "extra": "模块化应用率=模块化工程量投资/工程费用×100%"
-              },
-              {
-                "id": "open5", 
-                "topic": "工厂化预测率" ,
-                'background-color': '#1F8EF1',
-                "extra": "工厂化预制率=采用工厂化预制的投资/工程费用×100%"
-              },
-              {
-                "id": "open6", 
-                "topic": "一体化集成装置应用率" ,
-                'background-color': '#1F8EF1',
-                "extra": "一体化集成装置应用率=采用一体化集成装置建设的项目数量/新建站场总数量×100%"
-              },
-              {
-                "id": "open7", 
-                "topic": "数字化交付率" ,
-                'background-color': '#1F8EF1',
-                "extra": "数字化交付率=进行数字化交付的项目数/总项目数×100%"
-              },
-          ]},
-          
-        {"id":"other","topic":"达标率指标",'background-color': '#FF7F50',"direction":"left","expanded":false,"children":[
-        {
-                "id": "other1", 
-                "topic": "原油自用率" ,
-                'background-color': '#1F8EF1',
-                "extra": "原油自用率=原油自用量/原油产量×100%"
-              },
-              {
-                "id": "other2", 
-                "topic": "集输密闭率" ,
-                'background-color': '#1F8EF1',
-                "extra": "集输密闭率=密闭集输的原油量/原油产量×100%"
-              },
-              {
-                "id": "other3", 
-                "topic": "原油含水率" ,
-                'background-color': '#1F8EF1',
-                "extra": "额外信息"
-              },
-              {
-                "id": "other4", 
-                "topic": "原油稳定率",
-                'background-color': '#1F8EF1' ,
-                "extra": "原油稳定率=进入原油稳定装置的原油量/应稳定的原油产量×100%"
-              },
-              {
-                "id": "other5", 
-                "topic": "伴生气处理率",
-                'background-color': '#1F8EF1' ,
-                "extra": "伴生气处理率=进入伴生气处理装置的伴生气量/应处理的伴生气量×100%"
-              },
-              {
-                "id": "other6", 
-                "topic": "伴生气集气率" ,
-                'background-color': '#1F8EF1',
-                "extra": "伴生气集气率=伴生气集气总量/伴生气井口产量×100%"
-              },
-              {
-                "id": "open7", 
-                "topic": "采出水处理站水质达标率" ,
-                'background-color': '#1F8EF1',
-                "extra": "这是油田百万吨产能地面投资的额外信息"
-              },
-              {
-                "id": "other8", 
-                "topic": "蒸汽锅炉出口蒸汽干度" ,
-                'background-color': '#1F8EF1',
-                "extra": "这是油田百万吨产能地面投资的额外信息"
-              },
-              {
-                "id": "other9", 
-                "topic": "配注系统黏损率" ,
-                'background-color': '#1F8EF1',
-                "extra": "配注系统黏损率=(配注系统起点的黏度  −  配注系统终点的黏度)/配注系统起点的黏度×100%"
-              },
-            ]},
-
-            {"id":"other_1","topic":"负荷率指标",'background-color': '#FF7F50',"direction":"right","expanded":false,"children":[
-              {
-                "id": "other_1-1", 
-                "topic": "脱水站负荷率" ,
-                'background-color': '#1F8EF1',
-                "extra": "脱水站负荷率=进入脱水站处理的液量/脱水站设计处理能力×100%"
-              },
-              {
-                "id": "other_1-2", 
-                "topic": "采出水处理站负荷率" ,
-                'background-color': '#1F8EF1',
-                "extra": "采出水处理站负荷率=采出水处理站处理液量/采出水处理站设计处理能力×100%"
-              },
-              {
-                "id": "other_1-3", 
-                "topic": "注水站负荷率" ,
-                'background-color': '#1F8EF1',
-                "extra": "注水站负荷率=注水站注水量/注水站设计注水能力×100%"
-              },
-              {
-                "id": "other_1-4", 
-                "topic": "注汽站实际负荷率" ,
-                'background-color': '#1F8EF1',
-                "extra": "注汽站实际负荷率=注汽站注汽量/设计注汽规模×100%"
-              },
-            ]},
-            {"id":"other_2","topic":"能耗成本指标",'background-color': '#FF7F50',"direction":"right","expanded":false,"children":[
+            "meta": {
+                "name": "jsMind-demo-tree",
+                "author": "hizzgdev@163.com",
+                "version": "0.2"
+            },
+            "format": "node_tree",
+            "data": {
+                "id": "root",
+                "topic": "指标体系",
+                'background-color': '#D3D3D3',
+                "extra": "胜利油田指标信息",
+                "direction": "bottom",  // 设置根节点的方向为向下
+                "children": [
                     {
-                        "id":"other_2-1",
-                        "topic":"机采系统效率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
+                        "id": "easy",
+                        "topic": "投资控制指标",
+                        'background-color': '#FF7F50',
+                        "direction": "bottom",
+                        "expanded": false,
+                        "children": [
+                            {
+                                "id": "easy1",
+                                "topic": "油田百万吨产能地面投资",
+                                'background-color': '#1F8EF1',
+                                "extra": "油田百万吨产能地面投资=地面工程投资/产能规模×100%"
+                            },
+                            {
+                                "id": "easy2",
+                                "topic": "油田地面工程投资占比",
+                                'background-color': '#1F8EF1',
+                                "extra": "地面工程投资占比=地面工程投资/项目建设投资×100%"
+                            },
+                            {
+                                "id": "easy3",
+                                "topic": "单井地面工程投资",
+                                'background-color': '#1F8EF1',
+                                "extra": "单井地面工程投资=地面工程投资/基建井数×100%"
+                            }
+                        ]
                     },
                     {
-                        "id":"other_2-2",
-                        "topic":"新井常温集油工艺覆盖率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "新井常温集油工艺覆盖率=统计年当年新建油井采用常温集油工艺的油井数量/当年新建油井总数量×100%"
+                        "id": "open",
+                        "topic": "建设管理指标",
+                        'background-color': '#FF7F50',
+                        "direction": "bottom",
+                        "expanded": false,
+                        "children": [
+                            {
+                                "id": "open1",
+                                "topic": "标准化设计定型文件使用率",
+                                'background-color': '#1F8EF1',
+                                "extra": "标准化设计定型文件使用率=使用标准化设计定型文件的数量/工程项目总设计文件数量×100%"
+                            },
+                            {
+                                "id": "open2",
+                                "topic": "标准化设计覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "标准化设计覆盖率=采用标准化设计的新建站场数量/新建站场总数量×100%"
+                            },
+                            {
+                                "id": "open3",
+                                "topic": "三维设计覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "三维设计覆盖率=采用三维设计项目数/总项目数×100%"
+                            },
+                            {
+                                "id": "open4",
+                                "topic": "模块化应用率",
+                                'background-color': '#1F8EF1',
+                                "extra": "模块化应用率=模块化工程量投资/工程费用×100%"
+                            },
+                            {
+                                "id": "open5",
+                                "topic": "工厂化预测率",
+                                'background-color': '#1F8EF1',
+                                "extra": "工厂化预制率=采用工厂化预制的投资/工程费用×100%"
+                            },
+                            {
+                                "id": "open6",
+                                "topic": "一体化集成装置应用率",
+                                'background-color': '#1F8EF1',
+                                "extra": "一体化集成装置应用率=采用一体化集成装置建设的项目数量/新建站场总数量×100%"
+                            },
+                            {
+                                "id": "open7",
+                                "topic": "数字化交付率",
+                                'background-color': '#1F8EF1',
+                                "extra": "数字化交付率=进行数字化交付的项目数/总项目数×100%"
+                            }
+                        ]
                     },
                     {
-                        "id":"other_2-3",
-                        "topic":"常温集油工艺覆盖率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
+                        "id": "other",
+                        "topic": "达标率指标",
+                        'background-color': '#FF7F50',
+                        "direction": "bottom",
+                        "expanded": false,
+                        "children": [
+                            {
+                                "id": "other1",
+                                "topic": "原油自用率",
+                                'background-color': '#1F8EF1',
+                                "extra": "原油自用率=原油自用量/原油产量×100%"
+                            },
+                            {
+                                "id": "other2",
+                                "topic": "集输密闭率",
+                                'background-color': '#1F8EF1',
+                                "extra": "集输密闭率=密闭集输的原油量/原油产量×100%"
+                            },
+                            {
+                                "id": "other3",
+                                "topic": "原油含水率",
+                                'background-color': '#1F8EF1',
+                                "extra": "额外信息"
+                            },
+                            {
+                                "id": "other4",
+                                "topic": "原油稳定率",
+                                'background-color': '#1F8EF1',
+                                "extra": "原油稳定率=进入原油稳定装置的原油量/应稳定的原油产量×100%"
+                            },
+                            {
+                                "id": "other5",
+                                "topic": "伴生气处理率",
+                                'background-color': '#1F8EF1',
+                                "extra": "伴生气处理率=进入伴生气处理装置的伴生气量/应处理的伴生气量×100%"
+                            },
+                            {
+                                "id": "other6",
+                                "topic": "伴生气集气率",
+                                'background-color': '#1F8EF1',
+                                "extra": "伴生气集气率=伴生气集气总量/伴生气井口产量×100%"
+                            },
+                            {
+                                "id": "open7",
+                                "topic": "采出水处理站水质达标率",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other8",
+                                "topic": "蒸汽锅炉出口蒸汽干度",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other9",
+                                "topic": "配注系统黏损率",
+                                'background-color': '#1F8EF1',
+                                "extra": "配注系统黏损率=(配注系统起点的黏度  −  配注系统终点的黏度)/配注系统起点的黏度×100%"
+                            },
+                            {
+                                "id": "other10",
+                                "topic": "采出水处理站水质达标率",
+                                'background-color': '#1F8EF1',
+                                // "extra": "配注系统黏损率=(配注系统起点的黏度  −  配注系统终点的黏度)/配注系统起点的黏度×100%"
+                            }
+                        ]
                     },
                     {
-                        "id":"other_2-4",
-                        "topic":"吨油处理能耗",
-                        'background-color': '#1F8EF1',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
+                        "id": "other_1",
+                        "topic": "负荷率指标",
+                        'background-color': '#FF7F50',
+                        "direction": "bottom",
+                        "expanded": false,
+                        "children": [
+                            {
+                                "id": "other_1-1",
+                                "topic": "脱水站负荷率",
+                                'background-color': '#1F8EF1',
+                                "extra": "脱水站负荷率=进入脱水站处理的液量/脱水站设计处理能力×100%"
+                            },
+                            {
+                                "id": "other_1-2",
+                                "topic": "采出水处理站负荷率",
+                                'background-color': '#1F8EF1',
+                                "extra": "采出水处理站负荷率=采出水处理站处理液量/采出水处理站设计处理能力×100%"
+                            },
+                            {
+                                "id": "other_1-3",
+                                "topic": "注水站负荷率",
+                                'background-color': '#1F8EF1',
+                                "extra": "注水站负荷率=注水站注水量/注水站设计注水能力×100%"
+                            },
+                            {
+                                "id": "other_1-4",
+                                "topic": "注汽站负荷率",
+                                'background-color': '#1F8EF1',
+                                "extra": "注汽站实际负荷率=注汽站注汽量/设计注汽规模×100%"
+                            }
+                        ]
                     },
                     {
-                        "id":"other_2-5",
-                        "topic":"吨水处理能耗",
-                        'background-color': '#1F8EF1',
-                        "extra": "新井常温集油工艺覆盖率=统计年当年新建油井采用常温集油工艺的油井数量/当年新建油井总数量×100%"
+                        "id": "other_2",
+                        "topic": "能耗成本指标",
+                        'background-color': '#FF7F50',
+                        "direction": "bottom",
+                        "expanded": false,
+                        "children": [
+                            {
+                                "id": "other_2-1",
+                                "topic": "机采系统效率",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other_2-2",
+                                "topic": "新井常温集油工艺覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "新井常温集油工艺覆盖率=统计年当年新建油井采用常温集油工艺的油井数量/当年新建油井总数量×100%"
+                            },
+                            {
+                                "id": "other_2-3",
+                                "topic": "常温集油工艺覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
+                            },
+                            {
+                                "id": "other_2-4",
+                                "topic": "吨油处理能耗",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other_2-5",
+                                "topic": "吨水处理能耗",
+                                'background-color': '#1F8EF1',
+                                "extra": "新井常温集油工艺覆盖率=统计年当年新建油井采用常温集油工艺的油井数量/当年新建油井总数量×100%"
+                            },
+                            {
+                                "id": "other_2-6",
+                                "topic": "单位原油处理药剂量（万吨原油药剂耗量）",
+                                'background-color': '#1F8EF1',
+                                "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
+                            },
+                            {
+                                "id": "other_2-7",
+                                "topic": "单位水处理药剂量（万吨水药剂耗量）",
+                                'background-color': '#1F8EF1',
+                                "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
+                            },
+                            {
+                                "id": "other_2-8",
+                                "topic": "前端分水率",
+                                'background-color': '#1F8EF1',
+                                "extra": "前端分水率=前端井站分水量/地面各级井站总分水量×100%"
+                            },
+                            {
+                                "id": "other_2-9",
+                                "topic": "联合站预分水率",
+                                'background-color': '#1F8EF1',
+                                "extra": "联合站预分水率=联合站进站不加热分水量/联合站内总分水量×100%"
+                            },
+                            {
+                                "id": "other_2-11",
+                                "topic": "加热炉效率",
+                                'background-color': '#1F8EF1',
+                                "extra": "加热炉效率=抽样加热炉效率的加权平均值"
+                            },
+                            {
+                                "id": "other_2-12",
+                                "topic": "泵效率",
+                                'background-color': '#1F8EF1',
+                                "extra": "泵效率=抽样泵效率的加权平均值"
+                            },
+                            {
+                                "id": "other_2-13",
+                                "topic": "注水系统效率",
+                                'background-color': '#1F8EF1',
+                                "extra": "注水系统效率=注水泵机组效率×注水管网效率×100%"
+                            },
+                            {
+                                "id": "other_2-14",
+                                "topic": "注水用电标耗",
+                                'background-color': '#1F8EF1',
+                                "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
+                            },
+                            {
+                                "id": "other_2-15",
+                                "topic": "吨汽能耗",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other_2-16",
+                                "topic": "注汽管网热损失",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other_2-17",
+                                "topic": "稠油采出水锅炉回用率",
+                                'background-color': '#1F8EF1',
+                                "extra": "这是油田百万吨产能地面投资的额外信息"
+                            },
+                            {
+                                "id": "other_2-18",
+                                "topic": "注汽锅炉热效率",
+                                'background-color': '#1F8EF1',
+                                "extra": "加热炉效率=抽样加热炉效率的加权平均值"
+                            },
+                            {
+                                "id": "other_2-19",
+                                "topic": "单位化学驱油田原油生产药剂量（万吨原油药剂耗量）",
+                                'background-color': '#1F8EF1',
+                                "extra": "泵效率=抽样泵效率的加权平均值"
+                            },
+                            {
+                                "id": "other_2-20",
+                                "topic": "单位油田油气生产新水量",
+                                'background-color': '#1F8EF1',
+                                "extra": "注水系统效率=注水泵机组效率×注水管网效率×100%"
+                            }
+                        ]
                     },
                     {
-                        "id":"other_2-6",
-                        "topic":"单位原油处理药剂量（万吨原油药剂耗量）",
-                        'background-color': '#1F8EF1',
-                        "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
-                    },
-                    {
-                        "id":"other_2-7",
-                        "topic":"单位水处理药剂量（万吨水药剂耗量）",
-                        'background-color': '#1F8EF1',
-                        "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
-                    },
-                    {
-                        "id":"other_2-8",
-                        "topic":"脱水工艺(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
-                    },
-                    {
-                        "id":"other_2-9",
-                        "topic":"脱水温升(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
-                    },
-                    {
-                        "id":"other_2-10",
-                        "topic":"脱水时间(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
-                    },
-                    {
-                        "id":"other_2-11",
-                        "topic":"加热炉效率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "加热炉效率=抽样加热炉效率的加权平均值"
-                    },
-                    {
-                        "id":"other_2-12",
-                        "topic":"泵效率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "泵效率=抽样泵效率的加权平均值"
-                    },
-                    {
-                        "id":"other_2-13",
-                        "topic":"注水系统效率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "注水系统效率=注水泵机组效率×注水管网效率×100%"
-                    },
-                    {
-                        "id":"other_2-14",
-                        "topic":"注水用电标耗",
-                        'background-color': '#1F8EF1',
-                        "extra": "常温集油工艺覆盖率=统计年当年在产油井采用常温集油工艺的油井数量/当年在产油井总数量×100%"
-                    },
-                    {
-                        "id":"other_2-15",
-                        "topic":"吨汽能耗",
-                        'background-color': '#1F8EF1',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
-                    },
-                    {
-                        "id":"other_2-16",
-                        "topic":"注汽管网热损失(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
-                    },
-                    {
-                        "id":"other_2-17",
-                        "topic":"稠油采出水锅炉回用率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "这是油田百万吨产能地面投资的额外信息"
-                    },
-                    {
-                        "id":"other_2-18",
-                        "topic":"注汽锅炉热效率(三级指标)",
-                        'background-color': '#FFD700',
-                        "extra": "加热炉效率=抽样加热炉效率的加权平均值"
-                    },
-                    {
-                        "id":"other_2-19",
-                        "topic":"单位化学驱油田原油生产药剂量（万吨原油药剂耗量）",
-                        'background-color': '#1F8EF1',
-                        "extra": "泵效率=抽样泵效率的加权平均值"
-                    },
-                    {
-                        "id":"other_2-20",
-                        "topic":"单位油田油气生产新水量",
-                        'background-color': '#1F8EF1',
-                        "extra": "注水系统效率=注水泵机组效率×注水管网效率×100%"
-                    },
+                        "id": "other23",
+                        "topic": "人均生产能力指标",
+                        "background-color": '#FF7F50',
+                        "direction": "bottom",
+                        "children": [
+                            {
+                                "id": "other23-1",
+                                "topic": "新井软件量油覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "新井软件量油覆盖率=统计年当年新建抽油机油井采用软件量油的油井数量/当年新建抽油机油井总数量×100%"
+                            },
+                            {
+                                "id": "other23-2",
+                                "topic": "油井软件量油覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "油井软件量油覆盖率=统计年当年抽油机井采用软件量油的油井数量/当年抽油机井总数量×100%"
+                            },
+                            {
+                                "id": "other23-3",
+                                "topic": "井场数字化覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "井场数字化覆盖率=数字化井场数量/井场总数量×100%"
+                            },
+                            {
+                                "id": "other23-4",
+                                "topic": "站场数字化覆盖率",
+                                'background-color': '#1F8EF1',
+                                "extra": "站场数字化覆盖率=数字化站场数量/站场总数量×100%"
+                            },
+                            {
+                                "id": "other23-5",
+                                "topic": "人均年采油量",
+                                'background-color': '#1F8EF1',
+                                "extra": "人均年采油量=原油产量/典型区块直接生产管理人员数"
+                            },
+                            {
+                                "id": "other23-6",
+                                "topic": "百万吨产能用工",
+                                'background-color': '#1F8EF1',
+                                "extra": "百万吨产能用工=油田地面工程产能建设项目的用工定员/新建产能规模"
+                            },
+                            {
+                                "id": "other23-7",
+                                "topic": "人均管井数",
+                                'background-color': '#1F8EF1',
+                                "extra": "人均管井数=区块生产井总数/典型区块直接生产管理人员数"
+                            }
+                        ]
+                    }
                 ]
-              },
-              {
-                "id": "other23", 
-                "topic": "人均生产能力指标" ,
-                "background-color": '#FF7F50',
-                "children":[
-                    {
-                        "id":"other23-1",
-                        "topic":"新井软件量油覆盖率（三级指标）",
-                        'background-color': '#FFD700',
-                        "extra": "新井软件量油覆盖率=统计年当年新建抽油机油井采用软件量油的油井数量/当年新建抽油机油井总数量×100%"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建一个全局的悬停提示框元素
+            var tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            document.body.appendChild(tooltip);
+
+            // 显示提示框
+            function showTooltip(x, y, text) {
+                tooltip.innerText = text;
+                tooltip.style.left = x + 'px';
+                tooltip.style.top = y + 'px';
+                tooltip.style.display = 'block';
+            }
+
+            // 隐藏提示框
+            function hideTooltip() {
+                tooltip.style.display = 'none';
+            }
+
+            var options = {
+                container: 'jsmind_container',
+                editable: true,
+                theme: 'primary',
+                mode: 'full',
+                support_html: true,
+                view: {
+                    engine: 'canvas',
+                    hmargin: 100,
+                    vmargin: 50,
+                    line_width: 2,
+                    line_color: '#555',
+                    line_style: 'curved',
+                    draggable: false,
+                    hide_scrollbars_when_draggable: false,
+                    node_overflow: 'hidden',
+                    zoom: {
+                        min: 0.5,
+                        max: 2.1,
+                        step: 0.1
                     },
-                    {
-                        "id":"other23-2",
-                        "topic":"油井软件量油覆盖率（三级指标）",
-                        'background-color': '#FFD700',
-                        "extra": "油井软件量油覆盖率=统计年当年抽油机井采用软件量油的油井数量/当年抽油机井总数量×100%"
-                    },
-                    {
-                        "id":"other23-3",
-                        "topic":"井场数字化覆盖率（三级指标）",
-                        'background-color': '#FFD700',
-                        "extra": "井场数字化覆盖率=数字化井场数量/井场总数量×100%"
-                    },
-                    {
-                        "id":"other23-4",
-                        "topic":"站场数字化覆盖率（三级指标）",
-                        'background-color': '#FFD700',
-                        "extra": "站场数字化覆盖率=数字化站场数量/站场总数量×100%"
-                    },
-                    {
-                      "id": "other23-5", 
-                      "topic": "人均年采油量" ,
-                      'background-color': '#1F8EF1',
-                      "extra": "人均年采油量=原油产量/典型区块直接生产管理人员数"
-                    },
-                    {
-                      "id": "other23-6", 
-                      "topic": "百万吨产能用工" ,
-                      'background-color': '#1F8EF1',
-                      "extra": "百万吨产能用工=油田地面工程产能建设项目的用工定员/新建产能规模"
-                    },
-                    {
-                      "id": "other23-7", 
-                      "topic": "人均管井数" ,
-                      'background-color': '#1F8EF1',
-                      "extra": "人均管井数=区块生产井总数/典型区块直接生产管理人员数"
-                    },
-          ]},
-            ]}
-  };
-  document.addEventListener('DOMContentLoaded', function() {
-    // 创建一个全局的悬停提示框元素
-    var tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    document.body.appendChild(tooltip);
+                    custom_node_render: null
+                },
+                layout: {
+                    hspace: 30,
+                    vspace: 20,
+                    pspace: 13,
+                    cousin_space: 0
+                },
+                shortcut: {
+                    enable: true,
+                    handles: {},
+                    mapping: {
+                        addchild: [45, 4096 + 13],
+                        addbrother: 13,
+                        editnode: 113,
+                        delnode: 46,
+                        toggle: 32,
+                        left: 37,
+                        up: 38,
+                        right: 39,
+                        down: 40
+                    }
+                }
+            };
 
-    // 悬停事件监听器
-    function showTooltip(event, text) {
-        tooltip.innerText = text;
-        tooltip.style.display = 'block';
-        tooltip.style.left = event.pageX + 10 + 'px'; // 10px是为了不让鼠标指针遮挡
-        tooltip.style.top = event.pageY + 10 + 'px';
-    }
+            var jm = new jsMind(options);
+            jm.show(mind);
+            jm.collapse_all();
 
-    // 移出事件监听器
-    function hideTooltip() {
-        tooltip.style.display = 'none';
-    }
-    // 创建提示框元素并添加到body
-var tooltip = document.createElement('div');
-tooltip.className = 'tooltip';
-document.body.appendChild(tooltip);
+            // 添加事件监听器到思维导图的节点
+            jm.view.container.addEventListener('mouseover', function(e) {
+                var target = e.target;
+                while (target && target.tagName && target.tagName.toUpperCase() !== 'JMNODE' && !target.classList.contains('jmnode')) {
+                    target = target.parentElement;
+                }
+                if (target) {
+                    var nodeId = target.getAttribute('nodeid');
+                    var node = jm.get_node(nodeId);
+                    if (node && node.data && node.data.extra) {
+                        showTooltip(e.pageX, e.pageY, node.data.extra);
+                    }
+                }
+            });
 
-// 显示提示框
-function showTooltip(x, y, text) {
-    tooltip.innerText = text;
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-    tooltip.style.display = 'block';
-}
+            jm.view.container.addEventListener('mousemove', function(e) {
+                if (tooltip.style.display !== 'none') {
+                    showTooltip(e.pageX, e.pageY, tooltip.innerText);
+                }
+            });
 
-// 隐藏提示框
-function hideTooltip() {
-    tooltip.style.display = 'none';
-}
-
-// 添加事件监听器到思维导图的节点
-jm.view.container.addEventListener('mouseover', function(e) {
-    var target = e.target;
-    if (target.tagName.toUpperCase() === 'JMNODE' || target.classList.contains('jmnode')) {
-        var nodeId = target.getAttribute('nodeid');
-        var node = jm.get_node(nodeId);
-        if(node && node.data && node.data.extra) {
-            showTooltip(e.pageX, e.pageY, node.data.extra);
-        }
-    }
-});
-
-jm.view.container.addEventListener('mousemove', function(e) {
-    if (tooltip.style.display !== 'none') {
-        showTooltip(e.pageX, e.pageY, tooltip.innerText);
-    }
-});
-
-jm.view.container.addEventListener('mouseout', function(e) {
-    hideTooltip();
-});
-
-  });
-      
-
-var options = {
-   container : 'jsmind_container',         // [必选] 容器的ID
-   editable : true,       // 是否启用编辑
-   theme : mind,           // 主题
-   mode :'full',           // 布局模式
-   support_html : true,    // 是否支持节点里的HTML元素
-   log_level: 'info',      // 日志级别
-   view:{
-       engine: 'canvas',   // 思维导图各节点之间线条的绘制引擎
-       hmargin:100,        // 思维导图距容器外框的最小水平距离
-       vmargin:50,         // 思维导图距容器外框的最小垂直距离
-       line_width:2,       // 思维导图线条的粗细
-       line_color:'#555',  // 思维导图线条的颜色
-       line_style:'curved',// 思维导图线条的样式，直线(straight)或者曲线(curved)
-       draggable: false,   // 当容器不能完全容纳思维导图时，是否允许拖动画布代替鼠标滚动
-       hide_scrollbars_when_draggable: false, // 当设置 draggable = true 时，是否隐藏滚动条
-       node_overflow: 'hidden', // 节点文本过长时的样式
-       zoom:{             // 配置缩放
-           min: 0.5,       // 最小的缩放比例
-           max: 2.1,       // 最大的缩放比例
-           step: 0.1,      // 缩放比例间隔
-       },
-       custom_node_render: null, // 自定义的节点渲染方法
-   },
-   layout:{
-       hspace:30,          // 节点之间的水平间距
-       vspace:20,          // 节点之间的垂直间距
-       pspace:13,          // 节点与连接线之间的水平间距（用于容纳节点收缩/展开控制器）
-       cousin_space:0      // 相邻节点的子节点之间的额外的垂直间距
-   },
-   shortcut:{
-       enable:true,        // 是否启用快捷键
-       handles:{},         // 命名的快捷键事件处理器
-       mapping:{           // 快捷键映射
-           addchild   : [45, 4096+13], 	// <Insert>, <Ctrl> + <Enter>
-           addbrother : 13,    // <Enter>
-           editnode   : 113,   // <F2>
-           delnode    : 46,    // <Delete>
-           toggle     : 32,    // <Space>
-           left       : 37,    // <Left>
-           up         : 38,    // <Up>
-           right      : 39,    // <Right>
-           down       : 40,    // <Down>
-       }
-   },
-};
-
-        var jm = new jsMind(options);
-        jm.show(mind);
-        jm.expand_all();
-        // 为所有节点添加悬停事件监听器
+            jm.view.container.addEventListener('mouseout', function(e) {
+                hideTooltip();
+            });
+        });
     </script>
-
 </body>
 </html>
