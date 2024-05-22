@@ -7,26 +7,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
 
 
-
     <style>
         :root {
             --chart-margin: 100px; /* 可以修改这个值来控制图表之间的间距 */
         }
-        #p-summary2{
+
+        #p-summary2 {
             text-indent: 2em;
             line-height: 2; /* 设置单倍行距 */
-          }
-          #copyright {
-        text-align: center;
-        font-size: 13px;
-        font-weight: bold;
         }
-        h1{
+
+        #copyright {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        h1 {
             font-size: 35px;
         }
-        h2{
+
+        h2 {
             font-size: 25px;
         }
+
         h1, h2 {
             text-align: center;
         }
@@ -34,18 +38,21 @@
         #index1 {
             text-align: center; /* 使文字居中 */
             font-size: 15px; /* 设置字体大小为20px */
-                font-weight: bold; /* 加粗 */
+            font-weight: bold; /* 加粗 */
         }
+
         #index2 {
             text-align: center; /* 使文字居中 */
             font-size: 15px; /* 设置字体大小为20px */
-                font-weight: bold; /* 加粗 */
+            font-weight: bold; /* 加粗 */
         }
+
         #index3 {
             text-align: center; /* 使文字居中 */
             font-size: 15px; /* 设置字体大小为20px */
-                font-weight: bold; /* 加粗 */
+            font-weight: bold; /* 加粗 */
         }
+
         body {
             padding: 0;
             margin: 0;
@@ -56,6 +63,7 @@
             font-size: 12px;
 
         }
+
         #charts {
             display: flex;
             justify-content: center;
@@ -84,54 +92,60 @@
             max-width: 600px;
             margin: 10px var(--chart-margin);
         }
+
         table {
             width: auto;
             border-collapse: collapse;
             margin-top: 20px;
-             margin-left: auto; /* 设置左外边距为auto */
-    margin-right: auto;
+            margin-left: auto; /* 设置左外边距为auto */
+            margin-right: auto;
         }
+
         th, td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
             color: #f0f0f0;
-                text-align: center; /* 将内容水平居中 */
-    vertical-align: middle; /* 将内容垂直居中 */
+            text-align: center; /* 将内容水平居中 */
+            vertical-align: middle; /* 将内容垂直居中 */
         }
+
         th {
             background-color: #00008B;
             color: #ffffff;
         }
-        h3{
+
+        h3 {
             font-size: 17px;
             margin-left: 250px;
             margin-right: 250px;
         }
+
         p {
             /*text-align: center;*/
             font-size: 15px;
             margin-left: 250px;
             margin-right: 250px;
         }
-        .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    font-size: 16px; /* 控制文字大小 */
-    font-family: Arial, sans-serif; /* 设置字体为Arial */
-}
 
-.button:hover {
-    background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
-}
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 16px; /* 控制文字大小 */
+            font-family: Arial, sans-serif; /* 设置字体为Arial */
+        }
+
+        .button:hover {
+            background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
+        }
 
         /* @page {
             size: A4;
@@ -160,526 +174,522 @@
 </head>
 <body>
 </br>
-    <a href="index.html" class="button">首页</a>
-    <a href="#section1" class="button">对比报告</a>
-    <a href="#section2" class="button">分析报告</a>
-    <button class="button" onclick="window.print();">打印报告</button>
+<a href="index.html" class="button">首页</a>
+<a href="#section1" class="button">对比报告</a>
+<a href="#section2" class="button" >分析报告</a>
+<a  class="button" id="upload_button">上传数据</a>
+<a class="button" id="download_button">模版下载</a>
+<button class="button" onclick="window.print();">打印报告</button>
+<input type="file" id="fileInput"">
 
+</br>
+</br>
+</br>
+<h2 id="section1">分析报告</h2>
+</br>
+</br>
+<h2>一、生成系统指标体系对比报告</h2>
+</br>
 
+<p id="summary">对标中石化先进指标数据库，本生产系统共x项达到中石化先进水平，共x项达到中石化平均水平，x项未达到中石化平均水平，现金指标占比为x。</p>
 
-
-     </br>
-     </br>
-     </br>
-    <h2 id="section1">分析报告</h2>
-    </br>
-      </br>
-    <h2>一、生成系统指标体系对比报告</h2>
-      </br>
-
-    <p id="summary">对标中石化先进指标数据库，本生产系统共x项达到中石化先进水平，共x项达到中石化平均水平，x项未达到中石化平均水平，现金指标占比为x。</p>
-
-    <div id="charts">
-        <div class="chart-container">
-            <canvas id="myLineChart" width="800" height="400"></canvas>
-            <p>指标得分柱状图</p>
-        </div>
-        <div class="chart-container">
-            <canvas id="myPieChart"></canvas>
-            <p>指标占比分布图</p>
-        </div>
+<div id="charts">
+    <div class="chart-container">
+        <canvas id="myLineChart" width="800" height="400"></canvas>
+        <p>指标得分柱状图</p>
     </div>
-    <p id="index1">达到中石化先进值的条数</p>
-    <table id="reportTable1">
-        <thead>
-            <tr>
-                <th onclick="sortTable('reportTable1', 0)">编号</th>
-                <th onclick="sortTable('reportTable1', 1)">类别</th>
-                <th onclick="sortTable('reportTable1', 2)">名称</th>
-                <th onclick="sortTable('reportTable1', 3)">级别</th>
-                <th onclick="sortTable('reportTable1', 4)">值</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>投资控制指标</td>
-                <td>油田百万吨产能地面投资 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>投资控制指标</td>
-                <td>油田地面工程投资占比</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>投资控制指标</td>
-                <td>单井地面工程投资</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>达标率指标</td>
-                <td>原油自用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>达标率指标</td>
-                <td>集输密闭率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-        </tbody>
-    </table>
-    <p id="index2">达到中石化平均值的条数</p>
-    <table id="reportTable2">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">编号</th>
-                <th onclick="sortTable(1)">类别</th>
-                <th onclick="sortTable(2)">名称</th>
-                <th onclick="sortTable(3)">级别</th>
-                <th onclick="sortTable(4)">值</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>投资控制指标</td>
-                <td>油田百万吨产能地面投资 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>投资控制指标</td>
-                <td>油田地面工程投资占比</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>投资控制指标</td>
-                <td>单井地面工程投资</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>达标率指标</td>
-                <td>原油自用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>达标率指标</td>
-                <td>集输密闭率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-        </tbody>
-    </table>
-    <p id="index3">未达到中石化平均值的条数</p>
-    <table id="reportTable3">
-        <thead>
-            <tr>
-                <th onclick="sortTable(0)">编号</th>
-                <th onclick="sortTable(1)">类别</th>
-                <th onclick="sortTable(2)">名称</th>
-                <th onclick="sortTable(3)">级别</th>
-                <th onclick="sortTable(4)">值</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>投资控制指标</td>
-                <td>油田百万吨产能地面投资 </td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>投资控制指标</td>
-                <td>油田地面工程投资占比</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>投资控制指标</td>
-                <td>单井地面工程投资</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>达标率指标</td>
-                <td>原油自用率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>达标率指标</td>
-                <td>集输密闭率</td>
-                <td>一级指标 </td>
-                <td>1 </td>
-            </tr>
-        </tbody>
-    </table>
-
-    </br>
-    </br>
- </br> </br> </br>
-    <h2 id="section2">二、生产系统优化简化策略分析报告</h2>
-    </br>
-    <p id="p-summary2">sdfd</p>
-    <h3>1. 串-油井串接分析</h3>
-    <p id="p-well">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="well">
-  <tr>
-    <th>序号</th>
-    <th>油井名称</th>
-    <th>是否采用功图在线计量装置</th>
-    <th>油井是否在区域中心站、分水站、分水点、增压点周边（≤1km）</th>
-    <th>串接后预计回压，MPa</th>
-    <th>该油井附近是否有其他油井（≤0.3km）</th>
-    <th>油井到原油集输支线距离，km</th>
-    <th>油井到隶属站距离，km</th>
-    <th>优化建议</th>
-  </tr>
+    <div class="chart-container">
+        <canvas id="myPieChart"></canvas>
+        <p>指标占比分布图</p>
+    </div>
+</div>
+<p id="index1">达到中石化先进值的条数</p>
+<table id="reportTable1">
+    <thead>
+    <tr>
+        <th onclick="sortTable('reportTable1', 0)">编号</th>
+        <th onclick="sortTable('reportTable1', 1)">类别</th>
+        <th onclick="sortTable('reportTable1', 2)">名称</th>
+        <th onclick="sortTable('reportTable1', 3)">级别</th>
+        <th onclick="sortTable('reportTable1', 4)">值</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>投资控制指标</td>
+        <td>油田百万吨产能地面投资</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>投资控制指标</td>
+        <td>油田地面工程投资占比</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>投资控制指标</td>
+        <td>单井地面工程投资</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>达标率指标</td>
+        <td>原油自用率</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>达标率指标</td>
+        <td>集输密闭率</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    </tbody>
+</table>
+<p id="index2">达到中石化平均值的条数</p>
+<table id="reportTable2">
+    <thead>
+    <tr>
+        <th onclick="sortTable(0)">编号</th>
+        <th onclick="sortTable(1)">类别</th>
+        <th onclick="sortTable(2)">名称</th>
+        <th onclick="sortTable(3)">级别</th>
+        <th onclick="sortTable(4)">值</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>投资控制指标</td>
+        <td>油田百万吨产能地面投资</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>投资控制指标</td>
+        <td>油田地面工程投资占比</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>投资控制指标</td>
+        <td>单井地面工程投资</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>达标率指标</td>
+        <td>原油自用率</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>达标率指标</td>
+        <td>集输密闭率</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    </tbody>
+</table>
+<p id="index3">未达到中石化平均值的条数</p>
+<table id="reportTable3">
+    <thead>
+    <tr>
+        <th onclick="sortTable(0)">编号</th>
+        <th onclick="sortTable(1)">类别</th>
+        <th onclick="sortTable(2)">名称</th>
+        <th onclick="sortTable(3)">级别</th>
+        <th onclick="sortTable(4)">值</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>投资控制指标</td>
+        <td>油田百万吨产能地面投资</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>投资控制指标</td>
+        <td>油田地面工程投资占比</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>投资控制指标</td>
+        <td>单井地面工程投资</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>达标率指标</td>
+        <td>原油自用率</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>达标率指标</td>
+        <td>集输密闭率</td>
+        <td>一级指标</td>
+        <td>1</td>
+    </tr>
+    </tbody>
 </table>
 
-    </br>
-    <h3>2. 撤-计量站撤销分析</h3>
-    <p id="p-metering_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="metering_station">
-  <tr>
-    <th>序号</th>
-    <th>计量站名称</th>
-    <th>管辖油井是否使用功图计量装置</th>
-    <th>计量站仅具有计量功能</th>
-    <th>改造后进站或集输支干线前温度（℃）</th>
-    <th>原油凝固点（℃）</th>
-    <th>优化建议</th>
-  </tr>
-
+</br>
+</br>
+</br> </br> </br>
+<h2 id="section2">二、生产系统优化简化策略分析报告</h2>
+</br>
+<p id="p-summary2">sdfd</p>
+<h3>1. 串-油井串接分析</h3>
+<p id="p-well">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="well">
+    <tr>
+        <th>序号</th>
+        <th>油井名称</th>
+        <th>是否采用功图在线计量装置</th>
+        <th>油井是否在区域中心站、分水站、分水点、增压点周边（≤1km）</th>
+        <th>串接后预计回压，MPa</th>
+        <th>该油井附近是否有其他油井（≤0.3km）</th>
+        <th>油井到原油集输支线距离，km</th>
+        <th>油井到隶属站距离，km</th>
+        <th>优化建议</th>
+    </tr>
 </table>
 
-    </br>
-    <h3>3. 并-注水站合并分析</h3>
-    <p id="p-water_injection_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="water_injection_station">
-  <tr>
-    <th>序号</th>
-    <th>站点1名称</th>
-    <th>站点2名称</th>
-    <th>类别</th>
-    <th>两站站间距，km</th>
-    <th>设计能力</th>
-    <th>实际注水量</th>
-      <th>两站压力等级基本相同（MPa）</th>
-      <th>优化建议</th>
-  </tr>
+</br>
+<h3>2. 撤-计量站撤销分析</h3>
+<p id="p-metering_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="metering_station">
+    <tr>
+        <th>序号</th>
+        <th>计量站名称</th>
+        <th>管辖油井是否使用功图计量装置</th>
+        <th>计量站仅具有计量功能</th>
+        <th>改造后进站或集输支干线前温度（℃）</th>
+        <th>原油凝固点（℃）</th>
+        <th>优化建议</th>
+    </tr>
 
 </table>
 
-     </br>
-    <h3>4. 并-集油支干线合并分析</h3>
-    <p id="p-line">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="line">
-  <tr>
-    <th>序号</th>
-    <th>集输支干线名称</th>
-    <th>设计流量（方/天）</th>
-    <th>实际流量（方/天）</th>
-    <th>集油管线是否存在腐蚀穿孔等安全风险隐患</th>
-    <th>周边是否有同流向集油管线</th>
-    <th>富余能力（方/天）</th>
-      <th>被撤管线流量（方/天）</th>
-      <th>优化建议</th>
-  </tr>
+</br>
+<h3>3. 并-注水站合并分析</h3>
+<p id="p-water_injection_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="water_injection_station">
+    <tr>
+        <th>序号</th>
+        <th>站点1名称</th>
+        <th>站点2名称</th>
+        <th>类别</th>
+        <th>两站站间距，km</th>
+        <th>设计能力</th>
+        <th>实际注水量</th>
+        <th>两站压力等级基本相同（MPa）</th>
+        <th>优化建议</th>
+    </tr>
 
 </table>
 
-         </br>
-    <h3>5. 并-输油管线合并分析</h3>
-    <p id="p-out_line">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="out_line">
-  <tr>
-    <th>序号</th>
-    <th>输油管线名称</th>
-    <th>设计流量（方/天）</th>
-    <th>实际流量（方/天）</th>
-    <th>外输管线是否存在腐蚀穿孔等安全风险隐患</th>
-    <th>周边是否有同流向外输油管线</th>
-    <th>同流向外输油管线原油物性是否差别不大</th>
-      <th>同流向外输油管线富余能力是否满足被撤并管线油量</th>
-      <th>优化建议</th>
-  </tr>
-
-</table>
-    </br>
-    <h3>6. 分-就地分水分析</h3>
-    <p id="p-divide_water">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="divide_water">
-  <tr>
-    <th>序号</th>
-    <th>站点</th>
-    <th>采出液含水率，%</th>
-    <th>采出水往返距离，km</th>
-    <th>是否有注水需求</th>
-    <th>存在问题</th>
-      <th>优化建议</th>
-  </tr>
+</br>
+<h3>4. 并-集油支干线合并分析</h3>
+<p id="p-line">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="line">
+    <tr>
+        <th>序号</th>
+        <th>集输支干线名称</th>
+        <th>设计流量（方/天）</th>
+        <th>实际流量（方/天）</th>
+        <th>集油管线是否存在腐蚀穿孔等安全风险隐患</th>
+        <th>周边是否有同流向集油管线</th>
+        <th>富余能力（方/天）</th>
+        <th>被撤管线流量（方/天）</th>
+        <th>优化建议</th>
+    </tr>
 
 </table>
 
-        </br>
-    <h3>7. 简-接转站降级或取消分析</h3>
-    <p id="p-transfer_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="transfer_station">
-  <tr>
-    <th>序号</th>
-    <th>转接站</th>
-    <th>取消后油井回压，MPa</th>
-    <th>接转站取消后插入点的压力，MPa</th>
-    <th>管线设计压力，MPa</th>
-    <th>实际外输压力，MPa</th>
-      <th>周边有无注水或掺水需求</th>
-      <th>优化建议</th>
-  </tr>
+</br>
+<h3>5. 并-输油管线合并分析</h3>
+<p id="p-out_line">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="out_line">
+    <tr>
+        <th>序号</th>
+        <th>输油管线名称</th>
+        <th>设计流量（方/天）</th>
+        <th>实际流量（方/天）</th>
+        <th>外输管线是否存在腐蚀穿孔等安全风险隐患</th>
+        <th>周边是否有同流向外输油管线</th>
+        <th>同流向外输油管线原油物性是否差别不大</th>
+        <th>同流向外输油管线富余能力是否满足被撤并管线油量</th>
+        <th>优化建议</th>
+    </tr>
+
+</table>
+</br>
+<h3>6. 分-就地分水分析</h3>
+<p id="p-divide_water">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="divide_water">
+    <tr>
+        <th>序号</th>
+        <th>站点</th>
+        <th>采出液含水率，%</th>
+        <th>采出水往返距离，km</th>
+        <th>是否有注水需求</th>
+        <th>存在问题</th>
+        <th>优化建议</th>
+    </tr>
 
 </table>
 
-            </br>
-    <h3>8. 简-联合站降级分析</h3>
-    <p id="p-union_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
-    <table id="union_station">
-  <tr>
-    <th>序号</th>
-    <th>联合站1</th>
-    <th>联合站2</th>
-    <th>两座联合站场间距，km</th>
-    <th>两联合站采出液物性是否相近，处理流程是否相同</th>
-    <th>两座联合站原油脱水负荷率均＜60%</th>
-    <th>区域中心站能力是否满足降级站来液处理规模</th>
-      <th>优化建议</th>
-  </tr>
+</br>
+<h3>7. 简-接转站降级或取消分析</h3>
+<p id="p-transfer_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="transfer_station">
+    <tr>
+        <th>序号</th>
+        <th>转接站</th>
+        <th>取消后油井回压，MPa</th>
+        <th>接转站取消后插入点的压力，MPa</th>
+        <th>管线设计压力，MPa</th>
+        <th>实际外输压力，MPa</th>
+        <th>周边有无注水或掺水需求</th>
+        <th>优化建议</th>
+    </tr>
 
 </table>
-    </br></br></br></br></br></br>
-    </br>
 
-    <p id="copyright">© 中石化石油工程建设有限公司版权所有</p>
-    </br></br>
+</br>
+<h3>8. 简-联合站降级分析</h3>
+<p id="p-union_station">本生产系统共x口油井待优化简化，经分析，其中x口油井建议油井串接，x口油井建议串联后直接进站（点）或集输支干线</p>
+<table id="union_station">
+    <tr>
+        <th>序号</th>
+        <th>联合站1</th>
+        <th>联合站2</th>
+        <th>两座联合站场间距，km</th>
+        <th>两联合站采出液物性是否相近，处理流程是否相同</th>
+        <th>两座联合站原油脱水负荷率均＜60%</th>
+        <th>区域中心站能力是否满足降级站来液处理规模</th>
+        <th>优化建议</th>
+    </tr>
 
-    <script>
-        function sortTable(tableId, columnIndex) {
-            var table = document.getElementById(tableId);
-            var rows = Array.from(table.rows).slice(1);
-            var sorted = rows.sort(function(a, b) {
-                var ax = a.cells[columnIndex].innerText.toLowerCase();
-                var bx = b.cells[columnIndex].innerText.toLowerCase();
-                return ax.localeCompare(bx);
-            });
-            sorted.forEach(function(row) {
-                table.appendChild(row);
-            });
-        }
-    
-        var ctxBar = document.getElementById('myLineChart').getContext('2d');
-        var data = [65, 59, 80, 81, 56, 55, 60, 62, 58, 64];
+</table>
+</br></br></br></br></br></br>
+</br>
 
-        // Function to determine the background color based on data value
-        function getColor(value) {
-            if (value < 60) return 'red';
-            else if (value >= 60 && value <= 80) return 'yellow';
-            else return 'blue';
-        }
-        var myBarChart = new Chart(ctxBar, {
-            type: 'bar',
-            data: {
-                labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月'],
-                datasets: [{
-                    label: '指标趋势',
-                    data: data,
-                    backgroundColor: data.map(getColor), // Apply color logic for each data point
-                    borderColor: data.map(getColor), // Apply the same logic for borders if required
-                    borderWidth: 1
-                }]
-            },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                position: 'top',
-                labels: {
-                    font: {
-                        size: 14,
-                        family: 'Arial',
-                        weight: 'bold'
-                    },
-                    color: '#ffffff'
-                }
-            },
-            title: {
-                display: true,
-                text: '年度指标趋势',
-                font: {
-                    size: 16,
-                    family: 'Arial',
-                    weight: 'bold'
-                },
-                color: '#ffffff'
-            },
-            tooltip: {
-                bodyFont: {
-                    size: 14,
-                    family: 'Arial'
-                },
-                titleFont: {
-                    size: 16,
-                    family: 'Arial',
-                    weight: 'bold'
-                },
-                backgroundColor: '#333333',
-                titleColor: '#ffffff',
-                bodyColor: '#ffffff'
-            },
-            annotation: {
-                annotations: {
-                    line60: {
-                        type: 'line',
-                        yMin: 60,
-                        yMax: 60,
-                        borderColor: 'red',
-                        borderWidth: 2,
-                        borderDash: [6, 6],
-                        label: {
-                            content: '目标线 60',
-                            enabled: true,
-                            position: 'end'
-                        }
-                    },
-                    line80: {
-                        type: 'line',
-                        yMin: 80,
-                        yMax: 80,
-                        borderColor: 'green',
-                        borderWidth: 2,
-                        borderDash: [6, 6],
-                        label: {
-                            content: '目标线 80',
-                            enabled: true,
-                            position: 'end'
-                        }
-                    }
-                }
-            }
+<p id="copyright">© 中石化石油工程建设有限公司版权所有</p>
+</br></br>
+
+<script>
+    function sortTable(tableId, columnIndex) {
+        var table = document.getElementById(tableId);
+        var rows = Array.from(table.rows).slice(1);
+        var sorted = rows.sort(function (a, b) {
+            var ax = a.cells[columnIndex].innerText.toLowerCase();
+            var bx = b.cells[columnIndex].innerText.toLowerCase();
+            return ax.localeCompare(bx);
+        });
+        sorted.forEach(function (row) {
+            table.appendChild(row);
+        });
+    }
+
+    var ctxBar = document.getElementById('myLineChart').getContext('2d');
+    var data = [65, 59, 80, 81, 56, 55, 60, 62, 58, 64];
+
+    // Function to determine the background color based on data value
+    function getColor(value) {
+        if (value < 60) return 'red';
+        else if (value >= 60 && value <= 80) return 'yellow';
+        else return 'blue';
+    }
+
+    var myBarChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月'],
+            datasets: [{
+                label: '指标趋势',
+                data: data,
+                backgroundColor: data.map(getColor), // Apply color logic for each data point
+                borderColor: data.map(getColor), // Apply the same logic for borders if required
+                borderWidth: 1
+            }]
         },
-        scales: {
-            x: {
-                ticks: {
-                    color: '#ffffff',
-                    font: {
-                        size: 12,
-                        family: 'Arial'
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: 'Arial',
+                            weight: 'bold'
+                        },
+                        color: '#ffffff'
                     }
                 },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            },
-            y: {
-                max: 100, // Y轴最大值保持为100
-                ticks: {
-                    color: '#ffffff',
+                title: {
+                    display: true,
+                    text: '年度指标趋势',
                     font: {
-                        size: 12,
-                        family: 'Arial'
-                    }
-                },
-                grid: {
-                    color: 'rgba(255,255,255,0.2)'
-                }
-            }
-        }
-    }
-});
-
-
-
-
-var ctx = document.getElementById('myPieChart').getContext('2d');
-var myPieChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ['先进性指标', '达标率指标', '未达标率指标'],
-        datasets: [{
-            label: '指标分布',
-            data: [20, 30, 50],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.6)',
-                'rgba(54, 162, 235, 0.6)',
-                'rgba(255, 206, 86, 0.6)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-            datalabels: {
-                color: 'white',  // 设置白色字体
-                formatter: (value, ctx) => {
-                    let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);  // 计算总和
-                    let percentage = (value / sum * 100).toFixed(2) + "%";  // 计算百分比
-                    return value + ' (' + percentage + ')';  // 显示值和百分比
-                },
-                font: {
-                    weight: 'bold'
-                },
-                anchor: 'end',  // 锚点设置为结束点
-                align: 'end'    // 对齐设置为结束点
-            },
-            legend: {
-                position: 'bottom',
-                labels: {
-                    font: {
-                        size: 14,
+                        size: 16,
                         family: 'Arial',
                         weight: 'bold'
                     },
                     color: '#ffffff'
+                },
+                tooltip: {
+                    bodyFont: {
+                        size: 14,
+                        family: 'Arial'
+                    },
+                    titleFont: {
+                        size: 16,
+                        family: 'Arial',
+                        weight: 'bold'
+                    },
+                    backgroundColor: '#333333',
+                    titleColor: '#ffffff',
+                    bodyColor: '#ffffff'
+                },
+                annotation: {
+                    annotations: {
+                        line60: {
+                            type: 'line',
+                            yMin: 60,
+                            yMax: 60,
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            borderDash: [6, 6],
+                            label: {
+                                content: '目标线 60',
+                                enabled: true,
+                                position: 'end'
+                            }
+                        },
+                        line80: {
+                            type: 'line',
+                            yMin: 80,
+                            yMax: 80,
+                            borderColor: 'green',
+                            borderWidth: 2,
+                            borderDash: [6, 6],
+                            label: {
+                                content: '目标线 80',
+                                enabled: true,
+                                position: 'end'
+                            }
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#ffffff',
+                        font: {
+                            size: 12,
+                            family: 'Arial'
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
+                },
+                y: {
+                    max: 100, // Y轴最大值保持为100
+                    ticks: {
+                        color: '#ffffff',
+                        font: {
+                            size: 12,
+                            family: 'Arial'
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(255,255,255,0.2)'
+                    }
                 }
             }
         }
-    }
-});
+    });
 
 
-
+    var ctx = document.getElementById('myPieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['先进性指标', '达标率指标', '未达标率指标'],
+            datasets: [{
+                label: '指标分布',
+                data: [20, 30, 50],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                datalabels: {
+                    color: 'white',  // 设置白色字体
+                    formatter: (value, ctx) => {
+                        let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);  // 计算总和
+                        let percentage = (value / sum * 100).toFixed(2) + "%";  // 计算百分比
+                        return value + ' (' + percentage + ')';  // 显示值和百分比
+                    },
+                    font: {
+                        weight: 'bold'
+                    },
+                    anchor: 'end',  // 锚点设置为结束点
+                    align: 'end'    // 对齐设置为结束点
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: 'Arial',
+                            weight: 'bold'
+                        },
+                        color: '#ffffff'
+                    }
+                }
+            }
+        }
+    });
 
 
     // 将数据填充到指定的表格中
-    window.onload = function() {
+    window.onload = function () {
 
         fetch('http://localhost:8081/index_optimize_well')
             .then(response => {
@@ -689,10 +699,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"well")
+                fillTable1(data.data, "well")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-well");
-                paragraph.innerText = "本生产系统共"+data.data.length+"口油井待优化简化，经分析，其中,"+data.count1+"口油井建议油井串接，"+data.count2+"口油井建议串联后直接进站（点）或集输支干线。";
+                paragraph.innerText = "本生产系统共" + data.data.length + "口油井待优化简化，经分析，其中," + data.count1 + "口油井建议油井串接，" + data.count2 + "口油井建议串联后直接进站（点）或集输支干线。";
                 console.log(data)
 
             })
@@ -708,10 +718,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"metering_station")
+                fillTable1(data.data, "metering_station")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-metering_station");
-                paragraph.innerText = "本生产系统共"+data.data.length+"座计量站待优化简化，经分析，其中,"+data.count1+"座计量站考虑可以撤销。";
+                paragraph.innerText = "本生产系统共" + data.data.length + "座计量站待优化简化，经分析，其中," + data.count1 + "座计量站考虑可以撤销。";
                 console.log(data)
 
             })
@@ -727,10 +737,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"water_injection_station")
+                fillTable1(data.data, "water_injection_station")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-water_injection_station");
-                paragraph.innerText = "本生产系统共"+data.count_all_1*2+"座注水站和"+data.count_all_2+"座单体泵站待优化合并，经分析，其中,"+data.count1+"座注水站考虑可以合并，"+data.count2+"座单体泵站考虑可以合并。";
+                paragraph.innerText = "本生产系统共" + data.count_all_1 * 2 + "座注水站和" + data.count_all_2 + "座单体泵站待优化合并，经分析，其中," + data.count1 + "座注水站考虑可以合并，" + data.count2 + "座单体泵站考虑可以合并。";
                 console.log(data)
 
             })
@@ -747,10 +757,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"line")
+                fillTable1(data.data, "line")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-line");
-                paragraph.innerText = "本生产系统共"+data.data.length+"条集输支干线，"+"经分析，其中,"+data.count1+"条集输支干线合并考虑可以合并。";
+                paragraph.innerText = "本生产系统共" + data.data.length + "条集输支干线，" + "经分析，其中," + data.count1 + "条集输支干线合并考虑可以合并。";
                 console.log(data)
 
             })
@@ -758,8 +768,8 @@ var myPieChart = new Chart(ctx, {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-            // 输油管线
-                fetch('http://localhost:8081/index_optimize_out_line')
+        // 输油管线
+        fetch('http://localhost:8081/index_optimize_out_line')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -767,10 +777,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"out_line")
+                fillTable1(data.data, "out_line")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-out_line");
-                paragraph.innerText = "本生产系统共"+data.data.length+"条集输支干线，"+"经分析，其中,"+data.count1+"条集输支干线合并考虑可以合并。";
+                paragraph.innerText = "本生产系统共" + data.data.length + "条集输支干线，" + "经分析，其中," + data.count1 + "条集输支干线合并考虑可以合并。";
                 console.log(data)
 
             })
@@ -778,8 +788,8 @@ var myPieChart = new Chart(ctx, {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-            // 分水区
-            fetch('http://localhost:8081/index_optimize_divide_water')
+        // 分水区
+        fetch('http://localhost:8081/index_optimize_divide_water')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -787,10 +797,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"divide_water")
+                fillTable1(data.data, "divide_water")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-divide_water");
-                paragraph.innerText = "本生产系统共"+data.data.length+"座分水站，"+"经分析，其中,"+data.count1+"座分水站考虑新建分水站。";
+                paragraph.innerText = "本生产系统共" + data.data.length + "座分水站，" + "经分析，其中," + data.count1 + "座分水站考虑新建分水站。";
                 console.log(data)
 
             })
@@ -798,8 +808,8 @@ var myPieChart = new Chart(ctx, {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-            // 转接站
-                    fetch('http://localhost:8081/index_optimize_transfer_station')
+        // 转接站
+        fetch('http://localhost:8081/index_optimize_transfer_station')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -807,10 +817,10 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"transfer_station")
+                fillTable1(data.data, "transfer_station")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-transfer_station");
-                paragraph.innerText = "本生产系统共"+data.data.length+"座转接站，"+"经分析，其中,"+data.count1+"座转接站考虑取消，"+data.count2+"座转接站降级为分水点。";
+                paragraph.innerText = "本生产系统共" + data.data.length + "座转接站，" + "经分析，其中," + data.count1 + "座转接站考虑取消，" + data.count2 + "座转接站降级为分水点。";
                 console.log(data)
 
             })
@@ -818,8 +828,8 @@ var myPieChart = new Chart(ctx, {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-            // 联合站
-            fetch('http://localhost:8081/index_optimize_union_station')
+        // 联合站
+        fetch('http://localhost:8081/index_optimize_union_station')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -827,25 +837,25 @@ var myPieChart = new Chart(ctx, {
                 return response.json();
             })
             .then(data => {
-                fillTable1(data.data,"union_station")
+                fillTable1(data.data, "union_station")
                 // 修改 <p> 元素的内容
                 var paragraph = document.getElementById("p-union_station");
-                paragraph.innerText = "本生产系统共"+data.data.length*2+"座联合站，"+"经分析，其中,"+data.count1+"座联合站可降级为分水站。";
+                paragraph.innerText = "本生产系统共" + data.data.length * 2 + "座联合站，" + "经分析，其中," + data.count1 + "座联合站可降级为分水站。";
                 console.log(data)
-                            var p1Content = document.getElementById("p-well").innerHTML;
-            var p2Content = document.getElementById("p-metering_station").innerHTML;
-            var p3Content = document.getElementById("p-water_injection_station").innerHTML;
-            var p4Content = document.getElementById("p-line").innerHTML;
-            var p5Content = document.getElementById("p-out_line").innerHTML;
-            var p6Content = document.getElementById("p-divide_water").innerHTML;
-            var p7Content = document.getElementById("p-transfer_station").innerHTML;
-            var p8Content = document.getElementById("p-union_station").innerHTML;
+                var p1Content = document.getElementById("p-well").innerHTML;
+                var p2Content = document.getElementById("p-metering_station").innerHTML;
+                var p3Content = document.getElementById("p-water_injection_station").innerHTML;
+                var p4Content = document.getElementById("p-line").innerHTML;
+                var p5Content = document.getElementById("p-out_line").innerHTML;
+                var p6Content = document.getElementById("p-divide_water").innerHTML;
+                var p7Content = document.getElementById("p-transfer_station").innerHTML;
+                var p8Content = document.getElementById("p-union_station").innerHTML;
 
-    // 创建一个新的段落
-    var mergedParagraph = document.getElementById("p-summary2");
+                // 创建一个新的段落
+                var mergedParagraph = document.getElementById("p-summary2");
 
-    // 将各个段落的内容合并到新的段落中
-    mergedParagraph.innerHTML = "    "+p1Content + p2Content + p3Content+p4Content + p5Content + p6Content+p7Content + p8Content ;            
+                // 将各个段落的内容合并到新的段落中
+                mergedParagraph.innerHTML = "    " + p1Content + p2Content + p3Content + p4Content + p5Content + p6Content + p7Content + p8Content;
 
             })
             .catch(error => {
@@ -853,21 +863,21 @@ var myPieChart = new Chart(ctx, {
             });
 
 
-    //
-    // // 将新的段落插入到文档中
-    // document.body.appendChild(mergedParagraph);
-        function fillTable1(data,table_name) {
-    var table = document.getElementById(table_name);
-    for (var i = 0; i < data.length; i++) {
-      var row = table.insertRow(-1); // 在表格末尾添加新行
-      for (var key in data[i]) {
-        if (data[i].hasOwnProperty(key)) {
-          var cell = row.insertCell(); // 在行中插入单元格
-          cell.innerHTML = data[i][key]; // 填充单元格内容
+        //
+        // // 将新的段落插入到文档中
+        // document.body.appendChild(mergedParagraph);
+        function fillTable1(data, table_name) {
+            var table = document.getElementById(table_name);
+            for (var i = 0; i < data.length; i++) {
+                var row = table.insertRow(-1); // 在表格末尾添加新行
+                for (var key in data[i]) {
+                    if (data[i].hasOwnProperty(key)) {
+                        var cell = row.insertCell(); // 在行中插入单元格
+                        cell.innerHTML = data[i][key]; // 填充单元格内容
+                    }
+                }
+            }
         }
-      }
-    }
-  }
 
         // 创建一个新的 XMLHttpRequest 对象
         var xhr = new XMLHttpRequest();
@@ -877,7 +887,7 @@ var myPieChart = new Chart(ctx, {
         xhr.open("GET", "http://127.0.0.1:8081/index_compare", true);
 
         // 设置回调函数，处理响应
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     // 请求成功，解析返回的 JSON 数据
@@ -890,7 +900,7 @@ var myPieChart = new Chart(ctx, {
                     var paragraph = document.getElementById("index1");
 
                     // 修改饼图
-                    myPieChart.data.datasets[0].data =data.rates;
+                    myPieChart.data.datasets[0].data = data.rates;
                     myPieChart.update();
 
                     // 修改柱状图
@@ -900,25 +910,25 @@ var myPieChart = new Chart(ctx, {
 
                     // 修改summary p标签内容
                     var paragraph = document.getElementById("summary");
-                    paragraph.innerHTML = "对标中石化先进指标数据库，本生产系统共"+data.advanced.length+"项达到中石化先进水平，共"+data.mean.length+"项达到中石化平均水平，"+data.unqualified.length+"项未达到中石化平均水平，先进指标占比为"+data.rates[0]*100+"%,系统综合评估得分为"+data.score+"分。";
+                    paragraph.innerHTML = "对标中石化先进指标数据库，本生产系统共" + data.advanced.length + "项达到中石化先进水平，共" + data.mean.length + "项达到中石化平均水平，" + data.unqualified.length + "项未达到中石化平均水平，先进指标占比为" + data.rates[0] * 100 + "%,系统综合评估得分为" + data.score + "分。";
 
 
                     // 修改 <p> 元素的内容
                     var paragraph = document.getElementById("index1");
-                    paragraph.innerText = "达到中石化先进指标数："+data.advanced.length;
+                    paragraph.innerText = "达到中石化先进指标数：" + data.advanced.length;
                     var paragraph = document.getElementById("index2");
                     // 修改 <p> 元素的内容
-                    paragraph.innerText = "达到中石化平均指标数："+data.mean.length;
+                    paragraph.innerText = "达到中石化平均指标数：" + data.mean.length;
                     var paragraph = document.getElementById("index3");
                     // 修改 <p> 元素的内容
-                    paragraph.innerText = "未达到中石化平均指标数："+data.unqualified.length;
-                    var total=data.advanced.length+data.mean.length+data.unqualified.length
-                    myPieChart.data.datasets[0].data = [data.advanced.length/total*100, data.mean.length/total*100, data.unqualified.length/total*100];
+                    paragraph.innerText = "未达到中石化平均指标数：" + data.unqualified.length;
+                    var total = data.advanced.length + data.mean.length + data.unqualified.length
+                    myPieChart.data.datasets[0].data = [data.advanced.length / total * 100, data.mean.length / total * 100, data.unqualified.length / total * 100];
 // 更新图表
                     myPieChart.update();
                     var paragraph = document.getElementById("indexall");
                     // 修改 <p> 元素的内容
-                    paragraph.innerText = "综上分析，对标中石化生产指标，本系统得分："+data.score+"分";
+                    paragraph.innerText = "综上分析，对标中石化生产指标，本系统得分：" + data.score + "分";
                 } else {
                     // 请求失败，显示错误信息
                     console.error("发生错误：" + xhr.status);
@@ -928,16 +938,16 @@ var myPieChart = new Chart(ctx, {
 
         // 发送请求
         xhr.send();
-        };
+    };
 
-        // 将数据填充到指定的表格中
-        function fillTable(data, tableId) {
+    // 将数据填充到指定的表格中
+    function fillTable(data, tableId) {
         var table = document.getElementById(tableId);
         var tbody = table.getElementsByTagName("tbody")[0];
         tbody.innerHTML = ""; // 清空表格内容
         for (var i = 0; i < data.length; i++) {
             var row = "<tr>";
-            row += "<td>" + i+ "</td>";
+            row += "<td>" + i + "</td>";
             row += "<td>" + data[i].类别 + "</td>";
             row += "<td>" + data[i].指标名称 + "</td>";
             row += "<td>" + "一级" + "</td>";
@@ -945,14 +955,64 @@ var myPieChart = new Chart(ctx, {
             row += "</tr>";
             tbody.innerHTML += row;
         }
-        }
+    }
 
-        // 跳转页面
-        function redirectToPage() {
-    // 将页面的URL设置为新的URL
-    window.location.href = "index.html";
-}
-    </script>
+    // 跳转页面
+    function redirectToPage() {
+        // 将页面的URL设置为新的URL
+        window.location.href = "index.html";
+    }
+
+    // 下载文件
+    const url = `http://127.0.0.1:8081/download`;
+    document.getElementById('download_button').addEventListener('click', function () {
+        // 使用 fetch 获取文件
+        fetch('http://localhost:8081/download/')
+            .then(response => response.blob())
+            .then(blob => {
+                // 创建一个隐藏的<a>标签
+                var a = document.createElement('a');
+                var url = URL.createObjectURL(blob);
+                a.href = url;
+                a.download = 'data.rar'; // 你可以设置你想要的文件名
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    // 移除<a>标签，释放内存
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 0);
+            })
+            .catch(error => console.error('Download error:', error));
+    });
+
+    document.getElementById('upload_button').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                fetch('http://localhost:8081/upload/', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert(`File uploaded successfully: ${data.info}`);
+                })
+                .catch(error => {
+                    console.error('Error uploading file:', error);
+                    alert('Error uploading file');
+                });
+            } else {
+                alert('Please select a file to upload.');
+            }
+        });
+
+</script>
 </body>
 </html>
 

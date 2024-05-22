@@ -107,3 +107,47 @@ async def read_top_10():
     avg_list = [data[8]["avg_efficiency"],data[7]["avg_efficiency"],data[6]["avg_efficiency"],data[5]["avg_efficiency"],data[4]["avg_efficiency"],data[3]["avg_efficiency"],data[2]["avg_efficiency"],data[1]["avg_efficiency"],data[0]["avg_efficiency"]]
     data_new = {"date":date_list,"avg_efficiency":avg_list}
     return data_new
+
+
+@index_router.get("/energy_overview")
+async def energy_overview():
+    df = pd.read_excel('data.xlsx', sheet_name='能耗总览')
+    df.columns=["name","energy_overview","system","union","water"]
+    data = df.iloc[0].to_dict()
+    print(data)
+        # 确保所请求的列存在于数据框中
+
+    return data
+
+
+@index_router.get("/efficient")
+async def efficient():
+    df = pd.read_excel('data.xlsx', sheet_name='效率')
+    columns=df.columns[1:]
+    new_data = {i: col.rstrip("效率（%）") for i, col in enumerate(df.columns[1:])}
+
+    return {'data':new_data}
+        # 确保所请求的列存在于数据框中
+
+
+@index_router.get("/efficient/{number}")
+async def efficient_equip(number:int):
+    df = pd.read_excel('data.xlsx', sheet_name='效率')
+    # 使用 enumerate 函数遍历 DataFrame 的列
+    # return df.columns
+    new_columns = {old_col: str(i - 1) for i, old_col in enumerate(df.columns)}
+    #
+    # # 使用 rename 方法重命名列
+    df.rename(columns=new_columns, inplace=True)
+
+    sorted_df = df.sort_values(by=str(number),ascending=True)
+
+    # 将排序后的列转换为列表
+    print(df["-1"])
+    sorted_column_list = sorted_df[str(number)].tolist()[:10]
+    return {
+        "date":df["-1"].tolist()[:10],
+        "efficient":sorted_column_list
+    }
+
+        # 确保所请求的列存在于数据框中

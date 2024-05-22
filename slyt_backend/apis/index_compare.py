@@ -1,7 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter,FastAPI, File, UploadFile
 import pandas as pd
 import json
 import numpy as np
+import os
+from fastapi.responses import FileResponse
 
 index_compare_router = APIRouter()
 
@@ -244,3 +246,18 @@ async def optimize_out_line():
             count1 += 1
         data1.append(row)
     return {"data": data1, "count1": count1}
+
+@index_compare_router.get("/download/")
+async def download_file():
+    file_path ="data/data.rar"
+    if os.path.exists(file_path):
+        return FileResponse(file_path, filename="data.rar")
+    return {"error": "File not found"}
+
+
+@index_compare_router.post("/upload/")
+async def upload_file(file: UploadFile = File(...)):
+    file_location = os.path.join("data/", file.filename)
+    with open(file_location, "wb") as f:
+        f.write(file.file.read())
+    return {"info": f"file '{file.filename}' saved at '{file_location}'"}

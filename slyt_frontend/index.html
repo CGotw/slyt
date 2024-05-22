@@ -1,86 +1,164 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <!-- <meta http-equiv="refresh" content="60;url='https://gitee.com/iGaoWei/big-data-view'" /> -->
+    <meta charset="utf-8"/>
     <title>中石化胜利油田大数据可视化系统</title>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <link rel="stylesheet" href="css/comon0.css" />
+    <link rel="stylesheet" href="css/comon0.css"/>
     <style>
+        /* 右侧按钮样式 */
+        #ebutton {
+            margin-left: 20px; /* 设置按钮与下拉框之间的距离 */
+            padding: 8px 16px; /* 设置按钮的内边距 */
+            border: none; /* 去掉按钮的边框 */
+            border-radius: 4px; /* 设置按钮的圆角 */
+            background-color: #007bff; /* 设置按钮的背景颜色 */
+            color: #fff; /* 设置按钮的文本颜色 */
+            font-size: 14px; /* 设置按钮的字体大小 */
+            cursor: pointer; /* 设置按钮的光标样式为手型 */
+            transition: background-color 0.3s ease;
+            /*
+                   /* 添加其他样式属性 */
+        }
+
+        #btn:hover {
+            background-color: #0056b3; /* 设置按钮在悬停状态下的背景颜色 */
+        }
+
+        /* 下拉框样式 */
+        .dropdown {
+            margin-left: 20px; /* 设置按钮与下拉框之间的距离 */
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 下拉框箭头样式 */
+        .dropdown::after {
+            content: "\25BC"; /* 使用unicode字符表示向下的箭头 */
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+        }
+
+        /* 下拉框选项样式 */
+        #dropdown {
+            appearance: none; /* 隐藏默认样式 */
+            -webkit-appearance: none; /* 兼容webkit内核浏览器 */
+            -moz-appearance: none; /* 兼容火狐浏览器 */
+            padding: 5px 25px 5px 10px; /* 设置内边距 */
+            border: 1px solid #ccc; /* 设置边框 */
+            border-radius: 4px; /* 设置边框圆角 */
+            background-color: #fff; /* 设置背景色 */
+            font-size: 14px; /* 设置字体大小 */
+            cursor: pointer; /* 设置光标样式 */
+        }
+
+        /* 下拉框选项的 hover 样式 */
+        #dropdown:hover {
+            border-color: #999; /* 设置边框 hover 时的颜色 */
+        }
+
         .head {
-            text-align: center; /* 使整个头部内容居中 */
+            display: flex;
+            justify-content: center; /* Center align the h1 element */
+            align-items: center; /* Vertically center the content */
+            position: relative;
+            height: 100px; /* Adjust height as needed */
         }
-        .head > div {
-            display: inline-block; /* 使div成为内联块，以便它们能水平排列 */
-            vertical-align: middle; /* 垂直对齐 */
+
+        .buttons {
+            position: absolute;
+            left: 0;
         }
-        .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    text-align: center;
-    cursor: pointer;
-    border: none;
-    font-size: 16px; /* 控制文字大小 */
-    font-family: Arial, sans-serif; /* 设置字体为Arial */
-}
 
-.button:hover {
-    background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
-}
+        .buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 16px; /* Control font size */
+            font-family: Arial, sans-serif; /* Set font to Arial */
+            margin: 0 5px; /* Optional: margin between buttons */
+        }
 
+        .buttons a:hover {
+            background-color: #45a049; /* Background color change on hover */
+        }
+
+        /* 选择具体的容器类或者ID */
+        .sqzs h1 {
+            font-size: 0.4rem; /* 具体数值根据需要调整 */
+        }
+
+        .sqzs h1 span {
+            font-size: 0.9rem; /* 具体数值根据需要调整 */
+        }
     </style>
 </head>
 <body>
 <div class="loading">
     <div class="loadbox">
-        <img src="images/loading.gif" /> 页面加载中...
+        <img src="images/loading.gif"/> 页面加载中...
     </div>
 </div>
 <div class="head">
-    <h1><a href="https://gitee.com/iGaoWei/big-data-view">中石化胜利油田大数据可视化系统</a></h1>
+    <div class="buttons">
         <a href="mind.html" class="button">指标图</a>
-        <a href="upload.html" class="button">上传</a>
-        <a href="index_compare.html" class="button">分析报告</a>
-        <!-- <button class="custom-button" onclick="window.location.href='upload.html'">上传</button> -->
+<!--        <a href="upload.html" class="button">上传</a>-->
+        <a href="upload2.html" class="button">分析报告</a>
     </div>
-    <div class="time" id="showTime">
-        2019/12/05 16:16:54
-    </div>
-    <script>
+    <h1 id="main-heading"><a href="https://gitee.com/iGaoWei/big-data-view">油区大数据可视化系统</a></h1>
+</div>
+<div class="time" id="showTime">
+    2019/12/05 16:16:54
+</div>
+<script>
+    var t = null;
+    t = setTimeout(time, 1000);//開始运行
+    function time() {
+        clearTimeout(t);//清除定时器
+        dt = new Date();
+        var y = dt.getFullYear();
+        var mt = dt.getMonth() + 1;
+        var day = dt.getDate();
+        var h = dt.getHours();//获取时
+        var m = dt.getMinutes();//获取分
+        var s = dt.getSeconds();//获取秒
         var t = null;
-        t = setTimeout(time,1000);//開始运行
-        function time()
-        {
-            clearTimeout(t);//清除定时器
-            dt = new Date();
-            var y=dt.getFullYear();
-            var mt=dt.getMonth()+1;
-            var day=dt.getDate();
-            var h=dt.getHours();//获取时
-            var m=dt.getMinutes();//获取分
-            var s=dt.getSeconds();//获取秒
-            var t = null;
-            document.getElementById("showTime").innerHTML = y+"/"+Appendzero(mt)+"/"+Appendzero(day)+" "+Appendzero(h)+":"+Appendzero(m)+":"+Appendzero(s)+"";
-            function Appendzero(obj){
-                if(obj<10) return "0" +""+ obj;
-                else return obj;
-            }
-            t = setTimeout(time,1000); //设定定时器，循环运行
+        document.getElementById("showTime").innerHTML = y + "/" + Appendzero(mt) + "/" + Appendzero(day) + " " + Appendzero(h) + ":" + Appendzero(m) + ":" + Appendzero(s) + "";
+
+        function Appendzero(obj) {
+            if (obj < 10) return "0" + "" + obj;
+            else return obj;
         }
 
-    </script>
+        t = setTimeout(time, 1000); //设定定时器，循环运行
+    }
+
+</script>
 </div>
 <div class="mainbox">
     <ul class="clearfix">
         <li>
             <div class="boxall" style="height: calc(58% - .15rem)">
                 <div class="alltitle">
-                    设备综合效率
+                    设备效率
+                    <div class="dropdown">
+                        <select id="dropdown">
+                            <option value="option1">选项1</option>
+                            <option value="option2">选项2</option>
+                            <option value="option3">选项3</option>
+                            <!-- 添加更多选项 -->
+                        </select>
+                    </div>
+                    <button id="ebutton">确定</button>
                 </div>
                 <div class=" boxnav " id="echarts4">
                 </div>
@@ -90,33 +168,39 @@
                     直接运行成本
                 </div>
                 <div class="boxnav" id="echarts3"></div>
-            </div> </li>
+            </div>
+        </li>
         <li>
             <div class="boxall" style="height: calc(20% - .15rem)">
                 <ul class="row h100 clearfix">
                     <li class="col-6">
                         <div class="sqzs h100">
                             <p>能耗总览</p>
-                            <h1><span>30500</span>万</h1>
-                        </div> </li>
+                            <h1 id="energy_overview"><span>30500</span>万吨标煤</h1>
+                        </div>
+                    </li>
                     <li class="col-6">
                         <ul class="row h100 clearfix">
                             <li class="col-4">
                                 <div class="tit01">
                                     集输系统
                                 </div>
-                                <div class="piebox" id="pe01"></div> </li>
+                                <div class="piebox" id="pe01"></div>
+                            </li>
                             <li class="col-4">
                                 <div class="tit01">
                                     联合站
                                 </div>
-                                <div class="piebox" id="pe02"></div> </li>
+                                <div class="piebox" id="pe02"></div>
+                            </li>
                             <li class="col-4">
                                 <div class="tit01">
                                     注水站
                                 </div>
-                                <div class="piebox" id="pe03"></div> </li>
-                        </ul> </li>
+                                <div class="piebox" id="pe03"></div>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="boxall" style="height: calc(38% - .15rem)">
@@ -130,7 +214,8 @@
                     联合站原油脱水率趋势图
                 </div>
                 <div class="boxnav" id="echarts2"></div>
-            </div> </li>
+            </div>
+        </li>
         <li>
             <div class="boxall" style="height: calc(33.333% - .15rem)">
                 <div class="alltitle">
@@ -145,60 +230,53 @@
                 <div class="boxnav" id="">
                     <table border="0" cellspacing="0" id="data-table">
                         <tbody>
-                        <tr>
-                            <th>区域</th>
-                            <th>数量</th>
-                            <th>开井率/负荷率</th>
-                            <th>油量</th>
-                            <th>液量</th>
-                            <th>注水量</th>
-                        </tr>
-                        <tr>
-                            <th>油井</th>
-                            <td>1993</td>
-                            <td> 201%</td>
-                            <td>10</td>
-                            <td> 199</td>
-                        </tr>
-                        <tr>
-                            <th>集输站</th>
-                            <td>8098</td>
-                            <td>19.80%</td>
-                            <td>22</td>
-                            <td>368</td>
-                        </tr>
-                        <tr>
-                            <th>联合站</th>
-                            <td>7506</td>
-                            <td>6.70%</td>
-                            <td>22</td>
-                            <td>339</td>
-                        </tr>
-                        <tr>
-                            <th>注水站</th>
-                            <td>3261</td>
-                            <td>32.30%</td>
-                            <td>10</td>
-                            <td>325.7</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="boxall" style="height: calc(33.333% - .15rem)">
-                <div style="display: flex;justify-content: space-between;"><div class="alltitle">
-                    9月生产消耗量
-                </div></div>
+                <div style="display: flex;justify-content: space-between;">
+                    <div class="alltitle">
+                        9月生产消耗量
+                    </div>
+                </div>
                 <div class="boxnav" id="echarts6" style="height:calc(100% - .3rem);"></div>
-            </div> </li>
+            </div>
+        </li>
     </ul>
 </div>
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script language="JavaScript" src="js/js.js"></script>
-    <script>
-        // 在页面加载时执行的 JavaScript 代码
-        window.onload = function() {
-            fetch('http://localhost:8081/index/overview_of_translation_regions')
+<script>
+    // 在页面加载时执行的 JavaScript 代码
+    window.onload = function () {
+
+        // 能耗总览
+        fetch('http://127.0.0.1:8081/energy_overview')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                var h1Element = document.getElementById("main-heading");
+                // 更新 <h1> 元素的内容
+                h1Element.innerHTML = data.name + "油区大数据可视化系统";
+                // 找到 <span> 元素
+                var spanElement = document.querySelector("#energy_overview span");
+
+                // 修改 <span> 元素的文本内容
+                spanElement.textContent = data.energy_overview;
+
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+
+        fetch('http://localhost:8081/index/overview_of_translation_regions')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -208,34 +286,250 @@
             .then(data => {
                 var tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
                 console.log(tableBody.innerHTML)
-                tableBody.innerHTML="                        <tr>\n" +
+                tableBody.innerHTML = "                        <tr>\n" +
                     "                            <th>区域</th>\n" +
                     "                            <th>数量</th>\n" +
                     "                            <th>开井率/负荷率</th>\n" +
-                    "                            <th>油量</th>\n" +
-                    "                            <th>液量</th>\n" +
-                    "                            <th>注水量</th>\n" +
+                    "                            <th>油量（t）</th>\n" +
+                    "                            <th>液量（t）</th>\n" +
+                    "                            <th>注水量（t）</th>\n" +
                     "                        </tr>"
 
                 data.forEach(function (item) {
-                var row = '<tr>';
-                row += '<th>' + item.area + '</th>';
-                row += '<td>' + item.quantity + '</td>';
-                row += '<td>' + item.openingRate + '</td>';
-                row += '<td>' + item.oilProduction + '</td>';
-                row += '<td>' + item.waterProduction + '</td>';
-                row += '<td>' + item.water_1Production + '</td>';
-                row += '</tr>';
-                tableBody.innerHTML += row;
-            });
+                    var row = '<tr>';
+                    row += '<th>' + item.area + '</th>';
+                    row += '<td>' + item.quantity + '</td>';
+                    row += '<td>' + item.openingRate + '</td>';
+                    row += '<td>' + item.oilProduction + '</td>';
+                    row += '<td>' + item.waterProduction + '</td>';
+                    row += '<td>' + item.water + '</td>';
+                    row += '</tr>';
+                    tableBody.innerHTML += row;
+                });
 
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
             });
 
+        // 下拉框
+        // 执行网络请求
+        fetch('http://localhost:8081/efficient')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // 获取下拉框元素
+
+                const dropdown = document.getElementById('dropdown');
+                dropdown.innerHTML = '';
+                console.log(data)
+                // 遍历数据并创建选项元素
+                for (const key in data.data) {
+                    if (Object.hasOwnProperty.call(data.data, key)) {
+                        const value = data.data[key]; // 获取值
+                        const option = document.createElement('option');
+                        option.value = key; // 设置选项值为字典的键
+                        option.textContent = value; // 设置选项显示文本为字典的值
+                        dropdown.appendChild(option); // 将选项添加到下拉框中
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+
+
+    };
+
+    // 按钮回调
+    const btn = document.getElementById('ebutton');
+
+    // 点击按钮时的事件处理函数
+    btn.addEventListener('click', function () {
+        // 获取下拉框元素
+        const dropdown = document.getElementById('dropdown');
+        // 获取下拉框当前选中的值
+        const selectedValue = dropdown.value;
+        echarts_4(selectedValue)
+        // 在控制台输出选中的值
+        // 这里可以将选中的值传递给其他函数进行处理，或者执行其他操作
+    });
+
+    function echarts_4(selectedValue=0) {
+                console.log(selectedValue);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts4'));
+        var myColor = ['#eb2100', '#eb3600', '#d0570e', '#d0a00e', '#34da62', '#00e9db', '#00c0e9', '#0096f3'];
+        var option = {
+
+            grid: {
+                left: '2%',
+                top: '1%',
+                right: '5%',
+                bottom: '0%',
+                containLabel: true
+            },
+            xAxis: [{
+                show: false,
+            }],
+            yAxis: [{
+                axisTick: 'none',
+                axisLine: 'none',
+                offset: '7',
+                axisLabel: {
+                    textStyle: {
+                        color: 'rgba(255,255,255,.6)',
+                        fontSize: '14',
+                    }
+                },
+                data: ['字段1', '字段2', '字段3', '字段4', '字段5', '字段6', '字段7', '字段8', '字段9']
+
+            }, {
+                axisTick: 'none',
+                axisLine: 'none',
+                axisLabel: {
+                    textStyle: {
+                        color: 'rgba(255,255,255,.6)',
+                        fontSize: '16',
+                    }
+                },
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+            }, {
+                name: '单位：件',
+                nameGap: '50',
+                nameTextStyle: {
+                    color: 'rgba(255,255,255,.6)',
+                    fontSize: '16',
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: 'rgba(0,0,0,0)'
+                    }
+                },
+                data: [],
+            }],
+            series: [{
+                name: '条',
+                type: 'bar',
+                yAxisIndex: 0,
+                data: [25, 30, 34, 40, 43, 48, 52, 56, 70],
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'right',
+                        formatter: function (param) {
+                            return param.value + '%';
+                        },
+                        textStyle: {
+                            color: 'rgba(255,255,255,.8)',
+                            fontSize: '0',
+                        }
+                    }
+                },
+                barWidth: 15,
+                itemStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
+                            offset: 0,
+                            color: '#03c893'
+                        },
+                            {
+                                offset: 1,
+                                color: '#0091ff'
+                            }
+                        ]),
+                        barBorderRadius: 15,
+                    }
+                },
+                z: 2
+            }, {
+                name: '白框',
+                type: 'bar',
+                yAxisIndex: 1,
+                barGap: '-100%',
+                data: [99.5, 99.5, 99.5, 99.5, 99.5, 99.5, 99.5, 99.5, 99.5, 99.5],
+                barWidth: 15,
+                itemStyle: {
+                    normal: {
+                        color: 'rgba(0,0,0,.2)',
+                        barBorderRadius: 15,
+                    }
+                },
+                z: 1
+            }]
         };
-    </script>
-    
+        fetch('http://127.0.0.1:8081/efficient/'+selectedValue)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data_new => {
+                console.log(data_new)
+                // option.yAxis[0].data=data_new["date"]
+                // option.yAxis[1].data=data_new["avg_efficiency"]
+                // option.series[0].data=data_new["avg_efficiency"]
+                // 假设data_new是一个包含date和avg_efficiency的字典
+// let data_new = {
+//   "date": [...],  // 日期数据，可能是时间戳或其他格式
+//   "avg_efficiency": [...]  // 平均效率数据
+// };
+
+// 转换日期数据为只有日和月，并保留一位小数
+                let formatted_date = data_new["date"].map(date => {
+                    // 假设date是时间戳，你可以根据实际的日期格式进行调整
+                    let dateObj = new Date(date);
+                    let year = dateObj.getFullYear();
+                    let month = String(dateObj.getMonth() + 1).padStart(2, '0');  // 月份从0开始，所以+1
+                    let day = String(dateObj.getDate()).padStart(2, '0');  // 日期补零
+                    return `${year}-${month}-${day}`;  // 返回格式为YYYY-MM-DD
+                });
+
+                let formatted_avg_efficiency = data_new["efficient"].map(val => {
+                    // 保留一位小数
+                    return val.toFixed(1);
+                });
+
+// 设置图表的option
+                option.yAxis[0].data = formatted_date;
+                option.yAxis[1].data = formatted_avg_efficiency;
+                option.series[0].data = formatted_avg_efficiency;
+                var unit = '%';
+
+                // 使用 map() 方法为每个元素添加单位
+                var formatted_avg_efficiency_with_unit = formatted_avg_efficiency.map(function(value) {
+                    return value + unit;
+                });
+                option.yAxis[1].data = formatted_avg_efficiency_with_unit;
+
+                // console.log(data_new)
+                // option.series[0].data[0].value=data.natural_gas
+                // option.series[0].data[1].value=data.power_consumption
+                // option.series[0].data[0].value=data["carbon_emulsion"]
+                // option.series[0].data[2].value=data["power_consumption"]
+                // option.series[0].data[2].value=data.carbon_emulsion
+                // option.title.text=data["total"]
+                // option.xAxis[0].data=data.month
+                // option.xAxis[0].data=data.month
+                // var xAxisData = option["xAxis"];
+                // console.log(xAxisData);
+                myChart.setOption(option);
+                window.addEventListener("resize", function () {
+                    myChart.resize();
+                });
+                // console.log()
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+</script>
+
 </body>
 </html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Report Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
+
+    <style>
+        :root {
+            --chart-margin: 100px; /* 可以修改这个值来控制图表之间的间距 */
+        }
+
+        #p-summary2 {
+            text-indent: 2em;
+            line-height: 2; /* 设置单倍行距 */
+        }
+
+        #copyright {
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 35px;
+        }
+
+        h2 {
+            font-size: 25px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        #index1 {
+            text-align: center; /* 使文字居中 */
+            font-size: 15px; /* 设置字体大小为20px */
+            font-weight: bold; /* 加粗 */
+        }
+
+        #index2 {
+            text-align: center; /* 使文字居中 */
+            font-size: 15px; /* 设置字体大小为20px */
+            font-weight: bold; /* 加粗 */
+        }
+
+        #index3 {
+            text-align: center; /* 使文字居中 */
+            font-size: 15px; /* 设置字体大小为20px */
+            font-weight: bold; /* 加粗 */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('images/bg.jpg');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+        }
+
+        .content {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #charts {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* 如果图表大小不一，可能需要调整对齐方式 */
+            flex-wrap: wrap; /* 允许图表在较小屏幕上换行 */
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            flex-basis: 50%; /* 控制基础占比，可适应不同屏幕 */
+            max-width: 600px; /* 最大宽度限制 */
+            margin: 10px var(--chart-margin);
+            text-align: center; /* 文本居中对齐 */
+            display: flex;
+            flex-direction: column; /* 确保文本在图表下方 */
+            align-items: center; /* 中心对齐canvas和文本 */
+        }
+
+        canvas {
+            width: 200%; /* 全宽度但遵循最大宽度限制 */
+            max-height: 500px; /* 最大高度，避免无限制增长 */
+        }
+
+        #myPieChart, #myLineChart {
+            flex: 1 1 50%; /* Each chart takes up half of the flex container */
+            max-width: 600px;
+            margin: 10px var(--chart-margin);
+        }
+
+        table {
+            width: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-left: auto; /* 设置左外边距为auto */
+            margin-right: auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            color: #f0f0f0;
+            text-align: center; /* 将内容水平居中 */
+            vertical-align: middle; /* 将内容垂直居中 */
+        }
+
+        th {
+            background-color: #00008B;
+            color: #ffffff;
+        }
+
+        h3 {
+            font-size: 17px;
+            margin-left: 250px;
+            margin-right: 250px;
+        }
+
+        p {
+            font-size: 15px;
+            margin-left: 250px;
+            margin-right: 250px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-size: 16px; /* 控制文字大小 */
+            font-family: Arial, sans-serif; /* 设置字体为Arial */
+            margin: 5px; /* 添加一些外边距 */
+        }
+
+        .button:hover {
+            background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
+        }
+
+        .button-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="button-container">
+    <a href="index.html" class="button">首页</a>
+<!--    <a href="#section1" class="button">对比报告</a>-->
+    <a href="index_compare.html" class="button">提交分析</a>
+    <a class="button" id="upload_button">上传数据</a>
+    <a class="button" id="download_button">模版下载</a>
+<!--    <button class="button" onclick="window.print();">打印报告</button>-->
+    <input type="file" id="fileInput">
+</div>
+
+<script>
+
+    // 下载文件
+    const url = `http://127.0.0.1:8081/download`;
+    document.getElementById('download_button').addEventListener('click', function () {
+        console.log("in")
+        // 使用 fetch 获取文件
+        fetch('http://localhost:8081/download/')
+            .then(response => response.blob())
+            .then(blob => {
+                // 创建一个隐藏的<a>标签
+                var a = document.createElement('a');
+                var url = URL.createObjectURL(blob);
+                a.href = url;
+                a.download = 'data.rar'; // 你可以设置你想要的文件名
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    // 移除<a>标签，释放内存
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 0);
+            })
+            .catch(error => console.error('Download error:', error));
+    });
+
+    document.getElementById('upload_button').addEventListener('click', function() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                fetch('http://localhost:8081/upload/', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    alert(`文件上传成功: ${data.info}`);
+                })
+                .catch(error => {
+                    console.error('上传失败:', error);
+                    alert('上传失败');
+                });
+            } else {
+                alert('请选择文件.');
+            }
+        });
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
