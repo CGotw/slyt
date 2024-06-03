@@ -36,10 +36,11 @@ async def data3():
 
 @index_router.get("/index/overview_of_translation_regions")
 async def overview_of_translation_regions():
-    df = pd.read_excel('data.xlsx', sheet_name='研究油区总体介绍', header=0)
+    df = pd.read_excel('data.xlsx', sheet_name='研究油区总体介绍', header=0,dtype=str)
     data = []
     for _, row in df.iterrows():
-        data.append(row)
+        data.append(row.to_dict())
+    print(data)
     return data
 
 @index_router.get("/all_data")
