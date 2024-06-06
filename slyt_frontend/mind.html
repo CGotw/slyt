@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/jsmind@0.8.2/style/jsmind.css" />
     <script type="text/javascript" src="https://unpkg.com/jsmind@0.8.2/es6/jsmind.js"></script>
     <script type="text/javascript" src="https://unpkg.com/jsmind@0.8.2/es6/jsmind.draggable-node.js"></script>
+    <link rel="stylesheet" href="css/comon0.css"/>
     <style>
         body {
             padding: 0;
@@ -20,18 +21,27 @@
         }
         .header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* 将内容居中 */
             align-items: center;
             padding: 20px; /* 控制按钮和标题之间的间距 */
             width: 100%;
+            background: url('images/head_bg.png') no-repeat center center; /* 设置背景图片 */
+            background-size: cover; /* 让背景图片覆盖整个标题区域 */
+            position: relative;
+        }
+        .header .container {
+            position: absolute;
+            left: 10px; /* 调整按钮距离左边的距离 */
+            top: 20%; /* 垂直居中 */
+            transform: translateY(-50%); /* 垂直居中 */
         }
         #title {
-            font-size: 24px;
+            font-size: 36px;
             font-weight: bold;
             color: #fff;
-            flex-grow: 1;
             text-align: center;
-            margin-top: 20px;
+            margin: 0; /* 去掉 margin */
+            padding: 20px; /* 控制标题的内边距 */
         }
         #jsmind_container {
             width: 100%;
@@ -62,9 +72,6 @@
             z-index: 100;
         }
         .button  {
-            position: relative;
-            top: 20px; /* 距离顶部的距离 */
-            left: 20px; /* 距离左侧边的距离 */
             display: inline-block;
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -75,9 +82,9 @@
             text-align: center;
             cursor: pointer;
             border: none;
-            font-size: 16px; /* 控制文字大小 */
-            font-family: Arial, sans-serif; /* 设置字体为Arial */
-            margin: 0 5px;
+            font-size: 16px; /* Control font size */
+            font-family: Arial, sans-serif; /* Set font to Arial */
+            margin: 0 5px; /* Optional: margin between buttons */
         }
         .button:hover {
             background-color: #45a049; /* 鼠标悬停时的背景颜色变化 */
