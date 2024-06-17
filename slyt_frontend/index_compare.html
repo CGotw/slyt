@@ -5,7 +5,7 @@
     <title>Simple Report Page</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.2"></script>
-
+    <link href="css/common.css" rel="stylesheet">
 
     <style>
         :root {
@@ -73,7 +73,7 @@
         }
 
         .chart-container {
-            flex-basis: 50%; /* 控制基础占比，可适应不同屏幕 */
+            flex-basis: 30%; /* 控制基础占比，可适应不同屏幕 */
             max-width: 600px; /* 最大宽度限制 */
             margin: 10px var(--chart-margin);
             text-align: center; /* 文本居中对齐 */
@@ -88,7 +88,7 @@
         }
 
         #myPieChart, #myLineChart {
-            flex: 1 1 50%; /* Each chart takes up half of the flex container */
+            flex: 1 1 40%; /* Each chart takes up half of the flex container */
             max-width: 600px;
             margin: 10px var(--chart-margin);
         }
@@ -169,18 +169,86 @@
                 box-shadow: none;
             }
         } */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        .container {
+            display: flex;
+            justify-content: space-between; /* 在 div 之间留出空隙 */
+            width: 100vw; /* 充满整个横屏 */
+            padding: 20px; /* 增加一些上下和左右的内边距 */
+        }
+
+        .box {
+            background-color: rgba(0, 0, 255, 0.4); /* 蓝色背景色，透明度50% */
+            flex: 1; /* 每个 div 均分容器宽度 */
+            margin: 0 10px; /* 每个 div 左右各留10px 的间隙 */
+            height: 120px; /* 固定高度为120px */
+            display: flex;
+            flex-direction: row; /* 水平排列内部元素 */
+            justify-content: space-around; /* 内部元素均匀分布 */
+            align-items: center; /* 内部元素垂直居中 */
+        }
+
+        .icon {
+            width: 60px;
+            height: 60px;
+            /*background-color: #000; !* 用黑色方块模拟图标 *!*/
+            border-radius: 50%; /* 圆形图标 */
+        }
+
+        p {
+            margin: 0 10px; /* 增加文字左右的内边距 */
+        }
+
+        #xianjin {
+            font-size: 40px; /* 设置字号为24像素 */
+            color: red; /* 设置颜色为红色 */
+            font-weight: bold; /* 加粗 */
+        }
+                #pingjun {
+            font-size: 40px; /* 设置字号为24像素 */
+            color: yellow; /* 设置颜色为红色 */
+            font-weight: bold; /* 加粗 */
+        }
+                        #weidabiao {
+            font-size: 40px; /* 设置字号为24像素 */
+            color: green; /* 设置颜色为红色 */
+            font-weight: bold; /* 加粗 */
+        }
+                                        #zhanbi {
+            font-size: 40px; /* 设置字号为24像素 */
+            color: pink; /* 设置颜色为红色 */
+            font-weight: bold; /* 加粗 */
+        }
+                        #defen {
+            font-size: 40px; /* 设置字号为24像素 */
+            color: orange; /* 设置颜色为红色 */
+            font-weight: bold; /* 加粗 */
+        }
+                            /* 将内部div并排显示 */
+    .tcontainer {
+        text-align: center; /* 让内部内容居中 */
+    }
+
+    .tcontainer > div {
+        display: inline-block; /* 让div并排显示 */
+        margin-right: 20px; /* 设置间距 */
+    }
     </style>
 </head>
 <body>
 </br>
 <a href="index.html" class="button">首页</a>
 <a href="#section1" class="button">对比报告</a>
-<a href="#section2" class="button" >分析报告</a>
-<a  class="button" id="upload_button">上传数据</a>
+<a href="#section2" class="button">分析报告</a>
+<a class="button" id="upload_button">上传数据</a>
 <a class="button" id="download_button">模版下载</a>
 <button class="button" onclick="window.print();">打印报告</button>
-<input type="file" id="fileInput"">
+<input type="file" id="fileInput">
 
 </br>
 </br>
@@ -191,165 +259,246 @@
 <h2>一、生成系统指标体系对比报告</h2>
 </br>
 
-<p id="summary">对标中石化先进指标数据库，本生产系统共x项达到中石化先进水平，共x项达到中石化平均水平，x项未达到中石化平均水平，现金指标占比为x。</p>
+<!--<p id="summary">对标中石化先进指标数据库，本生产系统共x项达到中石化先进水平，共x项达到中石化平均水平，x项未达到中石化平均水平，现金指标占比为x。</p>-->
+
+
+<!--数据总概-->
+<div class="container">
+    <div class="box">
+        <img src="images/先进.png" alt="Icon1" class="icon"/>
+        <p>先进指标数量</p>
+        <p id="xianjin">12</p>
+    </div>
+    <div class="box">
+        <img src="images/平均值.png" alt="Icon1" class="icon"/>
+        <p>平均指标数量</p>
+        <p id="pingjun">4</p>
+    </div>
+    <div class="box">
+        <img src="images/未达标.png" alt="Icon1" class="icon"/>
+        <p>未达标指标数量</p>
+        <p id="weidabiao">2</p>
+    </div>
+    <div class="box">
+        <img src="images/占比.png" alt="Icon1" class="icon"/>
+        <p>先进指标占比</p>
+        <p id="zhanbi">64%</p>
+    </div>
+    <div class="box">
+        <img src="images/得分详情.png" alt="Icon1" class="icon"/>
+        <p>综合评价得分</p>
+                <p id="defen">91</p>
+    </div>
+</div>
 
 <div id="charts">
-    <div class="chart-container">
+    <div>
+        <!--        <p>指标统计总览</p>-->
+        <!--        <table id="summary_all">-->
+
+        <!--            <thead>-->
+        <!--            <tr>-->
+        <!--                <th onclick="sortTable('summary_all', 0)">编号</th>-->
+        <!--                <th onclick="sortTable('summary_all', 1)">指标</th>-->
+        <!--                <th onclick="sortTable('summary_all', 2)">指标值</th>-->
+        <!--            </tr>-->
+        <!--            </thead>-->
+        <!--            <tbody>-->
+        <!--            <tr>-->
+        <!--                <td>1</td>-->
+        <!--                <td>先进指标数量</td>-->
+        <!--                <td>油田百万吨产能地面投资</td>-->
+
+        <!--            <tr>-->
+        <!--                <td>2</td>-->
+        <!--                <td>达标平均指标数量</td>-->
+        <!--                <td>油田百万吨产能地面投资</td>-->
+        <!--            </tr>-->
+        <!--            <tr>-->
+        <!--                <td>3</td>-->
+        <!--                <td>未达标指标数量</td>-->
+        <!--                <td>油田百万吨产能地面投资</td>-->
+        <!--            </tr>-->
+        <!--            <tr>-->
+        <!--                <td>4</td>-->
+        <!--                <td>先进指标占比</td>-->
+        <!--                <td>油田百万吨产能地面投资</td>-->
+        <!--            </tr>-->
+        <!--            <tr>-->
+        <!--                <td>5</td>-->
+        <!--                <td>综合评估得分</td>-->
+        <!--                <td>油田百万吨产能地面投资</td>-->
+        <!--            </tr>-->
+        <!--            &lt;!&ndash; 其他行 &ndash;&gt;-->
+        <!--            </tbody>-->
+        <!--        </table>-->
+    </div>
+    <div>
         <canvas id="myLineChart" width="800" height="400"></canvas>
         <p>指标得分柱状图</p>
     </div>
-    <div class="chart-container">
+    <div>
         <canvas id="myPieChart"></canvas>
         <p>指标占比分布图</p>
     </div>
 </div>
-<p id="index1">达到中石化先进值的条数</p>
-<table id="reportTable1">
-    <thead>
-    <tr>
-        <th onclick="sortTable('reportTable1', 0)">编号</th>
-        <th onclick="sortTable('reportTable1', 1)">类别</th>
-        <th onclick="sortTable('reportTable1', 2)">名称</th>
-        <th onclick="sortTable('reportTable1', 3)">级别</th>
-        <th onclick="sortTable('reportTable1', 4)">值</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>投资控制指标</td>
-        <td>油田百万吨产能地面投资</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>投资控制指标</td>
-        <td>油田地面工程投资占比</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>投资控制指标</td>
-        <td>单井地面工程投资</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>达标率指标</td>
-        <td>原油自用率</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>达标率指标</td>
-        <td>集输密闭率</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    </tbody>
-</table>
-<p id="index2">达到中石化平均值的条数</p>
-<table id="reportTable2">
-    <thead>
-    <tr>
-        <th onclick="sortTable(0)">编号</th>
-        <th onclick="sortTable(1)">类别</th>
-        <th onclick="sortTable(2)">名称</th>
-        <th onclick="sortTable(3)">级别</th>
-        <th onclick="sortTable(4)">值</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>投资控制指标</td>
-        <td>油田百万吨产能地面投资</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>投资控制指标</td>
-        <td>油田地面工程投资占比</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>投资控制指标</td>
-        <td>单井地面工程投资</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>达标率指标</td>
-        <td>原油自用率</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>达标率指标</td>
-        <td>集输密闭率</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    </tbody>
-</table>
-<p id="index3">未达到中石化平均值的条数</p>
-<table id="reportTable3">
-    <thead>
-    <tr>
-        <th onclick="sortTable(0)">编号</th>
-        <th onclick="sortTable(1)">类别</th>
-        <th onclick="sortTable(2)">名称</th>
-        <th onclick="sortTable(3)">级别</th>
-        <th onclick="sortTable(4)">值</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>投资控制指标</td>
-        <td>油田百万吨产能地面投资</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>投资控制指标</td>
-        <td>油田地面工程投资占比</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>投资控制指标</td>
-        <td>单井地面工程投资</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>达标率指标</td>
-        <td>原油自用率</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>5</td>
-        <td>达标率指标</td>
-        <td>集输密闭率</td>
-        <td>一级指标</td>
-        <td>1</td>
-    </tr>
-    </tbody>
-</table>
+
+<div class="tcontainer">
+    <div style="margin-right: 20px;">
+        <p id="index1">达到中石化先进值的条数</p>
+        <table id="reportTable1">
+            <thead>
+            <tr>
+                <th onclick="sortTable('reportTable1', 0)">编号</th>
+                <th onclick="sortTable('reportTable1', 1)">类别</th>
+                <th onclick="sortTable('reportTable1', 2)">名称</th>
+                <th onclick="sortTable('reportTable1', 3)">级别</th>
+                <th onclick="sortTable('reportTable1', 4)">值</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>投资控制指标</td>
+                <td>油田百万吨产能地面投资</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>投资控制指标</td>
+                <td>油田地面工程投资占比</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>投资控制指标</td>
+                <td>单井地面工程投资</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>达标率指标</td>
+                <td>原油自用率</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>达标率指标</td>
+                <td>集输密闭率</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-right: 20px;">
+        <p id="index2">达到中石化平均值的条数</p>
+        <table id="reportTable2">
+            <thead>
+            <tr>
+                <th onclick="sortTable(0)">编号</th>
+                <th onclick="sortTable(1)">类别</th>
+                <th onclick="sortTable(2)">名称</th>
+                <th onclick="sortTable(3)">级别</th>
+                <th onclick="sortTable(4)">值</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>投资控制指标</td>
+                <td>油田百万吨产能地面投资</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>投资控制指标</td>
+                <td>油田地面工程投资占比</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>投资控制指标</td>
+                <td>单井地面工程投资</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>达标率指标</td>
+                <td>原油自用率</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>达标率指标</td>
+                <td>集输密闭率</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-right: 20px;">
+        <p id="index3">未达到中石化平均值的条数</p>
+        <table id="reportTable3">
+            <thead>
+            <tr>
+                <th onclick="sortTable(0)">编号</th>
+                <th onclick="sortTable(1)">类别</th>
+                <th onclick="sortTable(2)">名称</th>
+                <th onclick="sortTable(3)">级别</th>
+                <th onclick="sortTable(4)">值</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>投资控制指标</td>
+                <td>油田百万吨产能地面投资</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>投资控制指标</td>
+                <td>油田地面工程投资占比</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>投资控制指标</td>
+                <td>单井地面工程投资</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>达标率指标</td>
+                <td>原油自用率</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>达标率指标</td>
+                <td>集输密闭率</td>
+                <td>一级指标</td>
+                <td>1</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 </br>
 </br>
@@ -691,7 +840,7 @@
     // 将数据填充到指定的表格中
     window.onload = function () {
 
-        fetch('http://localhost:8081/index_optimize_well')
+        fetch('http://127.0.0.1:8081/index_optimize_well')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -710,7 +859,7 @@
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-        fetch('http://localhost:8081/index_optimize_metering_station')
+        fetch('http://127.0.0.1:8081/index_optimize_metering_station')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -729,7 +878,7 @@
                 console.error('There was a problem with the fetch operation:', error);
             });
 
-        fetch('http://localhost:8081/index_optimize_water_injection_station')
+        fetch('http://127.0.0.1:8081/index_optimize_water_injection_station')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -749,7 +898,7 @@
             });
 
         // 干线
-        fetch('http://localhost:8081/index_optimize_line')
+        fetch('http://127.0.0.1:8081/index_optimize_line')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -769,7 +918,7 @@
             });
 
         // 输油管线
-        fetch('http://localhost:8081/index_optimize_out_line')
+        fetch('http://127.0.0.1:8081/index_optimize_out_line')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -789,7 +938,7 @@
             });
 
         // 分水区
-        fetch('http://localhost:8081/index_optimize_divide_water')
+        fetch('http://127.0.0.1:8081/index_optimize_divide_water')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -809,7 +958,7 @@
             });
 
         // 转接站
-        fetch('http://localhost:8081/index_optimize_transfer_station')
+        fetch('http://127.0.0.1:8081/index_optimize_transfer_station')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -829,7 +978,7 @@
             });
 
         // 联合站
-        fetch('http://localhost:8081/index_optimize_union_station')
+        fetch('http://127.0.0.1:8081/index_optimize_union_station')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -909,9 +1058,16 @@
                     myBarChart.update();
 
                     // 修改summary p标签内容
-                    var paragraph = document.getElementById("summary");
-                    paragraph.innerHTML = "对标中石化先进指标数据库，本生产系统共" + data.advanced.length + "项达到中石化先进水平，共" + data.mean.length + "项达到中石化平均水平，" + data.unqualified.length + "项未达到中石化平均水平，先进指标占比为" + data.rates[0] * 100 + "%,系统综合评估得分为" + data.score + "分。";
+                    // var paragraph = document.getElementById("summary");
+                    // paragraph.innerHTML = "对标中石化先进指标数据库，本生产系统共" + data.advanced.length + "项达到中石化先进水平，共" + data.mean.length + "项达到中石化平均水平，" + data.unqualified.length + "项未达到中石化平均水平，先进指标占比为" + data.rates[0] * 100 + "%,系统综合评估得分为" + data.score + "分。";
 
+                    // 修改summary_all
+                    var table = document.getElementById('summary_all');
+                    table.rows[1].cells[2].textContent = data.advanced.length;
+                    table.rows[2].cells[2].textContent = data.mean.length;
+                    table.rows[3].cells[2].textContent = data.unqualified.length;
+                    table.rows[4].cells[2].textContent = data.rates[0] * 100;
+                    table.rows[5].cells[2].textContent = data.score;
 
                     // 修改 <p> 元素的内容
                     var paragraph = document.getElementById("index1");
@@ -986,18 +1142,18 @@
             .catch(error => console.error('Download error:', error));
     });
 
-    document.getElementById('upload_button').addEventListener('click', function() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
+    document.getElementById('upload_button').addEventListener('click', function () {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
 
-            if (file) {
-                const formData = new FormData();
-                formData.append('file', file);
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
 
-                fetch('http://localhost:8081/upload/', {
-                    method: 'POST',
-                    body: formData
-                })
+            fetch('http://localhost:8081/upload/', {
+                method: 'POST',
+                body: formData
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);
@@ -1007,10 +1163,10 @@
                     console.error('Error uploading file:', error);
                     alert('Error uploading file');
                 });
-            } else {
-                alert('Please select a file to upload.');
-            }
-        });
+        } else {
+            alert('Please select a file to upload.');
+        }
+    });
 
 </script>
 </body>
